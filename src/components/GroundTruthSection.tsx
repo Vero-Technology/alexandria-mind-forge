@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 type AccessType = "DONE" | "FREE" | "BUILD";
 
@@ -141,13 +141,6 @@ const accessColors: Record<AccessType, string> = {
 };
 
 const GroundTruthSection = () => {
-  const [openCategories, setOpenCategories] = useState<string[]>(["01"]);
-
-  const toggle = (num: string) => {
-    setOpenCategories((prev) =>
-      prev.includes(num) ? prev.filter((n) => n !== num) : [...prev, num]
-    );
-  };
 
   return (
     <section className="relative py-32 px-6">
@@ -196,61 +189,19 @@ const GroundTruthSection = () => {
           </div>
         </div>
 
-        {/* Accordion categories */}
-        <div className="space-y-3">
-          {categories.map((cat) => {
-            const isOpen = openCategories.includes(cat.number);
-            return (
-              <div key={cat.number} className="border border-border rounded-lg bg-card/30 overflow-hidden">
-                <button
-                  onClick={() => toggle(cat.number)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-card/50 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="text-mono text-sm text-muted-foreground">{cat.number}</span>
-                    <h3 className="text-lg font-semibold">{cat.title}</h3>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-mono text-xs text-muted-foreground border border-border rounded px-3 py-1">
-                      {cat.sources.length} {cat.sources.length === 1 ? "source" : "sources"}
-                    </span>
-                    <span className="text-muted-foreground text-sm">{isOpen ? "▲" : "▼"}</span>
-                  </div>
-                </button>
-
-                {isOpen && (
-                  <div className="px-6 pb-5">
-                    {/* Table header */}
-                    <div className="grid grid-cols-12 gap-4 text-mono text-[10px] tracking-wider uppercase text-primary/60 border-b border-border pb-2 mb-2">
-                      <div className="col-span-4">Source</div>
-                      <div className="col-span-8">Notes</div>
-                    </div>
-
-                    {cat.sources.map((source, i) => (
-                      <div key={i} className="grid grid-cols-12 gap-4 items-start py-2.5 border-b border-border/30 last:border-0">
-                        <div className="col-span-4 font-medium text-sm">{source.name}</div>
-                        <div className="col-span-8 text-sm text-foreground/60">{source.notes}</div>
-                      </div>
-                    ))}
-
-                    {cat.output && (
-                      <div className="grid grid-cols-12 gap-4 items-start pt-3 mt-1">
-                        <div className="col-span-4 text-primary text-sm font-medium">→ Output</div>
-                        <div className="col-span-8 text-sm text-foreground/60">
-                          <span dangerouslySetInnerHTML={{
-                            __html: cat.output.replace(
-                              /(No one has this\.|Consultants charge \$50K for one advisory board\.|Language shifts predict failure 1-2 quarters before announcement\.)/g,
-                              '<strong class="text-foreground">$1</strong>'
-                            ),
-                          }} />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
+        {/* Category cards – non-expandable */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map((cat) => (
+            <div key={cat.number} className="border border-border rounded-lg bg-card/30 px-6 py-5">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-mono text-sm text-muted-foreground">{cat.number}</span>
+                <h3 className="text-base font-semibold">{cat.title}</h3>
               </div>
-            );
-          })}
+              <span className="text-mono text-xs text-muted-foreground">
+                {cat.sources.length} {cat.sources.length === 1 ? "source" : "sources"}
+              </span>
+            </div>
+          ))}
         </div>
 
         <p className="mt-8 text-sm text-foreground/40 italic text-center">
