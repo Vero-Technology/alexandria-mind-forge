@@ -14,8 +14,8 @@ const Index = () => {
       <DrugPlatformsSection />
       <GeneralAISection />
       <ArchitectureSection />
-      <GroundTruthSection />
       <UseCasesSection />
+      <GroundTruthSection />
       <LeanTeamsSection />
       <MoatSection />
     </main>
