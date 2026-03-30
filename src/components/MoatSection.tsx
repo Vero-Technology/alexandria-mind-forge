@@ -81,9 +81,12 @@ const MoatSection = () => {
         <div className="absolute top-0 left-6 right-6 h-px bg-border" />
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-display text-xl tracking-tight mb-2">Alexandria</p>
-          <p className="text-mono text-xs text-muted-foreground">
+          <p className="text-mono text-xs text-muted-foreground mb-4">
             The intelligence layer for R&D strategy.
           </p>
+          <a href="mailto:logan@alexandrialabs.uk" className="text-mono text-xs text-primary/60 hover:text-primary transition-colors">
+            logan@alexandrialabs.uk
+          </a>
         </div>
       </footer>
     </>
