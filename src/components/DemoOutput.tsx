@@ -21,6 +21,26 @@ const divarasibTimeline = [
   { title: "Projected Interim Analysis", desc: "Estimated Q2 2027.", badge: null },
 ];
 
+const rmc6236Timeline = [
+  { title: "Phase I/II dose escalation", desc: "Completed. PDAC ORR 42% across KRAS variants.", badge: null },
+  { title: "Fast Track Designation", desc: "Granted Sep 2024 for KRAS-mutant PDAC.", badge: "Fast Track" },
+  { title: "Phase II PDAC expansion", desc: "ACTIVE. Enrolling across G12C, G12D, G12V, G13C. Variant-agnostic.", badge: null },
+  { title: "Phase III planning", desc: "Registrational trial design in progress. Key question: monotherapy vs combination.", badge: null },
+  { title: "Potential Breakthrough", desc: "If Phase II confirms variant-agnostic activity, BT designation likely.", badge: "Potential" },
+  { title: "Projected NDA", desc: "Estimated 2029-2030. Behind sotorasib and divarasib.", badge: null },
+  { title: "Regulatory Advantage", desc: "Pan-RAS mechanism could enable broader label (all KRAS mutations, not just G12C). Significantly larger addressable population.", badge: null },
+];
+
+const adagrasibTimeline = [
+  { title: "Phase I/II (KRYSTAL-1)", desc: "Completed. PDAC cohort ORR 33.3% (n=21).", badge: null },
+  { title: "Breakthrough Designation (NSCLC)", desc: "Granted Jun 2021.", badge: "Breakthrough" },
+  { title: "FDA Approval (NSCLC)", desc: "Approved Dec 2022. Accelerated approval.", badge: null },
+  { title: "Phase II (KRYSTAL-10, 1L PDAC)", desc: "ACTIVE. Adagrasib + gem/nab-pac. First-line. n=120.", badge: null },
+  { title: "Earnings Sentiment Warning", desc: "BMS sentiment declining 3 consecutive quarters. Strategic deprioritization risk.", badge: "Warning" },
+  { title: "Projected Data", desc: "Interim H2 2026. Full data 2027.", badge: null },
+  { title: "Regulatory Risk", desc: "No Phase III planned for PDAC. Phase II may be insufficient for full approval without randomized comparator.", badge: null },
+];
+
 const TimelineItem = ({ item, isLast }: { item: typeof sotorasibTimeline[0]; isLast: boolean }) => (
   <div className="flex gap-3">
     <div className="flex flex-col items-center">
@@ -31,7 +51,13 @@ const TimelineItem = ({ item, isLast }: { item: typeof sotorasibTimeline[0]; isL
       <div className="flex items-center gap-2 flex-wrap">
         <span className="font-semibold text-sm text-foreground">{item.title}</span>
         {item.badge && (
-          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary text-primary-foreground">
+          <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+            item.badge === "Warning"
+              ? "bg-destructive/10 text-destructive"
+              : item.badge === "Potential"
+              ? "bg-highlight/15 text-highlight"
+              : "bg-primary text-primary-foreground"
+          }`}>
             {item.badge}
           </span>
         )}
@@ -134,6 +160,28 @@ const DemoOutput = () => {
             <div>
               {divarasibTimeline.map((item, i) => (
                 <TimelineItem key={i} item={item} isLast={i === divarasibTimeline.length - 1} />
+              ))}
+            </div>
+          </div>
+
+          {/* RMC-6236 */}
+          <div className="border border-border rounded-lg p-5">
+            <p className="font-semibold text-base text-foreground">RMC-6236</p>
+            <p className="text-xs text-muted-foreground mb-4">Revolution Medicines · Pan-RAS(ON) tri-complex inhibitor</p>
+            <div>
+              {rmc6236Timeline.map((item, i) => (
+                <TimelineItem key={i} item={item} isLast={i === rmc6236Timeline.length - 1} />
+              ))}
+            </div>
+          </div>
+
+          {/* Adagrasib */}
+          <div className="border border-border rounded-lg p-5">
+            <p className="font-semibold text-base text-foreground">Adagrasib</p>
+            <p className="text-xs text-muted-foreground mb-4">BMS / Mirati · Covalent KRAS G12C inhibitor</p>
+            <div>
+              {adagrasibTimeline.map((item, i) => (
+                <TimelineItem key={i} item={item} isLast={i === adagrasibTimeline.length - 1} />
               ))}
             </div>
           </div>
