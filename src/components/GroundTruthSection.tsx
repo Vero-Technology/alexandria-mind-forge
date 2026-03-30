@@ -193,14 +193,6 @@ const GroundTruthSection = () => {
             <p className="text-foreground/60 leading-relaxed mb-6">
               Alexandria ingests, normalises, and cross-links {totalSources} primary data sources across research papers, clinical trials, biomarkers, patents, proteins, and regulatory filings. Every answer traces back to indexed, verifiable data.
             </p>
-            <div className="flex flex-wrap gap-2">
-              {["DONE", "FREE", "BUILD"].map((type) => (
-                <span key={type} className={`text-mono text-[10px] px-2 py-0.5 rounded border ${accessColors[type as AccessType]}`}>
-                  {type}
-                </span>
-              ))}
-              <span className="text-mono text-[10px] text-muted-foreground ml-2">= access status</span>
-            </div>
           </div>
         </div>
 
