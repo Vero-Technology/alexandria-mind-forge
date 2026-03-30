@@ -6,8 +6,9 @@ const problems = [
     title: "No Ground Truth",
     description: (
       <>
-        General LLMs generate answers from parametric memory; there's no structured source to anchor to.{" "}
-        <span className="font-semibold text-foreground">47% of AI-generated medical citations are fabricated.</span>
+        General LLMs generate answers from parametric memory; there's no structured source to anchor to. They have a{" "}
+        <span className="font-bold text-foreground">47% hallucination rate</span>{" "}
+        for biomedical references.
       </>
     ),
   },
