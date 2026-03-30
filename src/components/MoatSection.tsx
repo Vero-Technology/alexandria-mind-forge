@@ -16,7 +16,7 @@ const MoatSection = () => {
               </h2>
               <div className="space-y-5 text-foreground/60 leading-relaxed">
                 <p>
-                  Each new dataset added to Alexandria doesn't create linear value — it creates exponential connections. A patent database alone is useful. A patent database cross-referenced with clinical trial outcomes, adverse event signals, and regulatory decisions becomes an intelligence layer.
+                  Each new dataset added to Alexandria doesn't create linear value. It creates exponential connections. A patent database alone is useful. A patent database cross-referenced with clinical trial outcomes, adverse event signals, and regulatory decisions becomes an intelligence layer.
                 </p>
                 <p>
                   The denser the data web, the more novel the insights that emerge from every query. Connections that would take a human analyst weeks to hypothesize surface in seconds.

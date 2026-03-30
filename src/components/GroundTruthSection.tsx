@@ -26,12 +26,12 @@ const GroundTruthSection = () => {
 
             <div className="space-y-6 text-foreground/60 leading-relaxed">
               <p>
-                General-purpose LLMs fabricate medical citations at an alarming rate — studies show a{" "}
+                General-purpose LLMs fabricate medical citations at an alarming rate. Studies show a{" "}
                 <span className="text-highlight font-medium">47% hallucination rate</span>{" "}
                 for biomedical references. They lack access to primary drug datasets: FAERS adverse event signals, Orange Book exclusivity data, EMA regulatory assessments.
               </p>
               <p>
-                For R&D consulting, this isn't a minor inconvenience. It's a disqualifying flaw. Technical advancement claims and scientific uncertainty assessments demand verifiable, indexed source data — not pattern-matched approximations.
+                For R&D consulting, this isn't a minor inconvenience. It's a disqualifying flaw. Technical advancement claims and scientific uncertainty assessments demand verifiable, indexed source data, not pattern-matched approximations.
               </p>
             </div>
 
@@ -51,7 +51,7 @@ const GroundTruthSection = () => {
           {/* Right: Dataset list */}
           <div className="flex flex-col justify-center">
             <p className="text-mono text-xs text-muted-foreground mb-6 tracking-wider uppercase">
-              Unified Data Layer — 22 Sources
+              Unified Data Layer · 22 Sources
             </p>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2">
               {datasets.map((ds, i) => (

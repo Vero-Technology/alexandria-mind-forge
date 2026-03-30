@@ -63,7 +63,7 @@ const ArchitectureSection = () => {
             Alexandria is AI-Native
           </h2>
           <p className="text-foreground/60 text-lg max-w-3xl mb-3">
-            Most tools add AI to an existing product. Alexandria was built from the ground up as a reasoning engine — there is no legacy system underneath. Here's what that means in practice:
+            Most tools add AI to an existing product. Alexandria was built from the ground up as a reasoning engine. There is no legacy system underneath. Here's what that means in practice:
           </p>
         </div>
 
@@ -79,7 +79,7 @@ const ArchitectureSection = () => {
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary/10 border border-primary/20">
             <span className="w-2 h-2 rounded-full bg-primary" />
-            <span className="text-mono text-xs text-primary font-medium">Level 3 · AI-Native — Alexandria</span>
+            <span className="text-mono text-xs text-primary font-medium">Level 3 · AI-Native · Alexandria</span>
           </div>
         </div>
 
@@ -130,7 +130,7 @@ const ArchitectureSection = () => {
             "If you removed the AI, would the product still work?"
           </p>
           <p className="text-sm text-muted-foreground mt-2">
-            For Cortellis and Citeline, yes — the search interface remains. For Alexandria, no. The reasoning engine <em className="text-primary font-medium">is</em> the product.
+            For Cortellis and Citeline, yes. The search interface remains. For Alexandria, no. The reasoning engine <em className="text-primary font-medium">is</em> the product.
           </p>
         </div>
       </div>
