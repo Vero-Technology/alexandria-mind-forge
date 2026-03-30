@@ -9,7 +9,7 @@ const points = [
   },
   {
     icon: Zap,
-    stat: "Minutes",
+    stat: "Hours",
     label: "not weeks",
     description: "Queries that used to require days of spreadsheet work, multiple platform logins, and senior review are answered in a single prompt.",
   },
