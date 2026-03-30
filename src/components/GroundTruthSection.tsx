@@ -42,8 +42,8 @@ const GroundTruthSection = () => {
                 <p className="text-mono text-xs text-muted-foreground mt-1">Indexed Datasets</p>
               </div>
               <div className="border border-border rounded-lg p-5 bg-card/30">
-                <p className="text-3xl font-display text-primary">0%</p>
-                <p className="text-mono text-xs text-muted-foreground mt-1">Hallucinated Citations</p>
+                <p className="text-3xl font-display text-primary">540M+</p>
+                <p className="text-mono text-xs text-muted-foreground mt-1">Indexed Academic Resources</p>
               </div>
             </div>
           </div>
