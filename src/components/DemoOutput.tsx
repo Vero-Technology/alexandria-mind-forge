@@ -51,7 +51,13 @@ const TimelineItem = ({ item, isLast }: { item: typeof sotorasibTimeline[0]; isL
       <div className="flex items-center gap-2 flex-wrap">
         <span className="font-semibold text-sm text-foreground">{item.title}</span>
         {item.badge && (
-          <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary text-primary-foreground">
+          <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+            item.badge === "Warning"
+              ? "bg-destructive/10 text-destructive"
+              : item.badge === "Potential"
+              ? "bg-highlight/15 text-highlight"
+              : "bg-primary text-primary-foreground"
+          }`}>
             {item.badge}
           </span>
         )}
