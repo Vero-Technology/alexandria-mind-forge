@@ -29,7 +29,7 @@ const HeroSection = () => {
 
         {/* Title */}
         <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl mb-8">
-          Reasoning Across the Global Pharma Landscape.
+          Reasoning Across the Global R&D Landscape.
         </h1>
 
         {/* Subtitle */}
