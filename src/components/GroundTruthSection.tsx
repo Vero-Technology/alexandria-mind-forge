@@ -147,8 +147,8 @@ const GroundTruthSection = () => {
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
-          <div>
+        <div className="mb-20">
+          <div className="max-w-3xl">
             <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
               Ground Truth
             </span>
@@ -157,10 +157,11 @@ const GroundTruthSection = () => {
             </h2>
 
             <div className="space-y-6 text-foreground/60 leading-relaxed">
+              <p className="text-mono text-xs text-muted-foreground tracking-wider uppercase">
+                Unified Data Layer · {totalSources} Sources and Growing
+              </p>
               <p>
-                General-purpose LLMs fabricate medical citations at an alarming rate. Studies show a{" "}
-                <span className="text-highlight font-medium">47% hallucination rate</span>{" "}
-                for biomedical references. They lack access to primary drug datasets: FAERS adverse event signals, Orange Book exclusivity data, EMA regulatory assessments.
+                Alexandria ingests, normalises, and cross-links {totalSources} primary data sources across research papers, clinical trials, biomarkers, patents, proteins, and regulatory filings. Every answer traces back to indexed, verifiable data.
               </p>
             </div>
 
@@ -174,15 +175,6 @@ const GroundTruthSection = () => {
                 <p className="text-mono text-xs text-muted-foreground mt-1">Indexed Academic Resources</p>
               </div>
             </div>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <p className="text-mono text-xs text-muted-foreground mb-4 tracking-wider uppercase">
-              Unified Data Layer · {totalSources} Sources and Growing
-            </p>
-            <p className="text-foreground/60 leading-relaxed mb-6">
-              Alexandria ingests, normalises, and cross-links {totalSources} primary data sources across research papers, clinical trials, biomarkers, patents, proteins, and regulatory filings. Every answer traces back to indexed, verifiable data.
-            </p>
           </div>
         </div>
 
