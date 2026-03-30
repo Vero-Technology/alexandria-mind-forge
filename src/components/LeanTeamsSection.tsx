@@ -35,7 +35,7 @@ const LeanTeamsSection = () => {
             Enterprise Intelligence, Startup Team Size
           </h2>
           <p className="text-foreground/60 text-lg leading-relaxed">
-            Whether you're a two-person BD team or a 200-person R&D department, Alexandria scales to match. Legacy platforms charge for headcount. Alexandria charges for intelligence.
+            Whether you're a two-person BD team or a 200-person R&D department, Alexandria scales to match.
           </p>
         </div>
 
