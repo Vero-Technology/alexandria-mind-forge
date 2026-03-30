@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import demoOutput from "@/assets/demo-output.png";
+import DemoOutput from "@/components/DemoOutput";
 
 const QUERY_TEXT =
   "Compare all KRAS G12C inhibitors with active Phase III programs — overlay FDA breakthrough designations, patent expiry windows, and projected approval timelines across APAC and US markets";
@@ -31,7 +31,6 @@ const UseCasesSection = () => {
     setShowResults(false);
   }, []);
 
-  // Intersection observer to trigger on scroll
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -45,7 +44,6 @@ const UseCasesSection = () => {
     return () => observer.disconnect();
   }, [startAnimation]);
 
-  // Typing effect
   useEffect(() => {
     if (phase !== "typing") return;
     if (typedChars >= QUERY_TEXT.length) {
@@ -57,7 +55,6 @@ const UseCasesSection = () => {
     return () => clearTimeout(timeout);
   }, [phase, typedChars]);
 
-  // Processing steps
   useEffect(() => {
     if (phase !== "processing") return;
     if (processingStep >= processingSteps.length) {
@@ -91,7 +88,6 @@ const UseCasesSection = () => {
           analysis.
         </p>
 
-        {/* Terminal / demo area */}
         <div className="border border-border rounded-lg overflow-hidden bg-card border-glow">
           {/* Terminal chrome */}
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
@@ -103,7 +99,7 @@ const UseCasesSection = () => {
             </span>
           </div>
 
-          {/* Query input area */}
+          {/* Query input */}
           <div className="px-6 py-5 border-b border-border">
             <div className="flex items-start gap-3">
               <span className="text-mono text-xs text-primary flex-shrink-0 mt-0.5">
@@ -127,68 +123,49 @@ const UseCasesSection = () => {
             </div>
           </div>
 
-          {/* Processing state */}
+          {/* Processing */}
           {(phase === "processing" || phase === "results") && (
             <div className="px-6 py-4 border-b border-border bg-secondary/30">
               <div className="space-y-1.5">
                 {processingSteps.map((step, i) => {
-                  const visible =
-                    phase === "results" ? true : i < processingStep;
-                  const current =
-                    phase === "processing" && i === processingStep;
+                  const visible = phase === "results" ? true : i < processingStep;
+                  const current = phase === "processing" && i === processingStep;
                   if (!visible && !current) return null;
                   return (
                     <div
                       key={i}
                       className={`flex items-center gap-2 text-mono text-xs transition-opacity duration-300 ${
-                        visible
-                          ? "text-muted-foreground"
-                          : "text-muted-foreground/50"
+                        visible ? "text-muted-foreground" : "text-muted-foreground/50"
                       }`}
                     >
-                      <span className="text-primary">
-                        {visible ? "✓" : "⟳"}
-                      </span>
+                      <span className="text-primary">{visible ? "✓" : "⟳"}</span>
                       <span>{step}</span>
                     </div>
                   );
                 })}
-                {phase === "processing" &&
-                  processingStep < processingSteps.length && (
-                    <div className="flex items-center gap-2 text-mono text-xs text-muted-foreground/50">
-                      <span className="inline-block w-3 h-3 border border-primary/40 border-t-primary rounded-full animate-spin" />
-                      <span>{processingSteps[processingStep]}</span>
-                    </div>
-                  )}
+                {phase === "processing" && processingStep < processingSteps.length && (
+                  <div className="flex items-center gap-2 text-mono text-xs text-muted-foreground/50">
+                    <span className="inline-block w-3 h-3 border border-primary/40 border-t-primary rounded-full animate-spin" />
+                    <span>{processingSteps[processingStep]}</span>
+                  </div>
+                )}
               </div>
             </div>
           )}
 
-          {/* Results — demo output image */}
+          {/* Results */}
           {phase === "results" && (
             <div
               className={`transition-all duration-700 ease-out ${
-                showResults
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-4"
+                showResults ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
               <div className="px-6 py-4">
-                <p className="text-mono text-[10px] tracking-widest uppercase text-primary/60 mb-3">
-                  ✦ Analysis Complete — 28 trials · 8 FDA designations · 6
-                  compounds tracked
+                <p className="text-mono text-[10px] tracking-widest uppercase text-primary/60 mb-1">
+                  ✦ Analysis Complete — 28 trials · 8 FDA designations · 6 compounds tracked
                 </p>
               </div>
-              <div className="px-4 pb-6">
-                <div className="rounded-lg overflow-hidden border border-border">
-                  <img
-                    src={demoOutput}
-                    alt="KRAS G12C Regulatory & Trial Pathway Analysis — showing executive summary, breakthrough designations, approval probabilities, compound pathways for Sotorasib and Divarasib"
-                    className="w-full h-auto"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
+              <DemoOutput />
             </div>
           )}
         </div>
