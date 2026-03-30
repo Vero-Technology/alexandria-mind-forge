@@ -74,7 +74,7 @@ const MoatSection = () => {
       <footer className="relative py-20 px-6">
         <div className="absolute top-0 left-6 right-6 h-px bg-border" />
         <div className="max-w-6xl mx-auto text-center">
-          <p className="font-display text-2xl md:text-3xl tracking-tight mb-4" style={{ color: 'hsl(140, 12%, 90%)' }}>
+          <p className="font-display text-2xl md:text-3xl tracking-tight mb-4">
             Alexandria
           </p>
           <p className="text-mono text-sm text-muted-foreground">
