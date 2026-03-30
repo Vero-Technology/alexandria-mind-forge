@@ -22,8 +22,9 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
         {/* Eyebrow */}
         <div className="animate-fade-up mb-8">
-          <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/70">
-            AI-Native Research Terminal
+          <span className="text-mono text-xs tracking-[0.3em] uppercase">
+            <span className="text-foreground font-medium">Alexandria</span>
+            <span className="text-primary/70"> — AI-Native Research Terminal</span>
           </span>
         </div>
 
