@@ -185,6 +185,7 @@ const DemoOutput = () => {
               ))}
             </div>
           </div>
+        </div>
       )}
 
       {activeTab === "regulatory" && (
