@@ -1,4 +1,4 @@
-import { Search, AlertTriangle, Timer } from "lucide-react";
+import { Search, AlertTriangle, Timer, DollarSign } from "lucide-react";
 
 const problems = [
   {
@@ -15,6 +15,11 @@ const problems = [
     icon: Timer,
     title: "Not Built for Deal Speed",
     description: "Both platforms are built for running structured research projects over days or weeks. There is no way of reaching a verdict on an asset quickly.",
+  },
+  {
+    icon: DollarSign,
+    title: "Enterprise Pricing, Legacy Value",
+    description: "Cortellis and Citeline charge six-figure annual contracts for what remains a search interface. You're paying premium prices for the privilege of doing the synthesis work yourself.",
   },
 ];
 
@@ -36,7 +41,7 @@ const DrugPlatformsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 gap-5">
           {problems.map((item, i) => {
             const Icon = item.icon;
             return (
