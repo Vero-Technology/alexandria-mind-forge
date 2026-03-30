@@ -70,6 +70,17 @@ const categories: Category[] = [
   },
   {
     number: "06",
+    title: "Regulatory Intelligence",
+    sources: [
+      { name: "FDA Drugs@FDA", size: "~0.2 GB", access: "FREE", notes: "Every approved drug: dates, application type, review classification" },
+      { name: "FDA designation databases", size: "~0.3 GB", access: "FREE", notes: "Breakthrough, Fast Track, Orphan, RMAT, Accelerated Approval designations with outcomes" },
+      { name: "FDA Advisory Committee transcripts", size: "~1-2 GB", access: "BUILD", notes: "Mine voting records, reviewer concerns, panel member profiles. 30-50 GB raw PDFs, NLP extraction" },
+      { name: "FDA Complete Response Letters", size: "~0.5 GB", access: "BUILD", notes: "WHY the FDA rejected, gold for understanding regulatory risk. Extract from FOIA, press releases, SEC filings" },
+      { name: "EMA EPARs", size: "~2-4 GB", access: "BUILD", notes: "European assessment reports. 20-30 GB raw, structured NLP extraction" },
+    ],
+  },
+  {
+    number: "07",
     title: "Protein & Pathway Data",
     sources: [
       { name: "UniProt Swiss-Prot", size: "~2-3 GB", access: "FREE", notes: "573K reviewed protein annotations. Druggability, function, structure" },
@@ -80,7 +91,7 @@ const categories: Category[] = [
     ],
   },
   {
-    number: "07",
+    number: "08",
     title: "Failed Trial Knowledge Base",
     sources: [
       { name: "ClinicalTrials.gov results", access: "BUILD", notes: "Mine AACT for terminated/failed trials + reported results. Extract reason for termination, primary endpoint miss, safety signals" },
@@ -91,7 +102,7 @@ const categories: Category[] = [
     output: "Structured DB: target, mechanism, indication, phase failed, reason, year. No one has this.",
   },
   {
-    number: "08",
+    number: "09",
     title: "Conference Abstract Intelligence",
     sources: [
       { name: "ASCO abstracts", size: "~1-2 GB", access: "BUILD", notes: "Oncology data 6-12 months before journal publication" },
@@ -102,7 +113,7 @@ const categories: Category[] = [
     ],
   },
   {
-    number: "09",
+    number: "10",
     title: "FDA Reviewer Profiling",
     sources: [
       { name: "FDA review documents", access: "BUILD", notes: "NLP on medical/clinical review sections from Drugs@FDA" },
@@ -112,7 +123,7 @@ const categories: Category[] = [
     output: "Reviewer DB: name, division, therapeutic areas, decision history, concern patterns. Consultants charge $50K for one advisory board.",
   },
   {
-    number: "10",
+    number: "11",
     title: "Earnings Call Pipeline Sentiment",
     sources: [
       { name: "SEC EDGAR 8-K/10-K/10-Q", size: "~30-50 GB", access: "FREE", notes: "Every public pharma/biotech quarterly filing + earnings call transcripts" },
