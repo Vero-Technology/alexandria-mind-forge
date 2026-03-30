@@ -141,8 +141,66 @@ const DemoOutput = () => {
       )}
 
       {activeTab === "regulatory" && (
-        <div className="px-6 py-5">
-          <p className="text-sm text-muted-foreground">Regulatory comparison view — data loading from indexed sources.</p>
+        <div className="px-6 py-5 space-y-6">
+          {/* Comparison table */}
+          <div className="border border-border rounded-lg overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-secondary/40">
+                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Regulatory Dimension</th>
+                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Sotorasib</th>
+                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Divarasib</th>
+                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">RMC-6236</th>
+                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Adagrasib</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs text-muted-foreground">
+                {[
+                  ["Breakthrough Designation", "Yes (NSCLC)", "Yes (Solid tumors)", "No (Fast Track only)", "Yes (NSCLC)"],
+                  ["Fast Track", "Yes", "No", "Yes (PDAC)", "No"],
+                  ["Orphan Drug (PDAC)", "Yes", "No", "No", "No"],
+                  ["Priority Review likely", "Yes", "Yes", "Possible", "Unlikely"],
+                  ["Phase III in PDAC", "Yes (CodeBreaK 201)", "Yes (with cetuximab)", "Planned", "No"],
+                  ["Randomized data", "Yes (vs FOLFIRI)", "Yes (vs docetaxel)", "No", "No"],
+                  ["OS as primary endpoint", "Yes", "TBD", "TBD", "No (ORR)"],
+                  ["Earliest PDAC approval", "Q1 2029", "Q2 2029", "2030", "Unlikely without Ph3"],
+                  ["Approval probability", "~44% (from Ph3)", "~38%", "~25%", "~12%"],
+                  ["Key regulatory risk", "OS magnitude unclear", "Small PDAC cohort (n=80)", "No randomized data yet", "No Phase III, BMS deprioritizing"],
+                ].map((row, i) => (
+                  <tr key={i} className="border-t border-border">
+                    <td className="px-4 py-3 font-medium text-foreground">{row[0]}</td>
+                    {row.slice(1).map((cell, j) => (
+                      <td
+                        key={j}
+                        className={`px-4 py-3 ${
+                          row[0] === "Approval probability" ? "text-primary font-medium" : ""
+                        }`}
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Regulatory Analysis */}
+          <div className="border border-border rounded-lg p-5">
+            <p className="font-semibold text-sm mb-2 text-foreground">Regulatory Analysis</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Sotorasib has the most de-risked regulatory pathway — the only compound with a randomized Phase III (CodeBreaK 201) using OS as primary endpoint, plus Orphan Drug exclusivity. Divarasib is the strongest clinical performer (44.4% ORR) but its PDAC cohort (n=80) may be too small for standalone approval. RMC-6236 has the most transformative potential (variant-agnostic) but is furthest from registration. Adagrasib is at highest risk of PDAC abandonment given BMS's declining investment signals.
+            </p>
+          </div>
+
+          {/* Source tags */}
+          <div className="flex flex-wrap gap-2">
+            {["AACT", "FDA Drugs@FDA", "FDA Designations", "SEC EDGAR", "AdCom Records"].map((src) => (
+              <span key={src} className="text-mono text-[10px] px-2.5 py-1 rounded bg-secondary text-muted-foreground">
+                {src}
+              </span>
+            ))}
+          </div>
         </div>
       )}
     </div>

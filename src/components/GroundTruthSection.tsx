@@ -162,9 +162,6 @@ const GroundTruthSection = () => {
                 <span className="text-highlight font-medium">47% hallucination rate</span>{" "}
                 for biomedical references. They lack access to primary drug datasets: FAERS adverse event signals, Orange Book exclusivity data, EMA regulatory assessments.
               </p>
-              <p>
-                For R&D consulting, this isn't a minor inconvenience. It's a disqualifying flaw. Technical advancement claims and scientific uncertainty assessments demand verifiable, indexed source data, not pattern-matched approximations.
-              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-10">
