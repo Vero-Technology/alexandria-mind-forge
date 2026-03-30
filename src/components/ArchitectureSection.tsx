@@ -30,12 +30,6 @@ const dimensions = [
     native: "Super-linear. Each source makes every other source more valuable.",
   },
   {
-    name: "Defensible Moat",
-    enhanced: "Brand and switching costs.",
-    powered: "Proprietary models. Replicable paradigm.",
-    native: "Cross-linked intelligence layer. Extraordinarily hard to replicate.",
-  },
-  {
     name: "Onboarding",
     enhanced: "Weeks to months.",
     powered: "Days to weeks.",
