@@ -5,37 +5,44 @@ const MoatSection = () => {
         <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
         <div className="max-w-6xl mx-auto">
-          <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
-            Compounding Moat
-          </span>
-          <h2 className="text-4xl md:text-5xl tracking-tight mb-8">
-            Super-Linear Value
-          </h2>
-          <div className="max-w-2xl space-y-5 text-foreground/60 leading-relaxed mb-10">
-            <p>
-              Each new dataset added to Alexandria doesn't create linear value — it creates exponential connections. A patent database alone is useful. A patent database cross-referenced with clinical trial outcomes, adverse event signals, and regulatory decisions becomes an intelligence layer.
-            </p>
-            <p>
-              This is the compounding moat: the denser the data web, the more novel the insights that emerge from every query. Connections that would take a human analyst weeks to hypothesize surface in seconds.
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-center">
+            {/* Left: text */}
+            <div>
+              <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
+                Compounding Moat
+              </span>
+              <h2 className="text-4xl md:text-5xl tracking-tight mb-8">
+                Super-Linear Value
+              </h2>
+              <div className="space-y-5 text-foreground/60 leading-relaxed">
+                <p>
+                  Each new dataset added to Alexandria doesn't create linear value — it creates exponential connections. A patent database alone is useful. A patent database cross-referenced with clinical trial outcomes, adverse event signals, and regulatory decisions becomes an intelligence layer.
+                </p>
+                <p>
+                  The denser the data web, the more novel the insights that emerge from every query. Connections that would take a human analyst weeks to hypothesize surface in seconds.
+                </p>
+              </div>
+            </div>
 
-          {/* Network effect visual */}
-          <div className="max-w-md border border-border rounded-lg p-6 bg-card/30">
-            <div className="flex items-end gap-1 h-24">
-              {[1, 2, 3, 5, 8, 13, 21, 34, 55].map((v, i) => (
-                <div
-                  key={i}
-                  className="flex-1 bg-primary/20 rounded-t-sm transition-all hover:bg-primary/40"
-                  style={{ height: `${(v / 55) * 100}%` }}
-                />
-              ))}
+            {/* Right: chart */}
+            <div className="border border-border rounded-lg p-8 bg-card">
+              <div className="flex items-end gap-1.5 h-40">
+                {[1, 2, 3, 5, 8, 13, 21, 34, 55].map((v, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 bg-primary/15 rounded-t-sm transition-all hover:bg-primary/30"
+                    style={{ height: `${(v / 55) * 100}%` }}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between mt-4 pt-4 border-t border-border">
+                <span className="text-mono text-xs text-muted-foreground">1 dataset</span>
+                <span className="text-mono text-xs text-muted-foreground">22 datasets</span>
+              </div>
+              <p className="text-mono text-xs text-muted-foreground mt-2 text-center">
+                Cross-referential connections (super-linear growth)
+              </p>
             </div>
-            <div className="flex justify-between mt-3">
-              <span className="text-mono text-xs text-muted-foreground">1 dataset</span>
-              <span className="text-mono text-xs text-muted-foreground">22 datasets</span>
-            </div>
-            <p className="text-mono text-xs text-muted-foreground mt-1 text-center">Cross-referential connections (super-linear)</p>
           </div>
         </div>
       </section>
