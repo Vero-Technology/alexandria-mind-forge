@@ -21,6 +21,26 @@ const divarasibTimeline = [
   { title: "Projected Interim Analysis", desc: "Estimated Q2 2027.", badge: null },
 ];
 
+const rmc6236Timeline = [
+  { title: "Phase I/II dose escalation", desc: "Completed. PDAC ORR 42% across KRAS variants.", badge: null },
+  { title: "Fast Track Designation", desc: "Granted Sep 2024 for KRAS-mutant PDAC.", badge: "Fast Track" },
+  { title: "Phase II PDAC expansion", desc: "ACTIVE. Enrolling across G12C, G12D, G12V, G13C. Variant-agnostic.", badge: null },
+  { title: "Phase III planning", desc: "Registrational trial design in progress. Key question: monotherapy vs combination.", badge: null },
+  { title: "Potential Breakthrough", desc: "If Phase II confirms variant-agnostic activity, BT designation likely.", badge: "Potential" },
+  { title: "Projected NDA", desc: "Estimated 2029-2030. Behind sotorasib and divarasib.", badge: null },
+  { title: "Regulatory Advantage", desc: "Pan-RAS mechanism could enable broader label (all KRAS mutations, not just G12C). Significantly larger addressable population.", badge: null },
+];
+
+const adagrasibTimeline = [
+  { title: "Phase I/II (KRYSTAL-1)", desc: "Completed. PDAC cohort ORR 33.3% (n=21).", badge: null },
+  { title: "Breakthrough Designation (NSCLC)", desc: "Granted Jun 2021.", badge: "Breakthrough" },
+  { title: "FDA Approval (NSCLC)", desc: "Approved Dec 2022. Accelerated approval.", badge: null },
+  { title: "Phase II (KRYSTAL-10, 1L PDAC)", desc: "ACTIVE. Adagrasib + gem/nab-pac. First-line. n=120.", badge: null },
+  { title: "Earnings Sentiment Warning", desc: "BMS sentiment declining 3 consecutive quarters. Strategic deprioritization risk.", badge: "Warning" },
+  { title: "Projected Data", desc: "Interim H2 2026. Full data 2027.", badge: null },
+  { title: "Regulatory Risk", desc: "No Phase III planned for PDAC. Phase II may be insufficient for full approval without randomized comparator.", badge: null },
+];
+
 const TimelineItem = ({ item, isLast }: { item: typeof sotorasibTimeline[0]; isLast: boolean }) => (
   <div className="flex gap-3">
     <div className="flex flex-col items-center">
