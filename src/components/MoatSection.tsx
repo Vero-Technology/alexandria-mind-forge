@@ -77,14 +77,15 @@ const MoatSection = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-16 px-6">
+      <footer className="relative py-20 px-6">
         <div className="absolute top-0 left-6 right-6 h-px bg-border" />
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-display text-xl tracking-tight mb-2">Alexandria</p>
-          <p className="text-mono text-xs text-muted-foreground mb-4">
+          <p className="text-mono text-xs text-muted-foreground mb-8">
             The intelligence layer for R&D strategy.
           </p>
-          <a href="mailto:logan@alexandrialabs.uk" className="text-mono text-xs text-primary/60 hover:text-primary transition-colors">
+          <span className="text-mono text-xs tracking-[0.2em] uppercase text-muted-foreground block mb-3">Inquiries</span>
+          <a href="mailto:logan@alexandrialabs.uk" className="text-lg md:text-xl font-display tracking-tight text-foreground hover:text-primary transition-colors">
             logan@alexandrialabs.uk
           </a>
         </div>
