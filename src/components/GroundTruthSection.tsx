@@ -194,9 +194,6 @@ const GroundTruthSection = () => {
                 <span className="text-mono text-sm text-muted-foreground">{cat.number}</span>
                 <h3 className="text-base font-semibold">{cat.title}</h3>
               </div>
-              <span className="text-mono text-xs text-muted-foreground">
-                {cat.sources.length} {cat.sources.length === 1 ? "source" : "sources"}
-              </span>
             </div>
           ))}
         </div>
