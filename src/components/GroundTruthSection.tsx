@@ -222,30 +222,21 @@ const GroundTruthSection = () => {
                   <div className="px-6 pb-5">
                     {/* Table header */}
                     <div className="grid grid-cols-12 gap-4 text-mono text-[10px] tracking-wider uppercase text-primary/60 border-b border-border pb-2 mb-2">
-                      <div className="col-span-3">Source</div>
-                      <div className="col-span-2">{cat.sources[0]?.size !== undefined || cat.sources.some(s => s.size) ? "Size" : "Method"}</div>
-                      <div className="col-span-1">Access</div>
-                      <div className="col-span-6">Notes</div>
+                      <div className="col-span-4">Source</div>
+                      <div className="col-span-8">Notes</div>
                     </div>
 
                     {cat.sources.map((source, i) => (
                       <div key={i} className="grid grid-cols-12 gap-4 items-start py-2.5 border-b border-border/30 last:border-0">
-                        <div className="col-span-3 font-medium text-sm">{source.name}</div>
-                        <div className="col-span-2 text-mono text-sm text-muted-foreground">{source.size || "–"}</div>
-                        <div className="col-span-1">
-                          <span className={`text-mono text-[10px] px-2 py-0.5 rounded border ${accessColors[source.access]}`}>
-                            {source.access}
-                          </span>
-                        </div>
-                        <div className="col-span-6 text-sm text-foreground/60">{source.notes}</div>
+                        <div className="col-span-4 font-medium text-sm">{source.name}</div>
+                        <div className="col-span-8 text-sm text-foreground/60">{source.notes}</div>
                       </div>
                     ))}
 
                     {cat.output && (
                       <div className="grid grid-cols-12 gap-4 items-start pt-3 mt-1">
-                        <div className="col-span-3 text-primary text-sm font-medium">→ Output</div>
-                        <div className="col-span-2" />
-                        <div className="col-span-7 text-sm text-foreground/60">
+                        <div className="col-span-4 text-primary text-sm font-medium">→ Output</div>
+                        <div className="col-span-8 text-sm text-foreground/60">
                           <span dangerouslySetInnerHTML={{
                             __html: cat.output.replace(
                               /(No one has this\.|Consultants charge \$50K for one advisory board\.|Language shifts predict failure 1-2 quarters before announcement\.)/g,
