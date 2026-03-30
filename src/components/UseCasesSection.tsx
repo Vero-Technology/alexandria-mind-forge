@@ -1,139 +1,196 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import demoOutput from "@/assets/demo-output.png";
 
-const queries = [
-  {
-    tag: "State-of-the-Art Benchmarking",
-    query: "Compare all active Phase 2 oncology trials for G12C inhibitors against existing patent landscapes",
-    datasets: ["ClinicalTrials.gov", "USPTO Patents", "Orange Book", "Cortellis"],
-    insights: [
-      "14 active Phase 2 trials identified across 6 distinct molecular entities",
-      "3 patent families expiring 2026-2027 creating biosimilar opportunity windows",
-      "Mechanism overlap detected between AMG 510 derivatives and 2 novel candidates",
-    ],
-  },
-  {
-    tag: "Technical Gap Analysis",
-    query: "Identify failed clinical programs where the mechanism of action overlaps with current manufacturing patents",
-    datasets: ["FAERS", "FDA AdComm", "USPTO Patents", "PubMed"],
-    insights: [
-      "27 discontinued programs with viable MOA-patent intersections",
-      "Safety signal patterns suggest formulation, not mechanism, as failure driver in 12 cases",
-      "4 manufacturing patents with unexercised claims in oncology applications",
-    ],
-  },
-  {
-    tag: "Regulatory Risk Assessment",
-    query: "Synthesize FDA advisory committee signals and safety data for biosimilar opportunities",
-    datasets: ["FDA AdComm", "FAERS", "EMA EPARs", "Biosimilar DB"],
-    insights: [
-      "8 reference biologics with advisory committee concerns flagged in post-market surveillance",
-      "FAERS signal-to-noise ratio elevated for 3 biosimilar candidates in immunology",
-      "EMA-FDA regulatory divergence identified in 2 therapeutic areas",
-    ],
-  },
+const QUERY_TEXT =
+  "Compare all KRAS G12C inhibitors with active Phase III programs — overlay FDA breakthrough designations, patent expiry windows, and projected approval timelines across APAC and US markets";
+
+type Phase = "idle" | "typing" | "processing" | "results";
+
+const processingSteps = [
+  "Indexing ClinicalTrials.gov...",
+  "Cross-referencing FDA designations...",
+  "Mapping patent landscapes...",
+  "Synthesizing regulatory signals...",
+  "Compiling compound pathway analysis...",
 ];
 
 const UseCasesSection = () => {
-  const [active, setActive] = useState(0);
-  const q = queries[active];
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [typedChars, setTypedChars] = useState(0);
+  const [processingStep, setProcessingStep] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const hasTriggered = useRef(false);
+
+  const startAnimation = useCallback(() => {
+    if (hasTriggered.current) return;
+    hasTriggered.current = true;
+    setPhase("typing");
+    setTypedChars(0);
+    setProcessingStep(0);
+    setShowResults(false);
+  }, []);
+
+  // Intersection observer to trigger on scroll
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) startAnimation();
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [startAnimation]);
+
+  // Typing effect
+  useEffect(() => {
+    if (phase !== "typing") return;
+    if (typedChars >= QUERY_TEXT.length) {
+      const timeout = setTimeout(() => setPhase("processing"), 600);
+      return () => clearTimeout(timeout);
+    }
+    const speed = Math.random() * 25 + 18;
+    const timeout = setTimeout(() => setTypedChars((c) => c + 1), speed);
+    return () => clearTimeout(timeout);
+  }, [phase, typedChars]);
+
+  // Processing steps
+  useEffect(() => {
+    if (phase !== "processing") return;
+    if (processingStep >= processingSteps.length) {
+      const timeout = setTimeout(() => {
+        setPhase("results");
+        setTimeout(() => setShowResults(true), 100);
+      }, 400);
+      return () => clearTimeout(timeout);
+    }
+    const timeout = setTimeout(
+      () => setProcessingStep((s) => s + 1),
+      700 + Math.random() * 400
+    );
+    return () => clearTimeout(timeout);
+  }, [phase, processingStep]);
 
   return (
-    <section className="relative py-32 px-6">
+    <section ref={sectionRef} className="relative py-32 px-6">
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
         <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
-          Use Cases
+          In Action
         </span>
         <h2 className="text-4xl md:text-5xl tracking-tight mb-6 max-w-3xl">
-          Strategic Benchmarking in Action
+          From Query to Strategic Insight
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mb-14">
-          See how Alexandria synthesizes complex, multi-dataset queries that mirror real R&D consulting workflows.
+          Watch Alexandria reason across 42 datasets in real time — a single
+          agentic query produces a complete regulatory and trial pathway
+          analysis.
         </p>
 
-        {/* Cards layout */}
-        <div className="grid lg:grid-cols-3 gap-5">
-          {queries.map((item, i) => {
-            const isActive = active === i;
-            return (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`text-left rounded-lg p-6 transition-all border ${
-                  isActive
-                    ? "bg-primary/[0.04] border-primary/25 shadow-sm"
-                    : "bg-card border-border hover:border-primary/15"
-                }`}
-              >
-                <span
-                  className={`inline-block text-mono text-[10px] tracking-widest uppercase px-2 py-1 rounded mb-4 ${
-                    isActive
-                      ? "bg-primary/10 text-primary"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {item.tag}
-                </span>
-                <p className={`text-sm leading-relaxed ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
-                  {item.query}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Expanded result */}
-        <div className="mt-8 border border-border rounded-lg bg-card overflow-hidden">
-          {/* Query bar */}
-          <div className="px-6 py-5 border-b border-border flex flex-col sm:flex-row sm:items-center gap-3">
-            <span className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground flex-shrink-0">
-              Query
+        {/* Terminal / demo area */}
+        <div className="border border-border rounded-lg overflow-hidden bg-card border-glow">
+          {/* Terminal chrome */}
+          <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
+            <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
+            <div className="w-2.5 h-2.5 rounded-full bg-primary/20" />
+            <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+            <span className="ml-3 text-mono text-xs text-muted-foreground">
+              alexandria · workspace
             </span>
-            <p className="text-foreground font-medium">
-              "{q.query}"
-            </p>
           </div>
 
-          <div className="p-6 md:p-8">
-            {/* Sources row */}
-            <div className="mb-8">
-              <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-3">
-                Sources Queried
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {q.datasets.map((ds, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1.5 text-mono text-xs bg-secondary text-secondary-foreground px-3 py-1.5 rounded-md"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                    {ds}
+          {/* Query input area */}
+          <div className="px-6 py-5 border-b border-border">
+            <div className="flex items-start gap-3">
+              <span className="text-mono text-xs text-primary flex-shrink-0 mt-0.5">
+                alexandria&gt;
+              </span>
+              <div className="text-sm font-mono text-foreground leading-relaxed min-h-[3rem]">
+                {phase === "idle" && (
+                  <span className="text-muted-foreground/40">
+                    Enter a strategic query...
                   </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Insights */}
-            <div>
-              <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-4">
-                Key Findings
-              </p>
-              <div className="space-y-3">
-                {q.insights.map((insight, i) => (
-                  <div
-                    key={i}
-                    className="flex gap-4 items-start p-4 rounded-lg bg-secondary/50"
-                  >
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-mono text-xs flex items-center justify-center font-medium">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm text-foreground/80 leading-relaxed">{insight}</p>
-                  </div>
-                ))}
+                )}
+                {phase !== "idle" && (
+                  <>
+                    <span>{QUERY_TEXT.slice(0, typedChars)}</span>
+                    {phase === "typing" && (
+                      <span className="inline-block w-2 h-4 ml-0.5 bg-primary animate-cursor-blink align-middle" />
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </div>
+
+          {/* Processing state */}
+          {(phase === "processing" || phase === "results") && (
+            <div className="px-6 py-4 border-b border-border bg-secondary/30">
+              <div className="space-y-1.5">
+                {processingSteps.map((step, i) => {
+                  const visible =
+                    phase === "results" ? true : i < processingStep;
+                  const current =
+                    phase === "processing" && i === processingStep;
+                  if (!visible && !current) return null;
+                  return (
+                    <div
+                      key={i}
+                      className={`flex items-center gap-2 text-mono text-xs transition-opacity duration-300 ${
+                        visible
+                          ? "text-muted-foreground"
+                          : "text-muted-foreground/50"
+                      }`}
+                    >
+                      <span className="text-primary">
+                        {visible ? "✓" : "⟳"}
+                      </span>
+                      <span>{step}</span>
+                    </div>
+                  );
+                })}
+                {phase === "processing" &&
+                  processingStep < processingSteps.length && (
+                    <div className="flex items-center gap-2 text-mono text-xs text-muted-foreground/50">
+                      <span className="inline-block w-3 h-3 border border-primary/40 border-t-primary rounded-full animate-spin" />
+                      <span>{processingSteps[processingStep]}</span>
+                    </div>
+                  )}
+              </div>
+            </div>
+          )}
+
+          {/* Results — demo output image */}
+          {phase === "results" && (
+            <div
+              className={`transition-all duration-700 ease-out ${
+                showResults
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+            >
+              <div className="px-6 py-4">
+                <p className="text-mono text-[10px] tracking-widest uppercase text-primary/60 mb-3">
+                  ✦ Analysis Complete — 28 trials · 8 FDA designations · 6
+                  compounds tracked
+                </p>
+              </div>
+              <div className="px-4 pb-6">
+                <div className="rounded-lg overflow-hidden border border-border">
+                  <img
+                    src={demoOutput}
+                    alt="KRAS G12C Regulatory & Trial Pathway Analysis — showing executive summary, breakthrough designations, approval probabilities, compound pathways for Sotorasib and Divarasib"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
