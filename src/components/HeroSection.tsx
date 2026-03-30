@@ -34,7 +34,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-foreground/70 leading-relaxed mb-16">
-          Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in seconds, not weeks.
+          Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
 
         {/* Terminal */}
