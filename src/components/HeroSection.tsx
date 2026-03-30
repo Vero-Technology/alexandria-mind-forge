@@ -14,10 +14,10 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Subtle grid */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div className="absolute inset-0 grid-bg opacity-30" />
       
       {/* Radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-primary/3 blur-[120px]" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
         {/* Eyebrow */}
@@ -39,7 +39,7 @@ const HeroSection = () => {
 
         {/* Terminal */}
         <div className="animate-fade-up-delay-2 max-w-3xl">
-          <div className="border border-border rounded-lg overflow-hidden bg-background/80 backdrop-blur-sm border-glow">
+          <div className="border border-border rounded-lg overflow-hidden bg-card backdrop-blur-sm border-glow">
             {/* Terminal chrome */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
               <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
