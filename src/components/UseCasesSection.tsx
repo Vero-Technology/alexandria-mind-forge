@@ -45,61 +45,90 @@ const UseCasesSection = () => {
         <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
           Use Cases
         </span>
-        <h2 className="text-4xl md:text-5xl tracking-tight mb-16 max-w-3xl">
+        <h2 className="text-4xl md:text-5xl tracking-tight mb-6 max-w-3xl">
           Strategic Benchmarking in Action
         </h2>
+        <p className="text-muted-foreground text-lg max-w-2xl mb-14">
+          See how Alexandria synthesizes complex, multi-dataset queries that mirror real R&D consulting workflows.
+        </p>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-10">
-          {queries.map((item, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`px-4 py-2 rounded-md text-mono text-xs transition-all ${
-                active === i
-                  ? "bg-primary/15 text-primary border border-primary/30"
-                  : "bg-card/50 text-muted-foreground border border-border hover:border-primary/20"
-              }`}
-            >
-              {item.tag}
-            </button>
-          ))}
+        {/* Cards layout */}
+        <div className="grid lg:grid-cols-3 gap-5">
+          {queries.map((item, i) => {
+            const isActive = active === i;
+            return (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`text-left rounded-lg p-6 transition-all border ${
+                  isActive
+                    ? "bg-primary/[0.04] border-primary/25 shadow-sm"
+                    : "bg-card border-border hover:border-primary/15"
+                }`}
+              >
+                <span
+                  className={`inline-block text-mono text-[10px] tracking-widest uppercase px-2 py-1 rounded mb-4 ${
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {item.tag}
+                </span>
+                <p className={`text-sm leading-relaxed ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
+                  {item.query}
+                </p>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Active query display */}
-        <div className="border border-border rounded-lg bg-card/30 overflow-hidden">
-          {/* Query */}
-          <div className="p-6 md:p-8 border-b border-border">
-            <p className="text-mono text-xs text-muted-foreground mb-3">QUERY</p>
-            <p className="text-lg md:text-xl font-display leading-relaxed text-terminal">
+        {/* Expanded result */}
+        <div className="mt-8 border border-border rounded-lg bg-card overflow-hidden">
+          {/* Query bar */}
+          <div className="px-6 py-5 border-b border-border flex flex-col sm:flex-row sm:items-center gap-3">
+            <span className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground flex-shrink-0">
+              Query
+            </span>
+            <p className="text-foreground font-medium">
               "{q.query}"
             </p>
           </div>
 
-          <div className="grid md:grid-cols-[200px_1fr] divide-y md:divide-y-0 md:divide-x divide-border">
-            {/* Datasets queried */}
-            <div className="p-6">
-              <p className="text-mono text-xs text-muted-foreground mb-4">SOURCES</p>
-              <div className="space-y-2">
+          <div className="p-6 md:p-8">
+            {/* Sources row */}
+            <div className="mb-8">
+              <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-3">
+                Sources Queried
+              </p>
+              <div className="flex flex-wrap gap-2">
                 {q.datasets.map((ds, i) => (
-                  <div key={i} className="flex items-center gap-2">
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-1.5 text-mono text-xs bg-secondary text-secondary-foreground px-3 py-1.5 rounded-md"
+                  >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary/50" />
-                    <span className="text-mono text-xs text-foreground/60">{ds}</span>
-                  </div>
+                    {ds}
+                  </span>
                 ))}
               </div>
             </div>
 
             {/* Insights */}
-            <div className="p-6 md:p-8">
-              <p className="text-mono text-xs text-muted-foreground mb-4">SYNTHESIS</p>
-              <div className="space-y-4">
+            <div>
+              <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-4">
+                Key Findings
+              </p>
+              <div className="space-y-3">
                 {q.insights.map((insight, i) => (
-                  <div key={i} className="flex gap-3">
-                    <span className="text-mono text-xs text-primary/50 mt-0.5 flex-shrink-0">
-                      {String(i + 1).padStart(2, "0")}
+                  <div
+                    key={i}
+                    className="flex gap-4 items-start p-4 rounded-lg bg-secondary/50"
+                  >
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-mono text-xs flex items-center justify-center font-medium">
+                      {i + 1}
                     </span>
-                    <p className="text-sm text-foreground/70 leading-relaxed">{insight}</p>
+                    <p className="text-sm text-foreground/80 leading-relaxed">{insight}</p>
                   </div>
                 ))}
               </div>
