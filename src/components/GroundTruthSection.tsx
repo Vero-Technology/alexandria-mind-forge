@@ -91,7 +91,7 @@ const categories: Category[] = [
     ],
   },
   {
-    number: "07",
+    number: "08",
     title: "Failed Trial Knowledge Base",
     sources: [
       { name: "ClinicalTrials.gov results", access: "BUILD", notes: "Mine AACT for terminated/failed trials + reported results. Extract reason for termination, primary endpoint miss, safety signals" },
@@ -102,7 +102,7 @@ const categories: Category[] = [
     output: "Structured DB: target, mechanism, indication, phase failed, reason, year. No one has this.",
   },
   {
-    number: "08",
+    number: "09",
     title: "Conference Abstract Intelligence",
     sources: [
       { name: "ASCO abstracts", size: "~1-2 GB", access: "BUILD", notes: "Oncology data 6-12 months before journal publication" },
@@ -113,7 +113,7 @@ const categories: Category[] = [
     ],
   },
   {
-    number: "09",
+    number: "10",
     title: "FDA Reviewer Profiling",
     sources: [
       { name: "FDA review documents", access: "BUILD", notes: "NLP on medical/clinical review sections from Drugs@FDA" },
@@ -123,7 +123,7 @@ const categories: Category[] = [
     output: "Reviewer DB: name, division, therapeutic areas, decision history, concern patterns. Consultants charge $50K for one advisory board.",
   },
   {
-    number: "10",
+    number: "11",
     title: "Earnings Call Pipeline Sentiment",
     sources: [
       { name: "SEC EDGAR 8-K/10-K/10-Q", size: "~30-50 GB", access: "FREE", notes: "Every public pharma/biotech quarterly filing + earnings call transcripts" },
