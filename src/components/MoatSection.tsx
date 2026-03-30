@@ -50,22 +50,28 @@ const MoatSection = () => {
       {/* Built to Disappear */}
       <section className="relative py-28 px-6 bg-secondary/50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl tracking-tight mb-2">
+          <h2 className="text-5xl md:text-6xl tracking-tight mb-12">
             Built to <span className="text-primary/50 italic">Disappear.</span>
           </h2>
-          <div className="mt-8 space-y-6 text-lg text-foreground/70 leading-relaxed">
-            <p>
-              AI is our architecture, <span className="font-semibold text-foreground">not a feature</span>.
-            </p>
-            <p>
-              We indexed 22 datasets into one unified layer. A single query cross-references trials, safety, patents, and deals simultaneously.
-            </p>
-            <p>
-              Legacy platforms cannot replicate this by adding AI on top. Reasoning across the full picture would require unifying databases that were never built to connect.
-            </p>
-            <p>
-              Write your query in plain language; there is no interface to learn. The tool disappears into the workflow.
-            </p>
+          <div className="grid sm:grid-cols-2 gap-6 text-left max-w-3xl mx-auto">
+            <div className="border border-border rounded-lg p-6 bg-card">
+              <p className="text-sm font-semibold text-foreground mb-2">Architecture, not a feature</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                22 datasets indexed into one unified layer. A single query cross-references trials, safety, patents, and deals simultaneously.
+              </p>
+            </div>
+            <div className="border border-border rounded-lg p-6 bg-card">
+              <p className="text-sm font-semibold text-foreground mb-2">Unreplicable by design</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Legacy platforms cannot replicate this by adding AI on top. It would require unifying databases that were never built to connect.
+              </p>
+            </div>
+            <div className="sm:col-span-2 border border-border rounded-lg p-6 bg-card">
+              <p className="text-sm font-semibold text-foreground mb-2">No interface to learn</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Write your query in plain language. The tool disappears into the workflow.
+              </p>
+            </div>
           </div>
         </div>
       </section>
