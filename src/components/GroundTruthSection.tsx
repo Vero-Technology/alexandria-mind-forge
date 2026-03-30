@@ -51,7 +51,7 @@ const GroundTruthSection = () => {
           {/* Right: Dataset list */}
           <div className="flex flex-col justify-center">
             <p className="text-mono text-xs text-muted-foreground mb-6 tracking-wider uppercase">
-              Unified Data Layer · 22 Sources
+              Unified Data Layer · 22 Sources and Growing
             </p>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2">
               {datasets.map((ds, i) => (
