@@ -37,7 +37,7 @@ const MoatSection = () => {
               </div>
               <div className="flex justify-between mt-4 pt-4 border-t border-border">
                 <span className="text-mono text-xs text-muted-foreground">1 dataset</span>
-                <span className="text-mono text-xs text-muted-foreground">22 datasets</span>
+                <span className="text-mono text-xs text-muted-foreground">42 datasets</span>
               </div>
               <p className="text-mono text-xs text-muted-foreground mt-2 text-center">
                 Cross-referential connections (super-linear growth)
@@ -57,7 +57,7 @@ const MoatSection = () => {
             <div className="border border-border rounded-lg p-6 bg-card">
               <p className="text-sm font-semibold text-foreground mb-2">Architecture, not a feature</p>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                22 datasets indexed into one unified layer. A single query cross-references trials, safety, patents, and deals simultaneously.
+                42 datasets indexed into one unified layer. A single query cross-references trials, safety, patents, and deals simultaneously.
               </p>
             </div>
             <div className="border border-border rounded-lg p-6 bg-card">
