@@ -35,7 +35,7 @@ const LeanTeamsSection = () => {
             Enterprise Intelligence, Startup Team Size
           </h2>
           <p className="text-foreground/60 text-lg leading-relaxed">
-            Legacy platforms assume you have a 20-person research department and a six-figure software budget. Alexandria assumes you have two sharp analysts and a deadline.
+            Whether you're a two-person BD team or a 200-person R&D department, Alexandria scales to match. Legacy platforms charge for headcount. Alexandria charges for intelligence.
           </p>
         </div>
 
