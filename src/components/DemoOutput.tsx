@@ -163,7 +163,28 @@ const DemoOutput = () => {
               ))}
             </div>
           </div>
-        </div>
+
+          {/* RMC-6236 */}
+          <div className="border border-border rounded-lg p-5">
+            <p className="font-semibold text-base text-foreground">RMC-6236</p>
+            <p className="text-xs text-muted-foreground mb-4">Revolution Medicines · Pan-RAS(ON) tri-complex inhibitor</p>
+            <div>
+              {rmc6236Timeline.map((item, i) => (
+                <TimelineItem key={i} item={item} isLast={i === rmc6236Timeline.length - 1} />
+              ))}
+            </div>
+          </div>
+
+          {/* Adagrasib */}
+          <div className="border border-border rounded-lg p-5">
+            <p className="font-semibold text-base text-foreground">Adagrasib</p>
+            <p className="text-xs text-muted-foreground mb-4">BMS / Mirati · Covalent KRAS G12C inhibitor</p>
+            <div>
+              {adagrasibTimeline.map((item, i) => (
+                <TimelineItem key={i} item={item} isLast={i === adagrasibTimeline.length - 1} />
+              ))}
+            </div>
+          </div>
       )}
 
       {activeTab === "regulatory" && (
