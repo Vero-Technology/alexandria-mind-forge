@@ -80,7 +80,7 @@ const categories: Category[] = [
     ],
   },
   {
-    number: "06",
+    number: "07",
     title: "Protein & Pathway Data",
     sources: [
       { name: "UniProt Swiss-Prot", size: "~2-3 GB", access: "FREE", notes: "573K reviewed protein annotations. Druggability, function, structure" },
