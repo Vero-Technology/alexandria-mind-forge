@@ -70,6 +70,17 @@ const categories: Category[] = [
   },
   {
     number: "06",
+    title: "Regulatory Intelligence",
+    sources: [
+      { name: "FDA Drugs@FDA", size: "~0.2 GB", access: "FREE", notes: "Every approved drug: dates, application type, review classification" },
+      { name: "FDA designation databases", size: "~0.3 GB", access: "FREE", notes: "Breakthrough, Fast Track, Orphan, RMAT, Accelerated Approval designations with outcomes" },
+      { name: "FDA Advisory Committee transcripts", size: "~1-2 GB", access: "BUILD", notes: "Mine voting records, reviewer concerns, panel member profiles. 30-50 GB raw PDFs, NLP extraction" },
+      { name: "FDA Complete Response Letters", size: "~0.5 GB", access: "BUILD", notes: "WHY the FDA rejected, gold for understanding regulatory risk. Extract from FOIA, press releases, SEC filings" },
+      { name: "EMA EPARs", size: "~2-4 GB", access: "BUILD", notes: "European assessment reports. 20-30 GB raw, structured NLP extraction" },
+    ],
+  },
+  {
+    number: "06",
     title: "Protein & Pathway Data",
     sources: [
       { name: "UniProt Swiss-Prot", size: "~2-3 GB", access: "FREE", notes: "573K reviewed protein annotations. Druggability, function, structure" },
