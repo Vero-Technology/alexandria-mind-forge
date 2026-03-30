@@ -141,13 +141,6 @@ const accessColors: Record<AccessType, string> = {
 };
 
 const GroundTruthSection = () => {
-  const [openCategories, setOpenCategories] = useState<string[]>(["01"]);
-
-  const toggle = (num: string) => {
-    setOpenCategories((prev) =>
-      prev.includes(num) ? prev.filter((n) => n !== num) : [...prev, num]
-    );
-  };
 
   return (
     <section className="relative py-32 px-6">
