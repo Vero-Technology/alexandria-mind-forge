@@ -4,6 +4,7 @@ import GeneralAISection from "@/components/GeneralAISection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
 import UseCasesSection from "@/components/UseCasesSection";
+import LeanTeamsSection from "@/components/LeanTeamsSection";
 import MoatSection from "@/components/MoatSection";
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
       <ArchitectureSection />
       <GroundTruthSection />
       <UseCasesSection />
+      <LeanTeamsSection />
       <MoatSection />
     </main>
   );
