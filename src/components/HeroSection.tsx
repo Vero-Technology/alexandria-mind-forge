@@ -2,13 +2,13 @@ import Navbar from "@/components/Navbar";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full aspect-video overflow-hidden">
+    <section className="relative w-full h-screen overflow-hidden bg-black">
       <Navbar />
       {/* Video background */}
       <div className="absolute inset-0 z-0">
         <iframe
           src="https://www.youtube.com/embed/ALgyYN3beWw?autoplay=1&mute=1&loop=1&playlist=ALgyYN3beWw&controls=0&showinfo=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playsinline=1"
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vh] min-w-full min-h-full pointer-events-none"
           allow="autoplay; encrypted-media"
           frameBorder="0"
           title="Background video"
