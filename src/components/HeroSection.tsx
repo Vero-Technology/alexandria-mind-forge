@@ -24,7 +24,7 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 flex items-center min-h-full">
         {/* Eyebrow */}
         <div className="animate-fade-up mb-8">
           <span className="text-mono text-xs tracking-[0.3em] uppercase">
