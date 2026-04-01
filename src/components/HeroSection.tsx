@@ -1,6 +1,16 @@
 import Navbar from "@/components/Navbar";
 import logo1 from "@/assets/logo_white_4k_fixed.png";
 import logo2 from "@/assets/hcm-big-d.png";
+import logo3 from "@/assets/bank-of-america.png";
+
+// ===== MANUAL LOGO SIZING =====
+// Adjust height (px) and vertical offset (px, negative = up) for each logo
+const logos = [
+  { src: logo1, alt: "Immuno Cure", height: 18, offsetY: 0 },
+  { src: logo2, alt: "HutchMed", height: 22, offsetY: 0 },
+  { src: logo3, alt: "Bank of America", height: 16, offsetY: 0 },
+];
+// ===============================
 
 const HeroSection = () => {
   return (
@@ -18,12 +28,9 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 flex flex-col justify-center min-h-full">
-        {/* Title */}
         <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl mb-8 text-white">
           Reasoning Across the Global R&D Landscape.
         </h1>
-
-        {/* Subtitle */}
         <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed">
           Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
@@ -33,8 +40,15 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/60 backdrop-blur-sm border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-center gap-8">
           <span className="text-white/70 text-sm tracking-wide">Accredited by executives from</span>
-          <img src={logo1} alt="Immuno Cure" className="h-5 object-contain opacity-80" />
-          <img src={logo2} alt="HutchMed" className="h-5 object-contain opacity-80" />
+          {logos.map((logo, i) => (
+            <img
+              key={i}
+              src={logo.src}
+              alt={logo.alt}
+              className="object-contain opacity-80"
+              style={{ height: logo.height, transform: `translateY(${logo.offsetY}px)` }}
+            />
+          ))}
         </div>
       </div>
     </section>
