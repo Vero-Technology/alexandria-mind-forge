@@ -24,16 +24,9 @@ const HeroSection = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed mb-10">
+        <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed">
           Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
-
-        {/* CTA Button */}
-        <div className="animate-fade-up-delay-1">
-          <button className="px-8 py-3 bg-white text-black font-medium rounded-md text-sm tracking-wide hover:bg-white/90 transition-colors">
-            Coming Soon
-          </button>
-        </div>
       </div>
 
       {/* Bottom accredited bar */}
