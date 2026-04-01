@@ -3,7 +3,7 @@ import DrugPlatformsSection from "@/components/DrugPlatformsSection";
 import GeneralAISection from "@/components/GeneralAISection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
-import UseCasesSection from "@/components/UseCasesSection";
+
 import LeanTeamsSection from "@/components/LeanTeamsSection";
 import MoatSection from "@/components/MoatSection";
 
