@@ -27,19 +27,19 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 flex items-center min-h-full">
         {/* Eyebrow */}
         <div className="animate-fade-up mb-8">
-          <span className="text-mono text-xs tracking-[0.3em] uppercase">
-            <span className="text-foreground font-medium">Alexandria</span>
-            <span className="text-primary/70"> — AI-Native Research Terminal</span>
+          <span className="text-mono text-xs tracking-[0.3em] uppercase text-white/70">
+            <span className="font-medium text-white">Alexandria</span>
+            <span> — AI-Native Research Terminal</span>
           </span>
         </div>
 
         {/* Title */}
-        <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl mb-8">
+        <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl mb-8 text-white">
           Reasoning Across the Global R&D Landscape.
         </h1>
 
         {/* Subtitle */}
-        <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-foreground/70 leading-relaxed mb-16">
+        <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed mb-16">
           Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
 
@@ -51,7 +51,7 @@ const HeroSection = () => {
               <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
               <div className="w-2.5 h-2.5 rounded-full bg-primary/20" />
               <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-              <span className="ml-3 text-mono text-xs text-muted-foreground">alexandria · cross-reference engine</span>
+              <span className="ml-3 text-mono text-xs text-white/50">session active</span>
             </div>
             
             {/* Terminal content */}
