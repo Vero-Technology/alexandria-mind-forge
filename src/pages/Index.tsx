@@ -1,10 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import DrugPlatformsSection from "@/components/DrugPlatformsSection";
-import GeneralAISection from "@/components/GeneralAISection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
-
 import LeanTeamsSection from "@/components/LeanTeamsSection";
 import MoatSection from "@/components/MoatSection";
 
@@ -13,10 +10,7 @@ const Index = () => {
     <main className="min-h-screen">
       <Navbar />
       <HeroSection />
-      <DrugPlatformsSection />
-      <GeneralAISection />
       <ArchitectureSection />
-      
       <GroundTruthSection />
       <LeanTeamsSection />
       <MoatSection />
