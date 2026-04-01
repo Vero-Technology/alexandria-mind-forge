@@ -1,6 +1,9 @@
+import Navbar from "@/components/Navbar";
+
 const HeroSection = () => {
   return (
     <section className="relative w-full aspect-video overflow-hidden">
+      <Navbar />
       {/* Video background */}
       <div className="absolute inset-0 z-0">
         <iframe
@@ -13,14 +16,6 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 flex items-center min-h-full">
-        {/* Eyebrow */}
-        <div className="animate-fade-up mb-8">
-          <span className="text-mono text-xs tracking-[0.3em] uppercase text-white/70">
-            <span className="font-medium text-white">Alexandria</span>
-            <span> — AI-Native Research Terminal</span>
-          </span>
-        </div>
-
         {/* Title */}
         <h1 className="animate-fade-up text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight max-w-4xl mb-8 text-white">
           Reasoning Across the Global R&D Landscape.
