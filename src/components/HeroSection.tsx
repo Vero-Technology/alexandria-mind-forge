@@ -31,10 +31,10 @@ const HeroSection = () => {
 
       {/* Bottom accredited bar */}
       <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/60 backdrop-blur-sm border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-center gap-6">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-center gap-8">
           <span className="text-white/70 text-sm tracking-wide">Accredited by executives from</span>
-          <img src={logo1} alt="Partner logo" className="h-6 object-contain opacity-80" />
-          <img src={logo2} alt="Partner logo" className="h-6 object-contain opacity-80" />
+          <img src={logo1} alt="Immuno Cure" className="h-5 object-contain opacity-80" />
+          <img src={logo2} alt="HutchMed" className="h-5 object-contain opacity-80" />
         </div>
       </div>
     </section>
