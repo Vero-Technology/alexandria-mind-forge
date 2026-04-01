@@ -51,7 +51,7 @@ const HeroSection = () => {
               <div className="w-2.5 h-2.5 rounded-full bg-primary/30" />
               <div className="w-2.5 h-2.5 rounded-full bg-primary/20" />
               <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-              <span className="ml-3 text-mono text-xs text-muted-foreground">alexandria · cross-reference engine</span>
+              <span className="ml-3 text-mono text-xs text-white/50">session active</span>
             </div>
             
             {/* Terminal content */}
