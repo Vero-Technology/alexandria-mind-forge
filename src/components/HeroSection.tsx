@@ -12,21 +12,19 @@ const terminalLines = [
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative w-full aspect-video overflow-hidden">
       {/* Video background */}
       <div className="absolute inset-0 z-0">
         <iframe
           src="https://www.youtube.com/embed/ALgyYN3beWw?autoplay=1&mute=1&loop=1&playlist=ALgyYN3beWw&controls=0&showinfo=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playsinline=1"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full min-h-full aspect-video pointer-events-none"
+          className="absolute inset-0 w-full h-full pointer-events-none"
           allow="autoplay; encrypted-media"
           frameBorder="0"
           title="Background video"
         />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-background/80" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-32 flex items-center min-h-full">
         {/* Eyebrow */}
         <div className="animate-fade-up mb-8">
           <span className="text-mono text-xs tracking-[0.3em] uppercase">
