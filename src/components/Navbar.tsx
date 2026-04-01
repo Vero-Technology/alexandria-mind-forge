@@ -6,10 +6,10 @@ const Navbar = () => {
       <div className="relative flex items-center h-14 px-6">
         <img src={alexandriaLogo} alt="Alexandria" className="h-8 absolute left-6" />
         <div className="flex items-center justify-center gap-10 w-full">
-          <a href="#solutions" className="font-sans text-sm text-white hover:text-white transition-colors">
+          <a href="#solutions" className="font-sans text-sm font-medium text-white drop-shadow-sm hover:text-white/80 transition-colors">
             Solutions
           </a>
-          <a href="#contact" className="font-sans text-sm text-white hover:text-white transition-colors">
+          <a href="#contact" className="font-sans text-sm font-medium text-white drop-shadow-sm hover:text-white/80 transition-colors">
             Contact
           </a>
         </div>
