@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import DrugPlatformsSection from "@/components/DrugPlatformsSection";
 import GeneralAISection from "@/components/GeneralAISection";
@@ -10,6 +11,7 @@ import MoatSection from "@/components/MoatSection";
 const Index = () => {
   return (
     <main className="min-h-screen">
+      <Navbar />
       <HeroSection />
       <DrugPlatformsSection />
       <GeneralAISection />
