@@ -63,38 +63,38 @@ const ArchitectureSection = () => {
         {/* Stacked stats */}
         <div className="flex flex-col gap-4 mb-10">
           {/* Static stat */}
-          <div className="border border-border rounded-lg py-6 px-8 flex items-center justify-between">
-            <p className="text-mono text-sm text-muted-foreground tracking-wide">Indexed Pharmaceutical Sources</p>
+          <div className="border border-border rounded-lg py-6 px-8 flex flex-col items-center justify-center">
             <p className="text-4xl md:text-5xl font-display text-foreground tracking-tight">50+</p>
+            <p className="text-mono text-sm text-muted-foreground tracking-wide mt-2">Indexed Pharmaceutical Sources</p>
           </div>
 
           {/* Rotating stat */}
-          <div className="border border-border rounded-lg py-6 px-8 flex items-center justify-between overflow-hidden">
-            <div className="h-6 relative flex items-center">
+          <div className="border border-border rounded-lg py-6 px-8 flex flex-col items-center justify-center overflow-hidden">
+            <div className="h-12 relative flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentIndex}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="text-4xl md:text-5xl font-display text-foreground tracking-tight absolute"
+                >
+                  {dataDomains[currentIndex].count}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+            <div className="h-6 relative flex items-center justify-center mt-2">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentIndex}
+                  initial={{ y: 16, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -16, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="text-mono text-sm text-muted-foreground tracking-wide absolute whitespace-nowrap"
                 >
                   {dataDomains[currentIndex].name}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-            <div className="h-12 relative flex items-center">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentIndex}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="text-4xl md:text-5xl font-display text-foreground tracking-tight absolute right-0"
-                >
-                  {dataDomains[currentIndex].count}
                 </motion.p>
               </AnimatePresence>
             </div>
