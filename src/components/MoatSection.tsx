@@ -92,7 +92,7 @@ const MoatSection = () => {
         {/* Title — scrolls away */}
         <div className="max-w-4xl mx-auto pt-32 pb-20 px-6 text-center">
           <h2
-            className="text-5xl md:text-7xl tracking-tight mb-6"
+            className="text-5xl md:text-7xl tracking-tight"
             style={{ color: "hsl(0 0% 95%)" }}
           >
             Built to{" "}
@@ -100,12 +100,6 @@ const MoatSection = () => {
               Disappear.
             </span>
           </h2>
-          <p
-            className="text-base md:text-lg max-w-xl mx-auto leading-relaxed"
-            style={{ color: "hsl(0 0% 40%)" }}
-          >
-            The best tools don't demand attention. They deliver answers and get out of the way.
-          </p>
         </div>
 
         {/* Sticky full-width strips */}
