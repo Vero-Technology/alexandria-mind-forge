@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", business: "", message: "" });
@@ -43,50 +43,26 @@ const ContactSection = () => {
       style={{ background: "hsl(0 0% 3%)" }}
     >
       <div className="max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2
-            className="text-4xl md:text-5xl font-light mb-4"
-            style={{
-              fontFamily: "'DM Serif Display', serif",
-              color: "hsl(0 0% 92%)",
-            }}
-          >
-            Get in Touch
-          </h2>
-          <p
-            className="text-base"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              color: "hsl(0 0% 50%)",
-            }}
-          >
-            Interested in what Alexandria can do for your team? Reach out.
-          </p>
-        </motion.div>
-
+        <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-16"
+            key="thanks"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col items-center justify-center text-center min-h-[400px]"
           >
-            <p
-              className="text-2xl font-light"
+            <h2
+              className="text-4xl md:text-6xl font-light mb-5"
               style={{
                 fontFamily: "'DM Serif Display', serif",
                 color: "hsl(0 0% 92%)",
               }}
             >
               Thank you for reaching out.
-            </p>
+            </h2>
             <p
-              className="mt-3 text-sm"
+              className="text-lg md:text-xl"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 color: "hsl(0 0% 50%)",
@@ -96,6 +72,38 @@ const ContactSection = () => {
             </p>
           </motion.div>
         ) : (
+          <motion.div
+            key="form"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2
+              className="text-4xl md:text-5xl font-light mb-4"
+              style={{
+                fontFamily: "'DM Serif Display', serif",
+                color: "hsl(0 0% 92%)",
+              }}
+            >
+              Get in Touch
+            </h2>
+            <p
+              className="text-base"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                color: "hsl(0 0% 50%)",
+              }}
+            >
+              Interested in what Alexandria can do for your team? Reach out.
+            </p>
+          </motion.div>
           <motion.form
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +223,9 @@ const ContactSection = () => {
               </a>
             </p>
           </motion.form>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </section>
   );
