@@ -263,14 +263,15 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
 
       {/* Filter chips */}
       <motion.div
-        className="px-4 sm:px-6 pb-3 flex items-center gap-2 flex-wrap"
+        className="px-4 sm:px-6 pb-3 flex items-start gap-2"
         initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, delay: 0.35 }}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 40%)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg className="shrink-0" style={{ marginTop: "6px" }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 40%)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="4" y1="21" x2="4" y2="14" /><line x1="4" y1="10" x2="4" y2="3" /><line x1="12" y1="21" x2="12" y2="12" /><line x1="12" y1="8" x2="12" y2="3" /><line x1="20" y1="21" x2="20" y2="16" /><line x1="20" y1="12" x2="20" y2="3" /><line x1="1" y1="14" x2="7" y2="14" /><line x1="9" y1="8" x2="15" y2="8" /><line x1="17" y1="16" x2="23" y2="16" />
         </svg>
+        <div className="flex flex-wrap gap-2">
         {[
           { label: "Region:", value: "United States" },
           { label: "Target:", value: "KRAS G12C" },
@@ -287,6 +288,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             <span className="ml-0.5 cursor-pointer" style={{ color: "hsl(0 0% 35%)" }}>&times;</span>
           </span>
         ))}
+        </div>
       </motion.div>
 
       {/* Metadata + Export row */}
