@@ -29,14 +29,14 @@ const ArchitectureSection = () => {
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        {/* Stats row */}
-        <div className="flex gap-10 mb-8">
-          <div>
+        {/* Stats — top right, at section border */}
+        <div className="flex justify-end gap-10 -mt-10 mb-14">
+          <div className="text-right">
             <p className="text-4xl font-display text-foreground tracking-tight">50+</p>
             <p className="text-mono text-[10px] text-muted-foreground mt-1">Indexed Pharmaceutical Sources</p>
           </div>
           <div className="w-px bg-border" />
-          <div>
+          <div className="text-right">
             <p className="text-4xl font-display text-foreground tracking-tight">540M+</p>
             <p className="text-mono text-[10px] text-muted-foreground mt-1">Academic Resources</p>
           </div>
@@ -48,14 +48,14 @@ const ArchitectureSection = () => {
             Alexandria is AI-Native
           </h2>
           <p className="text-foreground/60 text-lg max-w-3xl">
-            Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
+            Alexandria is an agentic research platform built on an interconnected index of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
           </p>
         </div>
 
         {/* Knowledge Domains */}
         <div className="flex justify-center">
           <div className="w-full max-w-lg">
-            <p className="text-mono text-xs tracking-[0.25em] uppercase text-foreground/50 font-semibold mb-6 text-center">
+            <h3 className="text-2xl md:text-3xl tracking-tight mb-6 text-center">
               Knowledge Domains
             </p>
             <div className="relative">
