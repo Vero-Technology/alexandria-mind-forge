@@ -6,9 +6,9 @@ import logo3 from "@/assets/bank-of-america.png";
 // ===== MANUAL LOGO SIZING =====
 // Adjust height (px) and vertical offset (px, negative = up) for each logo
 const logos = [
-  { src: logo1, alt: "Immuno Cure", height: 18, offsetY: 0 },
+  { src: logo1, alt: "Immuno Cure", height: 28, offsetY: 0 },
   { src: logo2, alt: "HutchMed", height: 22, offsetY: 0 },
-  { src: logo3, alt: "Bank of America", height: 16, offsetY: 0 },
+  { src: logo3, alt: "Bank of America", height: 26, offsetY: 0 },
 ];
 // ===============================
 
