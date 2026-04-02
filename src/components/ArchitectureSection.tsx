@@ -27,46 +27,44 @@ const ArchitectureSection = () => {
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        <div className="mb-10">
-          <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
-            Alexandria is AI-Native
-          </h2>
-          <p className="text-foreground/60 text-lg max-w-3xl mb-3">
-            Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
-          </p>
-        </div>
-
-        {/* Stats + Sources grid */}
-        <div className="grid md:grid-cols-[1fr_auto] gap-10 items-start">
-          {/* Source list */}
+        {/* Header with stats top-right */}
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10">
           <div>
-            <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-5">
-              Knowledge Domains
+            <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
+              Alexandria is AI-Native
+            </h2>
+            <p className="text-foreground/60 text-lg max-w-3xl">
+              Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-3">
-              {dataDomains.map((domain, i) => (
-                <div key={domain} className="flex items-center gap-2.5 group">
-                  <span className="text-mono text-[10px] text-muted-foreground/40 tabular-nums w-4">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-[13px] text-foreground/60 group-hover:text-foreground transition-colors duration-200">
-                    {domain}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
-
-          {/* Stats */}
-          <div className="flex md:flex-col gap-6 md:gap-5 md:text-right">
-            <div>
+          <div className="flex gap-8 flex-shrink-0 md:pt-2">
+            <div className="md:text-right">
               <p className="text-3xl font-display text-primary">50+</p>
-              <p className="text-mono text-[10px] text-muted-foreground mt-0.5">Indexed Sources</p>
+              <p className="text-mono text-[10px] text-muted-foreground mt-0.5">Indexed Pharmaceutical Sources</p>
             </div>
-            <div>
+            <div className="md:text-right">
               <p className="text-3xl font-display text-primary">540M+</p>
               <p className="text-mono text-[10px] text-muted-foreground mt-0.5">Academic Resources</p>
             </div>
+          </div>
+        </div>
+
+        {/* Source list */}
+        <div>
+          <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-5">
+            Knowledge Domains
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-3">
+            {dataDomains.map((domain, i) => (
+              <div key={domain} className="flex items-center gap-2.5 group">
+                <span className="text-mono text-[10px] text-muted-foreground/40 tabular-nums w-4">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[13px] text-foreground/60 group-hover:text-foreground transition-colors duration-200">
+                  {domain}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
