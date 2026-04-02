@@ -34,6 +34,14 @@ const HeroSection = () => {
         <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed">
           Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
+        <a
+          href="https://calendly.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="animate-fade-up-delay-1 mt-6 inline-flex items-center px-6 py-3 text-sm font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-colors duration-200 w-fit"
+        >
+          Book a Call
+        </a>
       </div>
 
       {/* Bottom accredited bar */}
