@@ -57,7 +57,7 @@ const ArchitectureSection = () => {
           <div className="w-full max-w-lg">
             <h3 className="text-2xl md:text-3xl tracking-tight mb-6 text-center">
               Knowledge Domains
-            </p>
+            </h3>
             <div className="relative">
               <div
                 className="absolute top-0 left-0 right-0 h-10 z-10 pointer-events-none"
