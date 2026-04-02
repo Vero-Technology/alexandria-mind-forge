@@ -3,10 +3,10 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const stats = [
-  { value: "3", label: "Breakthrough Designations", icon: "⚡" },
-  { value: "10.1%", label: "Approval Probability", sub: "Phase I to Approval", icon: "◎" },
-  { value: "Q1 2028", label: "Earliest Projected Approval", icon: "⏱" },
-  { value: "3", label: "Active Phase III Programs", icon: "▲" },
+  { value: "3", label: "Breakthrough Designations" },
+  { value: "10.1%", label: "Approval Probability", sub: "Phase I to Approval" },
+  { value: "Q1 2028", label: "Earliest Projected Approval" },
+  { value: "3", label: "Active Phase III Programs" },
 ];
 
 const sotorasibTimeline = [
