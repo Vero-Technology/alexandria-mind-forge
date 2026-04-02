@@ -5,7 +5,7 @@ const pillars = [
   {
     title: "Architecture, not a feature",
     description:
-      "50+ datasets indexed into one unified reasoning layer. A single query cross-references trials, safety, patents, and regulatory filings simultaneously — no tabs, no exports, no manual synthesis.",
+      "12+ datasets indexed into one unified reasoning layer. A single query cross-references trials, safety, patents, and regulatory filings simultaneously — no tabs, no exports, no manual synthesis.",
   },
   {
     title: "Unreplicable by design",

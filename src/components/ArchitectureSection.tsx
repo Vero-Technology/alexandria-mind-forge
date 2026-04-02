@@ -62,7 +62,7 @@ const ArchitectureSection = () => {
           {/* Static stat */}
           <div className="flex flex-col items-center justify-center py-6 px-8">
             <p className="text-5xl md:text-6xl font-display text-foreground tracking-tight">50+</p>
-            <p className="text-mono text-sm text-muted-foreground tracking-wide mt-2">Indexed Pharmaceutical Sources</p>
+            <p className="text-mono text-sm text-muted-foreground tracking-wide mt-2">Pharmaceutical Sources</p>
           </div>
 
           {/* Rotating stat */}
