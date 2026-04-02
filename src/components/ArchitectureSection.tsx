@@ -48,7 +48,7 @@ const ArchitectureSection = () => {
             Alexandria is AI-Native
           </h2>
           <p className="text-foreground/60 text-lg max-w-3xl">
-            Alexandria is an agentic research platform built on an interconnected index of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
+            Alexandria is an agentic research platform built on an Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks. of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
           </p>
         </div>
 
