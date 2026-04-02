@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const useCases = [
   "Asset Evaluation",
@@ -9,9 +9,6 @@ const useCases = [
   "Pipeline Gap Analysis",
   "Partner Identification",
 ];
-
-const VISIBLE_COUNT = 5;
-const ITEM_HEIGHT = 64;
 
 const UseCasesScrollSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,70 +23,52 @@ const UseCasesScrollSection = () => {
     return () => clearInterval(interval);
   }, [isInView]);
 
-  // Build visible items centered around activeIndex
-  const getVisibleItems = () => {
-    const items = [];
-    const mid = Math.floor(VISIBLE_COUNT / 2);
-    for (let offset = -mid; offset <= mid; offset++) {
-      const idx = ((activeIndex + offset) % useCases.length + useCases.length) % useCases.length;
-      items.push({ index: idx, offset, name: useCases[idx] });
-    }
-    return items;
-  };
-
-  const visibleItems = getVisibleItems();
-
   return (
     <section className="relative py-28 px-6" ref={containerRef}>
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-20">
-        <p className="text-foreground/80 text-lg md:text-xl max-w-[320px] leading-relaxed flex-shrink-0" style={{ paddingTop: `${Math.floor(VISIBLE_COUNT / 2) * ITEM_HEIGHT + 8}px` }}>
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start gap-16 md:gap-24">
+        {/* Left label */}
+        <p
+          className="text-mono text-sm tracking-wide text-muted-foreground max-w-[240px] leading-relaxed flex-shrink-0 md:pt-24"
+        >
           Business development teams use Alexandria for
         </p>
 
-        <div
-          className="relative overflow-hidden"
-          style={{ height: `${VISIBLE_COUNT * ITEM_HEIGHT}px` }}
-        >
-          <AnimatePresence initial={false}>
-            {visibleItems.map((item) => {
-              const distance = Math.abs(item.offset);
-              const opacity = distance === 0 ? 1 : distance === 1 ? 0.3 : 0.12;
+        {/* Right wheel */}
+        <div className="relative w-full" style={{ height: "320px" }}>
+          {/* Fade top */}
+          <div className="absolute top-0 left-0 right-0 h-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }} />
+          {/* Fade bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-16 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }} />
+
+          <div className="absolute inset-0 flex flex-col items-start justify-center overflow-hidden">
+            {useCases.map((useCase, i) => {
+              // Calculate circular distance
+              const rawDist = i - activeIndex;
+              const wrappedDist =
+                ((rawDist + useCases.length / 2) % useCases.length) - useCases.length / 2;
+
+              const opacity = Math.abs(wrappedDist) === 0 ? 1 : Math.abs(wrappedDist) === 1 ? 0.3 : 0.1;
+              const yPos = wrappedDist * 64;
 
               return (
-                <motion.div
-                  key={`${item.index}-${item.offset}`}
-                  className="absolute left-0 w-full flex items-center"
-                  style={{ height: `${ITEM_HEIGHT}px` }}
-                  initial={{
-                    y: (item.offset + 1) * ITEM_HEIGHT,
-                    opacity: 0,
-                  }}
+                <motion.p
+                  key={useCase}
+                  className="absolute left-0 font-display tracking-tight select-none whitespace-nowrap"
+                  style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
                   animate={{
-                    y: item.offset * ITEM_HEIGHT + Math.floor(VISIBLE_COUNT / 2) * ITEM_HEIGHT,
+                    y: yPos,
                     opacity,
+                    color: Math.abs(wrappedDist) === 0 ? "hsl(160, 25%, 12%)" : "hsl(0, 0%, 78%)",
                   }}
-                  exit={{
-                    y: (item.offset - 1) * ITEM_HEIGHT + Math.floor(VISIBLE_COUNT / 2) * ITEM_HEIGHT,
-                    opacity: 0,
-                  }}
-                  transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  <p
-                    className="font-display tracking-tight whitespace-nowrap select-none transition-colors duration-500"
-                    style={{
-                      fontSize: "clamp(1.8rem, 3.5vw, 3rem)",
-                      color: distance === 0 ? "hsl(160, 25%, 12%)" : "hsl(0, 0%, 78%)",
-                      fontWeight: distance === 0 ? 400 : 400,
-                    }}
-                  >
-                    {item.name}
-                  </p>
-                </motion.div>
+                  {useCase}
+                </motion.p>
               );
             })}
-          </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>
