@@ -19,12 +19,12 @@ const HeroSection = () => {
     const video = videoRef.current;
     if (!video) return;
     video.play().catch(() => {
-      video.style.display = "none";
+      // Video blocked (e.g. Low Power Mode) — poster image remains visible
     });
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden bg-[#0a0a1a]">
       {/* Video background — covers entire section */}
       <video
         ref={videoRef}
@@ -32,6 +32,7 @@ const HeroSection = () => {
         muted
         playsInline
         loop
+        poster="/hero-poster.jpg"
         className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
       >
         <source src="/hero-video-4k.webm" type="video/webm" />
