@@ -1,7 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
-import DemoSection from "@/components/DemoSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
+import DemoSection from "@/components/DemoSection";
 import MoatSection from "@/components/MoatSection";
 
 const Index = () => {
@@ -9,8 +9,8 @@ const Index = () => {
     <main className="min-h-screen">
       <HeroSection />
       <ArchitectureSection />
-      <DemoSection />
       <GroundTruthSection />
+      <DemoSection />
       <MoatSection />
     </main>
   );
