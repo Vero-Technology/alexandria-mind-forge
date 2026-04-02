@@ -5,7 +5,6 @@ import logo2 from "@/assets/hcm-big-d.png";
 import logo3 from "@/assets/bank-of-america.png";
 
 // ===== MANUAL LOGO SIZING =====
-// Adjust height (px) and vertical offset (px, negative = up) for each logo
 const logos = [
   { src: logo1, alt: "Immuno Cure", height: 28, offsetY: 0 },
   { src: logo2, alt: "HutchMed", height: 22, offsetY: -5 },
@@ -14,69 +13,29 @@ const logos = [
 // ===============================
 
 const HeroSection = () => {
-  const playerRef = useRef<YT.Player | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Load YouTube IFrame API
-    if (!(window as any).YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
-    }
-
-    const initPlayer = () => {
-      if (!containerRef.current) return;
-      playerRef.current = new YT.Player(containerRef.current, {
-        videoId: "ALgyYN3beWw",
-        width: "100%",
-        height: "100%",
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          showinfo: 0,
-          modestbranding: 1,
-          rel: 0,
-          disablekb: 1,
-          iv_load_policy: 3,
-          playsinline: 1,
-        },
-        events: {
-          onStateChange: (event: YT.OnStateChangeEvent) => {
-            if (event.data === YT.PlayerState.ENDED) {
-              event.target.seekTo(0, true);
-              event.target.playVideo();
-            }
-          },
-        },
-      });
-    };
-
-    if ((window as any).YT && (window as any).YT.Player) {
-      initPlayer();
-    } else {
-      (window as any).onYouTubeIframeAPIReady = initPlayer;
-    }
-
-    return () => {
-      playerRef.current?.destroy();
-    };
+    const video = videoRef.current;
+    if (!video) return;
+    video.play().catch(() => {
+      video.style.display = "none";
+    });
   }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Video background — covers entire section */}
-      <div className="absolute inset-0 z-0">
-        <div
-          ref={containerRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none [&>iframe]:w-full [&>iframe]:h-full"
-          style={{
-            width: "max(200vh, 100vw)",
-            height: "max(100vh, 56.25vw)",
-          }}
-        />
-      </div>
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        loop
+        className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+      >
+        <source src="/hero-video-4k.webm" type="video/webm" />
+      </video>
 
       {/* Coming Soon */}
       <div className="relative z-20 bg-white text-black text-center py-2 md:py-2.5 text-xs font-medium tracking-wide">

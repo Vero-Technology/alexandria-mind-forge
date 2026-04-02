@@ -4,6 +4,7 @@ import UseCasesScrollSection from "@/components/UseCasesScrollSection";
 import DemoSection from "@/components/DemoSection";
 import MoatSection from "@/components/MoatSection";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <DemoSection />
       <MoatSection />
       <ContactSection />
+      <Footer />
     </main>
   );
 };
