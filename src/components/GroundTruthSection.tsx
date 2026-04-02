@@ -1,4 +1,5 @@
-
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 type AccessType = "DONE" | "FREE" | "BUILD";
 
@@ -41,7 +42,6 @@ const categories: Category[] = [
     number: "03",
     title: "Biomarker & Target Databases",
     sources: [
-      
       { name: "CIViC", size: "~0.3 GB", access: "FREE", notes: "Community-curated clinical variant evidence. API available" },
       { name: "Open Targets Platform", size: "~25-40 GB", access: "FREE", notes: "Gene-disease associations, tractability scores, safety data. THE target validation database" },
       { name: "DisGeNET", size: "~3-4 GB", access: "FREE", notes: "1.1M gene-disease associations from curated + text-mined sources" },
@@ -54,7 +54,6 @@ const categories: Category[] = [
     title: "Drug & Compound Data",
     sources: [
       { name: "ChEMBL v36", size: "~35 GB", access: "FREE", notes: "2.4M compounds, 20.5M activity measurements, 15.5K targets. Gold standard for drug-target binding data" },
-      
       { name: "FDA Orange Book", size: "~0.2 GB", access: "FREE", notes: "Patent listings, exclusivity, therapeutic equivalence. Essential for patent window scoring" },
     ],
   },
@@ -134,16 +133,15 @@ const categories: Category[] = [
 
 const totalSources = categories.reduce((sum, cat) => sum + cat.sources.length, 0);
 
-const accessColors: Record<AccessType, string> = {
-  DONE: "bg-primary/20 text-primary border-primary/30",
-  FREE: "bg-primary/20 text-primary border-primary/30",
-  BUILD: "bg-purple-500/20 text-purple-400 border-purple-500/30",
-};
-
 const GroundTruthSection = () => {
+  const { ref, opacity, y, scale } = useScrollAnimation();
 
   return (
-    <section className="relative py-32 px-6">
+    <motion.section
+      ref={ref}
+      style={{ opacity, y, scale }}
+      className="relative py-32 px-6"
+    >
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
@@ -178,7 +176,7 @@ const GroundTruthSection = () => {
           </div>
         </div>
 
-        {/* Category cards – non-expandable */}
+        {/* Category cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {categories.map((cat) => (
             <div key={cat.number} className="border border-border rounded-lg bg-card/30 px-6 py-5">
@@ -194,7 +192,7 @@ const GroundTruthSection = () => {
           Validating Technical Advancement and Identifying Scientific Uncertainty through verifiable data.
         </p>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

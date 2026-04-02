@@ -1,4 +1,6 @@
 import { Users, Zap, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const points = [
   {
@@ -22,8 +24,14 @@ const points = [
 ];
 
 const LeanTeamsSection = () => {
+  const { ref, opacity, y, scale } = useScrollAnimation();
+
   return (
-    <section className="relative py-32 px-6">
+    <motion.section
+      ref={ref}
+      style={{ opacity, y, scale }}
+      className="relative py-32 px-6"
+    >
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
@@ -57,7 +65,7 @@ const LeanTeamsSection = () => {
           })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
