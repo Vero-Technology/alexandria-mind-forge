@@ -51,7 +51,7 @@ const StickyStrip = ({
           minHeight: "140px",
           padding: "2.5rem 0",
           background: `hsl(0 0% ${shade}%)`,
-          borderBottom: "1px solid hsl(0 0% 12%)",
+          borderTop: index > 0 ? "1px solid hsl(0 0% 12%)" : "none",
           zIndex: 10 + index,
         }}
       >
