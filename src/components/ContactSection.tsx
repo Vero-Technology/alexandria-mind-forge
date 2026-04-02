@@ -16,6 +16,7 @@ const ContactSection = () => {
 
   return (
     <section
+      id="contact"
       className="relative py-32 px-6"
       style={{ background: "hsl(0 0% 3%)" }}
     >

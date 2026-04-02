@@ -8,6 +8,7 @@ const DemoSection = () => {
 
   return (
     <section
+      id="solutions"
       ref={ref}
       className="relative py-32 px-6 overflow-hidden"
       style={{ background: "linear-gradient(180deg, hsl(0 0% 6%) 0%, hsl(0 0% 4%) 100%)" }}
