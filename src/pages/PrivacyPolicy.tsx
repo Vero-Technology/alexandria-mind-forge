@@ -4,6 +4,15 @@ const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen" style={{ background: "hsl(0 0% 3%)" }}>
       <div className="max-w-3xl mx-auto px-6 py-20 md:py-32">
+        <a
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs font-medium mb-8 transition-colors"
+          style={{ color: "hsl(0 0% 50%)" }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(0 0% 80%)")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 50%)")}
+        >
+          &larr; Back to Home
+        </a>
         <p className="text-mono text-xs uppercase tracking-[0.2em] mb-4 text-muted-foreground">
           Privacy Policy
         </p>
@@ -312,6 +321,10 @@ const PrivacyPolicy = () => {
             authority.
           </p>
         </Section>
+
+        <div className="text-center pt-8 text-xs italic" style={{ color: "hsl(0 0% 30%)" }}>
+          — End of Privacy Policy —
+        </div>
       </div>
       <Footer />
     </div>
