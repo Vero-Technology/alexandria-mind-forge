@@ -7,8 +7,8 @@ import logo3 from "@/assets/bank-of-america.png";
 // Adjust height (px) and vertical offset (px, negative = up) for each logo
 const logos = [
   { src: logo1, alt: "Immuno Cure", height: 28, offsetY: 0 },
-  { src: logo2, alt: "HutchMed", height: 22, offsetY: -2 },
-  { src: logo3, alt: "Bank of America", height: 32, offsetY: 0 },
+  { src: logo2, alt: "HutchMed", height: 22, offsetY: -8 },
+  { src: logo3, alt: "Bank of America", height: 38, offsetY: 0 },
 ];
 // ===============================
 
