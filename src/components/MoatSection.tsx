@@ -1,8 +1,16 @@
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 const MoatSection = () => {
+  const { ref, opacity, y, scale } = useScrollAnimation();
+
   return (
     <>
-      {/* Built to Disappear */}
-      <section className="relative py-28 px-6 bg-secondary/50">
+      <motion.section
+        ref={ref}
+        style={{ opacity, y, scale }}
+        className="relative py-28 px-6 bg-secondary/50"
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl tracking-tight mb-12">
             Built to <span className="text-primary/50 italic">Disappear.</span>
@@ -28,7 +36,7 @@ const MoatSection = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <footer className="relative py-20 px-6">
