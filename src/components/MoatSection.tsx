@@ -22,57 +22,51 @@ const pillars = [
   },
 ];
 
-const StickyCard = ({
+const StickyStrip = ({
   pillar,
   index,
-  total,
 }: {
   pillar: (typeof pillars)[0];
   index: number;
-  total: number;
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "start start"],
+    target: ref,
+    offset: ["start end", "start 0.4"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.6], [60, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
 
-  // Each card stacks slightly offset
-  const topOffset = 140 + index * 40;
+  const shade = 4 + index * 3;
 
   return (
-    <div ref={cardRef} className="h-[70vh] flex items-start" style={{ marginTop: index === 0 ? 0 : "-20vh" }}>
+    <div ref={ref} style={{ height: "100vh" }}>
       <motion.div
-        className="sticky w-full max-w-2xl mx-auto rounded-2xl p-8 md:p-10"
+        className="sticky top-0 w-full flex items-center"
         style={{
-          top: `${topOffset}px`,
           opacity,
-          y,
-          background: `hsl(0 0% ${5 + index * 2}%)`,
-          border: "1px solid hsl(0 0% 14%)",
-          boxShadow: "0 20px 60px -15px rgba(0,0,0,0.5)",
-          zIndex: total - index,
+          height: "100vh",
+          background: `hsl(0 0% ${shade}%)`,
+          borderBottom: "1px solid hsl(0 0% 12%)",
+          zIndex: 10 + index,
         }}
       >
-        <div className="flex items-start gap-6">
+        <div className="max-w-5xl mx-auto px-6 w-full flex items-start gap-8 md:gap-16">
           <span
-            className="text-mono text-[11px] tracking-widest pt-1 flex-shrink-0"
-            style={{ color: "hsl(0 0% 28%)" }}
+            className="text-mono text-[11px] tracking-widest pt-2 flex-shrink-0"
+            style={{ color: "hsl(0 0% 25%)" }}
           >
             {pillar.number}
           </span>
-          <div>
+          <div className="max-w-xl">
             <h3
-              className="text-xl md:text-2xl tracking-tight mb-4"
-              style={{ color: "hsl(0 0% 92%)" }}
+              className="text-2xl md:text-4xl tracking-tight mb-5"
+              style={{ color: "hsl(0 0% 93%)" }}
             >
               {pillar.title}
             </h3>
             <p
-              className="text-sm md:text-base leading-[1.8]"
+              className="text-base md:text-lg leading-[1.8]"
               style={{ color: "hsl(0 0% 45%)" }}
             >
               {pillar.description}
@@ -88,11 +82,11 @@ const MoatSection = () => {
   return (
     <>
       <section
-        className="relative px-6 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, hsl(0 0% 5%) 0%, hsl(0 0% 3%) 100%)" }}
+        className="relative overflow-hidden"
+        style={{ background: "hsl(0 0% 4%)" }}
       >
-        {/* Title — not sticky, scrolls away */}
-        <div className="max-w-4xl mx-auto pt-32 pb-10 text-center">
+        {/* Title — scrolls away */}
+        <div className="max-w-4xl mx-auto pt-32 pb-20 px-6 text-center">
           <h2
             className="text-5xl md:text-7xl tracking-tight mb-6"
             style={{ color: "hsl(0 0% 95%)" }}
@@ -110,37 +104,26 @@ const MoatSection = () => {
           </p>
         </div>
 
-        {/* Sticky cards */}
-        <div className="pb-[30vh]">
-          {pillars.map((pillar, i) => (
-            <StickyCard key={pillar.number} pillar={pillar} index={i} total={pillars.length} />
-          ))}
-        </div>
+        {/* Sticky full-width strips */}
+        {pillars.map((pillar, i) => (
+          <StickyStrip key={pillar.number} pillar={pillar} index={i} />
+        ))}
       </section>
 
       {/* Footer */}
       <footer
         className="relative py-20 px-6"
-        style={{ background: "hsl(0 0% 3%)" }}
+        style={{ background: "hsl(0 0% 3%)", zIndex: 20 }}
       >
         <div className="h-px absolute top-0 left-6 right-6" style={{ background: "hsl(0 0% 10%)" }} />
         <div className="max-w-6xl mx-auto text-center">
-          <p
-            className="font-display text-xl tracking-tight mb-2"
-            style={{ color: "hsl(0 0% 80%)" }}
-          >
+          <p className="font-display text-xl tracking-tight mb-2" style={{ color: "hsl(0 0% 80%)" }}>
             Alexandria
           </p>
-          <p
-            className="text-mono text-xs mb-8"
-            style={{ color: "hsl(0 0% 35%)" }}
-          >
+          <p className="text-mono text-xs mb-8" style={{ color: "hsl(0 0% 35%)" }}>
             The intelligence layer for R&D strategy.
           </p>
-          <span
-            className="text-mono text-[10px] tracking-[0.3em] uppercase block mb-3"
-            style={{ color: "hsl(0 0% 30%)" }}
-          >
+          <span className="text-mono text-[10px] tracking-[0.3em] uppercase block mb-3" style={{ color: "hsl(0 0% 30%)" }}>
             Inquiries
           </span>
           <a
