@@ -3,6 +3,7 @@ import ArchitectureSection from "@/components/ArchitectureSection";
 import UseCasesScrollSection from "@/components/UseCasesScrollSection";
 import DemoSection from "@/components/DemoSection";
 import MoatSection from "@/components/MoatSection";
+import ContactSection from "@/components/ContactSection";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <UseCasesScrollSection />
       <DemoSection />
       <MoatSection />
+      <ContactSection />
     </main>
   );
 };
