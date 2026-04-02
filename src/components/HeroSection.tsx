@@ -63,7 +63,7 @@ const HeroSection = () => {
           Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
         </p>
         <a
-          href="https://calendly.com"
+          href="https://calendly.com/kenneth-alexandrialabs/30min"
           target="_blank"
           rel="noopener noreferrer"
           className="animate-fade-up-delay-1 mt-6 inline-flex items-center px-6 py-3 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors duration-200 w-fit"
