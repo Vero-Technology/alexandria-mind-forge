@@ -27,18 +27,6 @@ const ArchitectureSection = () => {
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        {/* Big stats row */}
-        <div className="grid grid-cols-2 gap-6 mb-20">
-          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
-            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">50+</p>
-            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Indexed Pharmaceutical Sources</p>
-          </div>
-          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
-            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">540M+</p>
-            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Academic Resources</p>
-          </div>
-        </div>
-
         {/* Title + description */}
         <div className="mb-14">
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
@@ -47,6 +35,18 @@ const ArchitectureSection = () => {
           <p className="text-foreground/50 text-lg max-w-2xl">
             An agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
           </p>
+        </div>
+
+        {/* Big stats row */}
+        <div className="grid grid-cols-2 gap-6 mb-14">
+          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
+            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">50+</p>
+            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Indexed Pharmaceutical Sources</p>
+          </div>
+          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
+            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">540M+</p>
+            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Academic Resources</p>
+          </div>
         </div>
 
         {/* Knowledge domains — compact inline tags */}
