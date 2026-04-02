@@ -53,45 +53,38 @@ const ArchitectureSection = () => {
         </div>
 
         {/* Knowledge Domains — scrollable with progressive blur */}
-        <div>
-          <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-4">
-            Knowledge Domains
-          </p>
-          <div className="relative">
-            {/* Top blur */}
-            <div
-              className="absolute top-0 left-0 right-0 h-8 z-10 pointer-events-none"
-              style={{
-                background: "linear-gradient(to bottom, hsl(var(--background)), transparent)",
-              }}
-            />
-            {/* Bottom blur */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-12 z-10 pointer-events-none"
-              style={{
-                background: "linear-gradient(to top, hsl(var(--background)), transparent)",
-              }}
-            />
+        <div className="flex justify-center">
+          <div className="w-full max-w-md">
+            <p className="text-mono text-[10px] tracking-widest uppercase text-muted-foreground mb-4 text-center">
+              Knowledge Domains
+            </p>
+            <div className="relative">
+              <div
+                className="absolute top-0 left-0 right-0 h-8 z-10 pointer-events-none"
+                style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }}
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 h-12 z-10 pointer-events-none"
+                style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }}
+              />
 
-            <div
-              ref={scrollRef}
-              className="overflow-y-auto max-h-[220px] py-4 scrollbar-hide"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              <div className="space-y-4">
-                {dataDomains.map((domain, i) => (
-                  <div key={domain} className="flex items-center gap-4 group px-1">
-                    <span className="text-mono text-[10px] text-muted-foreground/30 tabular-nums w-5">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[15px] text-foreground/55 group-hover:text-foreground transition-colors duration-200">
-                      {domain}
-                    </span>
-                  </div>
-                ))}
+              <div
+                ref={scrollRef}
+                className="overflow-y-auto max-h-[240px] py-4 scrollbar-hide"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <div className="space-y-4">
+                  {dataDomains.map((domain, i) => (
+                    <div key={domain} className="flex items-center gap-4 group px-1 justify-center">
+                      <span className="text-mono text-xs text-muted-foreground/40 tabular-nums w-5 text-right">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-base font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-200">
+                        {domain}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
