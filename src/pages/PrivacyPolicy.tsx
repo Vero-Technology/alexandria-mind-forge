@@ -1,31 +1,28 @@
+import Footer from "@/components/Footer";
+
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-white px-6 py-16 md:py-24">
-      <div className="max-w-3xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif", color: "hsl(0 0% 15%)" }}>
-        <p className="text-xs uppercase tracking-[0.2em] mb-2" style={{ color: "hsl(0 0% 50%)" }}>
-          ALEXANDRIA | Privacy Policy
+    <div className="min-h-screen" style={{ background: "hsl(0 0% 3%)" }}>
+      <div className="max-w-3xl mx-auto px-6 py-20 md:py-32">
+        <p className="text-mono text-xs uppercase tracking-[0.2em] mb-4 text-muted-foreground">
+          Privacy Policy
         </p>
-        <h1 className="text-4xl md:text-5xl font-bold mb-2" style={{ fontFamily: "'DM Serif Display', serif" }}>
-          PRIVACY POLICY
+        <h1 className="text-display text-4xl md:text-6xl tracking-tight mb-3" style={{ color: "hsl(0 0% 92%)" }}>
+          Privacy Policy
         </h1>
-        <p className="text-lg mb-1" style={{ color: "hsl(210 50% 40%)" }}>
-          Alexandria B2B Terminal for Pharma Intelligence
-        </p>
-        <p className="text-sm mb-12" style={{ color: "hsl(0 0% 50%)" }}>
+        <p className="text-sm mb-8" style={{ color: "hsl(0 0% 40%)" }}>
           Effective Date: 2 April 2026 &nbsp;|&nbsp; Last Updated: 2 April 2026
         </p>
 
-        <hr className="border-t-2 border-[hsl(210,50%,35%)] mb-10" />
-
         <Section title="1. Introduction">
           <p>
-            This Privacy Policy ("Policy") describes how Alexandria ("we," "us," or "our") collects, uses,
+            This Privacy Policy (&ldquo;Policy&rdquo;) describes how Alexandria (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) collects, uses,
             discloses, and protects information obtained through the Alexandria B2B Terminal for Pharma
-            Intelligence ("Platform"), a business-to-business AI research discovery system designed for
-            pharmaceutical and life sciences organisations ("Clients").
+            Intelligence (&ldquo;Platform&rdquo;), a business-to-business AI research discovery system designed for
+            pharmaceutical and life sciences organisations (&ldquo;Clients&rdquo;).
           </p>
           <p className="mt-4">
-            This Policy applies to all authorised users ("Users") accessing the Platform under a Client's
+            This Policy applies to all authorised users (&ldquo;Users&rdquo;) accessing the Platform under a Client&rsquo;s
             enterprise subscription agreement. By accessing or using the Platform, you acknowledge that
             you have read, understood, and agree to the practices described herein.
           </p>
@@ -40,11 +37,11 @@ const PrivacyPolicy = () => {
 
         <Section title="3. Information We Collect">
           <SubSection title="3.1 Information Provided by Clients and Users">
-            <table className="w-full text-sm border border-gray-200 mb-6">
+            <table className="w-full text-sm mb-6 border-collapse">
               <thead>
-                <tr className="bg-[hsl(210,50%,25%)] text-white">
-                  <th className="text-left px-4 py-2 font-semibold">Category</th>
-                  <th className="text-left px-4 py-2 font-semibold">Details</th>
+                <tr style={{ background: "hsl(var(--primary))" }}>
+                  <th className="text-left px-4 py-3 font-medium text-white">Category</th>
+                  <th className="text-left px-4 py-3 font-medium text-white">Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -52,7 +49,7 @@ const PrivacyPolicy = () => {
                 <TableRow c1="User Credentials" c2="Full name, corporate email address, job title/role, and SSO/SAML authentication tokens." />
                 <TableRow c1="Research Queries" c2="Search terms, natural language prompts, filters, and parameters submitted to Alexandria's AI discovery engine." />
                 <TableRow c1="Uploaded Content" c2="Documents, datasets, compound structures, clinical trial protocols, and other files uploaded for analysis." />
-                <TableRow c1="Feedback & Annotations" c2="Relevance ratings, saved searches, bookmarks, notes, and collaborative workspace contributions." />
+                <TableRow c1="Feedback &amp; Annotations" c2="Relevance ratings, saved searches, bookmarks, notes, and collaborative workspace contributions." />
               </tbody>
             </table>
           </SubSection>
@@ -114,11 +111,11 @@ const PrivacyPolicy = () => {
           <p className="mb-4">
             Where EU or UK data protection law applies, we process Personal Data under the following legal bases:
           </p>
-          <table className="w-full text-sm border border-gray-200 mb-6">
+          <table className="w-full text-sm mb-6 border-collapse">
             <thead>
-              <tr className="bg-[hsl(210,50%,25%)] text-white">
-                <th className="text-left px-4 py-2 font-semibold">Legal Basis</th>
-                <th className="text-left px-4 py-2 font-semibold">Application</th>
+              <tr style={{ background: "hsl(var(--primary))" }}>
+                <th className="text-left px-4 py-3 font-medium text-white">Legal Basis</th>
+                <th className="text-left px-4 py-3 font-medium text-white">Application</th>
               </tr>
             </thead>
             <tbody>
@@ -138,7 +135,7 @@ const PrivacyPolicy = () => {
 
           <SubSection title="6.1 Within the Client Organisation">
             <p>
-              Client administrators may access usage analytics and user activity within their organisation's
+              Client administrators may access usage analytics and user activity within their organisation&rsquo;s
               tenant, consistent with their enterprise agreement.
             </p>
           </SubSection>
@@ -193,40 +190,20 @@ const PrivacyPolicy = () => {
           <p className="mb-4">
             We retain information only for as long as necessary to fulfil the purposes described in this Policy:
           </p>
-          <table className="w-full text-sm border border-gray-200 mb-6">
+          <table className="w-full text-sm mb-6 border-collapse">
             <thead>
-              <tr className="bg-[hsl(210,50%,25%)] text-white">
-                <th className="text-left px-4 py-2 font-semibold">Data Type</th>
-                <th className="text-left px-4 py-2 font-semibold">Retention Period</th>
-                <th className="text-left px-4 py-2 font-semibold">Basis</th>
+              <tr style={{ background: "hsl(var(--primary))" }}>
+                <th className="text-left px-4 py-3 font-medium text-white">Data Type</th>
+                <th className="text-left px-4 py-3 font-medium text-white">Retention Period</th>
+                <th className="text-left px-4 py-3 font-medium text-white">Basis</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-gray-200">
-                <td className="px-4 py-2">Client Data</td>
-                <td className="px-4 py-2">Duration of subscription + 90 days</td>
-                <td className="px-4 py-2">Contract performance; Client deletion requests honoured within 30 days.</td>
-              </tr>
-              <tr className="border-b border-gray-200">
-                <td className="px-4 py-2">User Credentials</td>
-                <td className="px-4 py-2">Duration of active account + 90 days</td>
-                <td className="px-4 py-2">Deleted upon account deactivation by Client admin.</td>
-              </tr>
-              <tr className="border-b border-gray-200">
-                <td className="px-4 py-2">Usage Data</td>
-                <td className="px-4 py-2">24 months from collection</td>
-                <td className="px-4 py-2">Aggregated and de-identified after retention period.</td>
-              </tr>
-              <tr className="border-b border-gray-200">
-                <td className="px-4 py-2">Audit Logs</td>
-                <td className="px-4 py-2">7 years</td>
-                <td className="px-4 py-2">Regulatory compliance (GxP, SOX).</td>
-              </tr>
-              <tr className="border-b border-gray-200">
-                <td className="px-4 py-2">Derived Insights</td>
-                <td className="px-4 py-2">Indefinite (fully de-identified)</td>
-                <td className="px-4 py-2">Cannot be attributed to any Client or User.</td>
-              </tr>
+              <TableRow3 c1="Client Data" c2="Duration of subscription + 90 days" c3="Contract performance; Client deletion requests honoured within 30 days." />
+              <TableRow3 c1="User Credentials" c2="Duration of active account + 90 days" c3="Deleted upon account deactivation by Client admin." />
+              <TableRow3 c1="Usage Data" c2="24 months from collection" c3="Aggregated and de-identified after retention period." />
+              <TableRow3 c1="Audit Logs" c2="7 years" c3="Regulatory compliance (GxP, SOX)." />
+              <TableRow3 c1="Derived Insights" c2="Indefinite (fully de-identified)" c3="Cannot be attributed to any Client or User." />
             </tbody>
           </table>
           <p>
@@ -265,7 +242,7 @@ const PrivacyPolicy = () => {
           </ul>
           <p>
             We respond to verified requests within 30 days (or as required by applicable law). For B2B
-            Users, certain requests may need to be routed through your Client's administrator per the
+            Users, certain requests may need to be routed through your Client&rsquo;s administrator per the
             enterprise agreement.
           </p>
         </Section>
@@ -273,7 +250,7 @@ const PrivacyPolicy = () => {
         <Section title="11. AI-Specific Provisions">
           <SubSection title="11.1 Model Training">
             <p>
-              Alexandria's AI models are trained on publicly available biomedical literature, licensed datasets,
+              Alexandria&rsquo;s AI models are trained on publicly available biomedical literature, licensed datasets,
               and Derived Insights. Raw Client Data is never used for model training unless a Client provides
               explicit, documented, opt-in consent under a separate agreement.
             </p>
@@ -290,7 +267,7 @@ const PrivacyPolicy = () => {
           <SubSection title="11.3 Prompt and Query Logging">
             <p>
               User queries are logged for service delivery, debugging, and abuse prevention. Logs are
-              retained per the Usage Data retention schedule and are not shared outside the Client's tenant.
+              retained per the Usage Data retention schedule and are not shared outside the Client&rsquo;s tenant.
             </p>
           </SubSection>
         </Section>
@@ -324,10 +301,10 @@ const PrivacyPolicy = () => {
         <Section title="15. Contact Information">
           <p className="mb-4">For questions, concerns, or to exercise your data protection rights:</p>
           <div className="mb-4">
-            <p className="font-bold">Data Protection Officer</p>
+            <p className="font-semibold" style={{ color: "hsl(0 0% 85%)" }}>Data Protection Officer</p>
             <p>Alexandria Limited</p>
-            <p>Email: <a href="mailto:privacy@alexandrialabs.uk" className="underline" style={{ color: "hsl(210 50% 40%)" }}>privacy@alexandrialabs.uk</a></p>
-            <p>Web: <a href="https://alexandrialabs.uk/privacy" className="underline" style={{ color: "hsl(210 50% 40%)" }}>https://alexandrialabs.uk/privacy</a></p>
+            <p>Email: <a href="mailto:privacy@alexandrialabs.uk" className="underline underline-offset-4 transition-colors" style={{ color: "hsl(var(--terminal))" }}>privacy@alexandrialabs.uk</a></p>
+            <p>Web: <a href="https://alexandrialabs.uk/privacy" className="underline underline-offset-4 transition-colors" style={{ color: "hsl(var(--terminal))" }}>https://alexandrialabs.uk/privacy</a></p>
           </div>
           <p>
             If you are located in the EEA or UK and believe your data protection rights have not been
@@ -336,23 +313,26 @@ const PrivacyPolicy = () => {
           </p>
         </Section>
       </div>
+      <Footer />
     </div>
   );
 };
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="mb-10">
-    <hr className="border-t-2 border-[hsl(210,50%,35%)] mb-8" />
-    <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: "'DM Serif Display', serif", color: "hsl(210 50% 25%)" }}>
+  <div className="mb-12">
+    <div className="h-px mb-10" style={{ background: "hsl(0 0% 15%)" }} />
+    <h2 className="text-display text-2xl md:text-3xl tracking-tight mb-5" style={{ color: "hsl(0 0% 88%)" }}>
       {title}
     </h2>
-    {children}
+    <div className="text-sm leading-relaxed" style={{ color: "hsl(0 0% 55%)" }}>
+      {children}
+    </div>
   </div>
 );
 
 const SubSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="mb-6">
-    <h3 className="text-lg font-semibold mb-2" style={{ color: "hsl(210 50% 35%)" }}>
+    <h3 className="text-base font-semibold mb-2" style={{ color: "hsl(0 0% 70%)" }}>
       {title}
     </h3>
     {children}
@@ -361,14 +341,22 @@ const SubSection = ({ title, children }: { title: string; children: React.ReactN
 
 const Definition = ({ term, text }: { term: string; text: string }) => (
   <p className="mb-3">
-    <strong>{term}:</strong> {text}
+    <span className="font-semibold" style={{ color: "hsl(0 0% 75%)" }}>{term}:</span> {text}
   </p>
 );
 
 const TableRow = ({ c1, c2 }: { c1: string; c2: string }) => (
-  <tr className="border-b border-gray-200">
-    <td className="px-4 py-2">{c1}</td>
-    <td className="px-4 py-2">{c2}</td>
+  <tr style={{ borderBottom: "1px solid hsl(0 0% 15%)" }}>
+    <td className="px-4 py-3" style={{ color: "hsl(0 0% 70%)" }}>{c1}</td>
+    <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c2}</td>
+  </tr>
+);
+
+const TableRow3 = ({ c1, c2, c3 }: { c1: string; c2: string; c3: string }) => (
+  <tr style={{ borderBottom: "1px solid hsl(0 0% 15%)" }}>
+    <td className="px-4 py-3" style={{ color: "hsl(0 0% 70%)" }}>{c1}</td>
+    <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c2}</td>
+    <td className="px-4 py-3" style={{ color: "hsl(0 0% 55%)" }}>{c3}</td>
   </tr>
 );
 
