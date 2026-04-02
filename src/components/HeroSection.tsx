@@ -22,6 +22,14 @@ const HeroSection = () => {
     video.play().catch(() => {
       setVideoBlocked(true);
     });
+
+    // Manual loop to avoid Chrome's reload spinner
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play();
+    };
+    video.addEventListener("ended", handleEnded);
+    return () => video.removeEventListener("ended", handleEnded);
   }, []);
 
   return (
@@ -39,7 +47,6 @@ const HeroSection = () => {
           autoPlay
           muted
           playsInline
-          loop
           poster="/hero-poster.jpg"
           className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
         >
