@@ -3,10 +3,10 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const stats = [
-  { value: "3", label: "Breakthrough Designations", icon: "⚡" },
-  { value: "10.1%", label: "Approval Probability", sub: "Phase I to Approval", icon: "◎" },
-  { value: "Q1 2028", label: "Earliest Projected Approval", icon: "⏱" },
-  { value: "3", label: "Active Phase III Programs", icon: "▲" },
+  { value: "3", label: "Breakthrough Designations" },
+  { value: "10.1%", label: "Approval Probability", sub: "Phase I to Approval" },
+  { value: "Q1 2028", label: "Earliest Projected Approval" },
+  { value: "3", label: "Active Phase III Programs" },
 ];
 
 const sotorasibTimeline = [
@@ -181,18 +181,13 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             whileHover={{ scale: 1.04, transition: { duration: 0.25 } }}
           >
             <div
-              className="rounded-[11px] p-5 h-full relative overflow-hidden"
+              className="rounded-[11px] px-4 py-3 h-full relative overflow-hidden"
               style={{ background: "linear-gradient(180deg, hsl(0 0% 9%) 0%, hsl(0 0% 5%) 100%)" }}
             >
-              {/* Subtle top glow */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(0 0% 30%), transparent)" }} />
-              
-              <div className="flex items-start justify-between mb-3">
-                <span className="text-lg opacity-40">{s.icon}</span>
-              </div>
-              <p className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: "hsl(0 0% 100%)" }}>{s.value}</p>
-              <p className="text-[11px] mt-2 leading-snug font-medium tracking-wide" style={{ color: "hsl(0 0% 50%)" }}>{s.label}</p>
-              {s.sub && <p className="text-[10px] mt-1" style={{ color: "hsl(0 0% 30%)" }}>{s.sub}</p>}
+              <p className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: "hsl(0 0% 100%)" }}>{s.value}</p>
+              <p className="text-[10px] mt-1 leading-snug font-medium tracking-wide" style={{ color: "hsl(0 0% 50%)" }}>{s.label}</p>
+              {s.sub && <p className="text-[9px] mt-0.5" style={{ color: "hsl(0 0% 30%)" }}>{s.sub}</p>}
             </div>
           </motion.div>
         ))}
