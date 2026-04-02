@@ -27,26 +27,27 @@ const ArchitectureSection = () => {
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        {/* Header with stats top-right */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10">
+        {/* Stats bar */}
+        <div className="flex gap-12 mb-10">
           <div>
-            <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
-              Alexandria is AI-Native
-            </h2>
-            <p className="text-foreground/60 text-lg max-w-3xl">
-              Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
-            </p>
+            <p className="text-4xl font-display text-foreground tracking-tight">50+</p>
+            <p className="text-mono text-[10px] text-muted-foreground mt-1">Indexed Pharmaceutical Sources</p>
           </div>
-          <div className="flex gap-8 flex-shrink-0 md:pt-2">
-            <div className="md:text-right">
-              <p className="text-3xl font-display text-primary">50+</p>
-              <p className="text-mono text-[10px] text-muted-foreground mt-0.5">Indexed Pharmaceutical Sources</p>
-            </div>
-            <div className="md:text-right">
-              <p className="text-3xl font-display text-primary">540M+</p>
-              <p className="text-mono text-[10px] text-muted-foreground mt-0.5">Academic Resources</p>
-            </div>
+          <div className="w-px bg-border" />
+          <div>
+            <p className="text-4xl font-display text-foreground tracking-tight">540M+</p>
+            <p className="text-mono text-[10px] text-muted-foreground mt-1">Academic Resources</p>
           </div>
+        </div>
+
+        {/* Title */}
+        <div className="mb-10">
+          <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
+            Alexandria is AI-Native
+          </h2>
+          <p className="text-foreground/60 text-lg max-w-3xl">
+            Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
+          </p>
         </div>
 
         {/* Source list */}
