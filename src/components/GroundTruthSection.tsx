@@ -153,7 +153,7 @@ const GroundTruthSection = () => {
               Ground Truth
             </span>
             <h2 className="text-4xl md:text-5xl tracking-tight mb-8">
-              Evidentiary Precision, Not Probabilistic Guessing
+              Evidentiary Precision
             </h2>
 
             <div className="space-y-6 text-foreground/60 leading-relaxed">

@@ -50,9 +50,6 @@ const ArchitectureSection = () => {
 
       <div className="max-w-6xl mx-auto">
         <div className="mb-6">
-          <span className="text-mono text-xs tracking-[0.3em] uppercase text-primary/60 block mb-4">
-            Where Alexandria Sits
-          </span>
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
             Alexandria is AI-Native
           </h2>
