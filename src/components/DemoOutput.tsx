@@ -222,7 +222,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
     <div ref={containerRef} className="rounded-lg" style={{ background: darkMode ? "hsl(0 0% 7%)" : undefined }}>
       {/* Header tags */}
       <motion.div
-        className="px-6 pt-6 flex gap-2"
+        className="px-4 sm:px-6 pt-5 sm:pt-6 flex gap-2 flex-wrap"
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.3 }}
@@ -243,7 +243,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
 
       {/* Title */}
       <motion.div
-        className="px-6 pt-4 pb-2"
+        className="px-4 sm:px-6 pt-4 pb-2"
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -251,19 +251,19 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         <h3 className="text-xl md:text-2xl tracking-tight" style={{ color: "hsl(0 0% 93%)" }}>
           KRAS G12C — Regulatory &amp; Trial Pathway Analysis
         </h3>
-        <div className="flex items-center justify-between mt-1">
-          <p className="text-xs" style={{ color: "hsl(0 0% 42%)" }}>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-1 gap-2">
+          <p className="text-[10px] sm:text-xs" style={{ color: "hsl(0 0% 42%)" }}>
             28 trials · 6 FDA designations · 4 lead compounds · Updated 1d ago
           </p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 shrink-0">
             <button
-              className="text-[11px] font-medium px-3 py-1.5 rounded-md transition-colors"
+              className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors"
               style={{ background: "hsl(0 0% 100% / 0.08)", color: "hsl(0 0% 80%)", border: "1px solid hsl(0 0% 18%)" }}
             >
               Export
             </button>
             <button
-              className="text-[11px] font-medium px-3 py-1.5 rounded-md transition-colors"
+              className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors"
               style={{ background: "hsl(0 0% 100% / 0.04)", color: "hsl(0 0% 55%)", border: "1px solid hsl(0 0% 15%)" }}
             >
               Share
@@ -274,7 +274,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
 
       {/* Executive Summary */}
       <motion.div
-        className="px-6 py-4"
+        className="px-4 sm:px-6 py-4"
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -295,7 +295,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
       </motion.div>
 
       {/* Stats */}
-      <div className="px-6 pb-5 grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="px-4 sm:px-6 pb-5 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
         {stats.map((s, i) => (
           <motion.div
             key={i}
@@ -323,7 +323,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
 
       {/* Tabs */}
       <motion.div
-        className="px-6"
+        className="px-4 sm:px-6"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.5, delay: 0.8 }}
@@ -333,7 +333,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="text-sm py-2 px-4 rounded-md transition-all duration-300 flex-1"
+              className="text-xs sm:text-sm py-2 px-2 sm:px-4 rounded-md transition-all duration-300 flex-1"
               style={{
                 background: activeTab === tab ? "hsl(0 0% 14%)" : "transparent",
                 color: activeTab === tab ? "hsl(0 0% 93%)" : "hsl(0 0% 42%)",
@@ -351,7 +351,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         {activeTab === "pathways" && (
           <motion.div
             key="pathways"
-            className="px-6 py-5 space-y-4"
+            className="px-4 sm:px-6 py-5 space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -487,18 +487,19 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         {activeTab === "regulatory" && (
           <motion.div
             key="regulatory"
-            className="px-6 py-5 space-y-6"
+            className="px-4 sm:px-6 py-5 space-y-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
           >
             {/* Timeline Chart */}
-            <div className="rounded-xl p-5 md:p-6 relative overflow-hidden" style={{ background: "hsl(0 0% 6%)", border: "1px solid hsl(0 0% 13%)" }}>
+            <div className="rounded-xl p-4 sm:p-5 md:p-6 relative overflow-x-auto" style={{ background: "hsl(0 0% 6%)", border: "1px solid hsl(0 0% 13%)" }}>
               <p className="font-display text-lg md:text-xl tracking-tight mb-6" style={{ color: "hsl(0 0% 90%)" }}>
                 Race to PDAC Approval — Projected Timeline
               </p>
 
+              <div className="min-w-[600px]">
               {/* Year axis */}
               <div className="relative h-6 mb-2 ml-[100px] md:ml-[120px] mr-[50px] md:mr-[60px]">
                 {timelineYears.map((y) => (
@@ -616,6 +617,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
                   </motion.div>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* First-Mover Advantage Analysis */}
@@ -656,7 +658,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         {activeTab === "risk" && (
           <motion.div
             key="risk"
-            className="px-6 py-5 space-y-6"
+            className="px-4 sm:px-6 py-5 space-y-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -665,7 +667,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             {/* Risk Matrix Table */}
             <div className="rounded-xl overflow-hidden p-[1px]" style={{ background: "linear-gradient(135deg, hsl(0 0% 18%) 0%, hsl(0 0% 10%) 50%, hsl(0 0% 18%) 100%)" }}>
               <div className="rounded-[11px] overflow-x-auto" style={{ background: "hsl(0 0% 6%)" }}>
-                <table className="w-full text-sm">
+                <table className="w-full text-sm min-w-[700px]">
                   <thead>
                     <tr style={{ background: "hsl(0 0% 8%)", borderBottom: "1px solid hsl(0 0% 14%)" }}>
                       <th className="text-left px-4 py-3.5 font-semibold text-xs" style={{ color: "hsl(0 0% 90%)" }}>Risk Dimension</th>
