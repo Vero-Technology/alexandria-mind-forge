@@ -75,7 +75,7 @@ const ArchitectureSection = () => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -20, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="text-4xl md:text-5xl font-display text-foreground tracking-tight absolute"
+                  className="text-5xl md:text-6xl font-display text-foreground tracking-tight absolute"
                 >
                   {dataDomains[currentIndex].count}
                 </motion.p>
