@@ -42,9 +42,9 @@ const ArchitectureSection = () => {
     <motion.section
       ref={ref}
       style={{ opacity, y, scale }}
-      className="relative py-16 px-6"
+      className="relative py-16 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-6"
     >
-      <div className="absolute top-0 left-6 right-6 h-px bg-border" />
+      <div className="absolute top-0 left-6 sm:left-10 md:left-16 lg:left-20 xl:left-6 right-6 sm:right-10 md:right-16 lg:right-20 xl:right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
         {/* Title + description */}
@@ -52,7 +52,7 @@ const ArchitectureSection = () => {
           <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
             Alexandria is AI-Native
           </h2>
-          <p className="text-foreground/50 text-lg max-w-2xl">
+          <p className="text-foreground/50 text-lg max-w-3xl">
             An agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
           </p>
         </div>

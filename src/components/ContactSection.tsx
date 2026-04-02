@@ -9,9 +9,31 @@ const ContactSection = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "8f9a5406-8b8d-434d-8e49-b810aa06cd17",
+          to: "info@alexandrialabs.uk",
+          subject: `New inquiry from ${form.name}`,
+          from_name: form.name,
+          email: form.email,
+          business: form.business,
+          message: form.message,
+        }),
+      });
+      if (res.ok) setSubmitted(true);
+    } catch {
+      // fallback
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -170,7 +192,7 @@ const ContactSection = () => {
                   e.currentTarget.style.borderColor = "hsl(0 0% 18%)";
                 }}
               >
-                Send Inquiry
+                {sending ? "Sending..." : "Send Inquiry"}
               </motion.button>
             </div>
 
@@ -183,13 +205,13 @@ const ContactSection = () => {
             >
               Or reach us directly at{" "}
               <a
-                href="mailto:logan@alexandrialabs.uk"
+                href="mailto:info@alexandrialabs.uk"
                 className="underline underline-offset-4 transition-colors duration-200"
                 style={{ color: "hsl(0 0% 55%)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(0 0% 80%)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(0 0% 55%)")}
               >
-                logan@alexandrialabs.uk
+                info@alexandrialabs.uk
               </a>
             </p>
           </motion.form>
