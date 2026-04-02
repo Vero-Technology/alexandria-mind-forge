@@ -39,20 +39,18 @@ const StickyStrip = ({
 
   const shade = 4 + index * 3;
 
-  const topPos = index * 140;
-
   return (
-    <div ref={ref} style={{ height: "50vh" }}>
-      <motion.div
-        className="sticky w-full flex items-center"
-        style={{
-          top: `${topPos}px`,
-          opacity,
-          minHeight: "140px",
-          padding: "2.5rem 0",
-          background: `hsl(0 0% ${shade}%)`,
-          borderTop: index > 0 ? "1px solid hsl(0 0% 12%)" : "none",
-          zIndex: 10 + index,
+    <motion.div
+      ref={ref}
+      className="w-full flex items-center"
+      style={{
+        opacity,
+        minHeight: "140px",
+        padding: "2.5rem 0",
+        background: `hsl(0 0% ${shade}%)`,
+        borderTop: index > 0 ? "1px solid hsl(0 0% 12%)" : "none",
+      }}
+    >
         }}
       >
         <div className="max-w-5xl mx-auto px-6 w-full flex items-start gap-8 md:gap-16">
