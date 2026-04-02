@@ -60,7 +60,7 @@ const HeroSection = () => {
           Reasoning Across the Global R&D Landscape.
         </h1>
         <p className="animate-fade-up-delay-1 text-lg md:text-xl max-w-2xl text-white/70 leading-relaxed">
-          Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in hours, not weeks.
+          Eliminate the workflow of manual cross-referencing. Move from raw data to technical synthesis in minutes, not weeks.
         </p>
         <a
           href="https://calendly.com/kenneth-alexandrialabs/30min"

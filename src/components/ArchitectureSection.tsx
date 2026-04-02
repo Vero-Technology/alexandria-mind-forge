@@ -53,7 +53,7 @@ const ArchitectureSection = () => {
             Alexandria is AI-Native
           </h2>
           <p className="text-foreground/50 text-lg max-w-3xl">
-            An agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
+            An agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers.
           </p>
         </div>
 

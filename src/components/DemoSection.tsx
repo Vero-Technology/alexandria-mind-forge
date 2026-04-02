@@ -219,7 +219,7 @@ const DemoSection = () => {
 
                   {/* Data sources */}
                   <div className="flex flex-wrap justify-center gap-1.5 mt-6">
-                    {["AACT", "FDA Drugs@FDA", "SEC EDGAR", "AdCom Records", "OpenAlex"].map((src, i) => (
+                    {["AACT", "FDA Drugs@FDA", "SEC EDGAR", "AdCom Records", "Research Papers"].map((src, i) => (
                       <motion.span
                         key={src}
                         className="text-mono text-[9px] px-2 py-0.5 rounded font-medium"

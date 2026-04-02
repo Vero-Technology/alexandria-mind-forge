@@ -639,7 +639,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             </motion.div>
 
             <div className="flex flex-wrap gap-2">
-              {["AACT", "FDA Drugs@FDA", "FDA Designations", "SEC EDGAR", "AdCom Records"].map((src, i) => (
+              {["AACT", "FDA Drugs@FDA", "SEC EDGAR", "AdCom Records", "Research Papers"].map((src, i) => (
                 <motion.span
                   key={src}
                   className="text-mono text-[10px] px-3 py-1.5 rounded-lg font-medium"
@@ -767,7 +767,7 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             </motion.div>
 
             <div className="flex flex-wrap gap-2">
-              {["AACT", "FDA Drugs@FDA", "FDA Designations", "SEC EDGAR", "AdCom Records"].map((src, i) => (
+              {["AACT", "FDA Drugs@FDA", "SEC EDGAR", "AdCom Records", "Research Papers"].map((src, i) => (
                 <motion.span
                   key={src}
                   className="text-mono text-[10px] px-3 py-1.5 rounded-lg font-medium"
