@@ -39,13 +39,17 @@ const StickyStrip = ({
 
   const shade = 4 + index * 3;
 
+  const topPos = index * 140;
+
   return (
-    <div ref={ref} style={{ height: "100vh" }}>
+    <div ref={ref} style={{ height: "50vh" }}>
       <motion.div
-        className="sticky top-0 w-full flex items-center"
+        className="sticky w-full flex items-center"
         style={{
+          top: `${topPos}px`,
           opacity,
-          height: "100vh",
+          minHeight: "140px",
+          padding: "2.5rem 0",
           background: `hsl(0 0% ${shade}%)`,
           borderBottom: "1px solid hsl(0 0% 12%)",
           zIndex: 10 + index,
@@ -53,20 +57,20 @@ const StickyStrip = ({
       >
         <div className="max-w-5xl mx-auto px-6 w-full flex items-start gap-8 md:gap-16">
           <span
-            className="text-mono text-[11px] tracking-widest pt-2 flex-shrink-0"
+            className="text-mono text-[11px] tracking-widest pt-1 flex-shrink-0"
             style={{ color: "hsl(0 0% 25%)" }}
           >
             {pillar.number}
           </span>
           <div className="max-w-xl">
             <h3
-              className="text-2xl md:text-4xl tracking-tight mb-5"
+              className="text-lg md:text-2xl tracking-tight mb-2"
               style={{ color: "hsl(0 0% 93%)" }}
             >
               {pillar.title}
             </h3>
             <p
-              className="text-base md:text-lg leading-[1.8]"
+              className="text-sm leading-[1.7]"
               style={{ color: "hsl(0 0% 45%)" }}
             >
               {pillar.description}
