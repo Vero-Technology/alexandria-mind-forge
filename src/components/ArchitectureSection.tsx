@@ -3,17 +3,15 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useState, useEffect } from "react";
 
 const dataDomains = [
-  { name: "Research Papers", count: "42M+" },
-  { name: "Clinical Trials", count: "850K+" },
-  { name: "Biomarker Databases", count: "12M+" },
-  { name: "Drug & Compound Data", count: "38M+" },
-  { name: "Patent Intelligence", count: "95M+" },
-  { name: "Regulatory Intelligence", count: "6M+" },
-  { name: "Protein & Pathway Data", count: "28M+" },
-  { name: "Failed Trial Records", count: "320K+" },
-  { name: "Conference Abstracts", count: "18M+" },
-  { name: "FDA Reviewer Profiles", count: "45K+" },
-  { name: "Earnings Call Sentiment", count: "2M+" },
+  { name: "Pharma Research Papers", count: "100M+" },
+  { name: "Clinical Trials", count: "900K+" },
+  { name: "Biomarkers", count: "10M+" },
+  { name: "Drug & Compound Data", count: "24M+" },
+  { name: "Pharma Patents", count: "1M+" },
+  { name: "Protein & Pathways", count: "13M+" },
+  { name: "FDA & EMA Records", count: "100K+" },
+  { name: "Failed Trials", count: "60K+" },
+  { name: "Conference Abstracts", count: "250K+" },
 ];
 
 const domainPills = [
@@ -27,7 +25,6 @@ const domainPills = [
   "Failed Trials",
   "Conference Abstracts",
   "FDA Profiling",
-  "Earnings Sentiment",
 ];
 
 const ArchitectureSection = () => {
@@ -60,16 +57,16 @@ const ArchitectureSection = () => {
           </p>
         </div>
 
-        {/* Stacked stats */}
+        {/* Stats */}
         <div className="flex flex-col gap-4 mb-10">
           {/* Static stat */}
-          <div className="border border-border rounded-lg py-6 px-8 flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center py-6 px-8">
             <p className="text-4xl md:text-5xl font-display text-foreground tracking-tight">50+</p>
             <p className="text-mono text-sm text-muted-foreground tracking-wide mt-2">Indexed Pharmaceutical Sources</p>
           </div>
 
           {/* Rotating stat */}
-          <div className="border border-border rounded-lg py-6 px-8 flex flex-col items-center justify-center overflow-hidden">
+          <div className="flex flex-col items-center justify-center py-6 px-8 overflow-hidden">
             <div className="h-12 relative flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
@@ -102,7 +99,7 @@ const ArchitectureSection = () => {
         </div>
 
         {/* Knowledge domain pills */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 justify-center">
           {domainPills.map((domain) => (
             <span
               key={domain}
