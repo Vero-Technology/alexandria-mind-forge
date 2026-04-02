@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useInView, useMotionValue, animate } from "framer-motion";
 
 const useCases = [
   "Asset Evaluation",
@@ -10,10 +10,15 @@ const useCases = [
   "Partner Identification",
 ];
 
+const ITEM_HEIGHT = 56;
+const ITEM_HEIGHT_MOBILE = 44;
+const N = useCases.length;
+
 const UseCasesScrollSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: false, amount: 0.3 });
-  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollY = useMotionValue(0);
+  const [, forceRender] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,56 +28,98 @@ const UseCasesScrollSection = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  const itemH = isMobile ? ITEM_HEIGHT_MOBILE : ITEM_HEIGHT;
+
   useEffect(() => {
     if (!isInView) return;
+
+    let step = 0;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % useCases.length);
-    }, 2200);
+      step++;
+      const target = -step * itemH;
+      animate(scrollY, target, {
+        duration: 1,
+        ease: [0.4, 0, 0.2, 1],
+        onUpdate: () => forceRender((v) => v + 1),
+      });
+    }, 2800);
+
     return () => clearInterval(interval);
-  }, [isInView]);
+  }, [isInView, scrollY, itemH]);
+
+  const currentScroll = scrollY.get();
+  const containerHeight = itemH * 5;
+  const totalHeight = N * itemH;
+
+  const items: { text: string; yPos: number; originalIndex: number }[] = [];
+
+  for (let copy = -1; copy <= 2; copy++) {
+    for (let i = 0; i < N; i++) {
+      const baseY = copy * totalHeight + i * itemH;
+      const yPos = baseY + currentScroll;
+      if (yPos > -itemH * 2 && yPos < containerHeight + itemH * 2) {
+        items.push({ text: useCases[i], yPos, originalIndex: i });
+      }
+    }
+  }
+
+  const centerY = containerHeight / 2 - itemH / 2;
 
   return (
-    <section className="relative py-16 md:py-28 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-6" ref={containerRef}>
-      <div className="absolute top-0 left-6 sm:left-10 md:left-16 lg:left-20 xl:left-6 right-6 sm:right-10 md:right-16 lg:right-20 xl:right-6 h-px bg-border" />
+    <section className="relative py-16 md:py-36 px-6" ref={containerRef}>
+      <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-24">
-        {/* Left heading */}
-        <h2 className="text-2xl md:text-4xl tracking-tight flex-shrink-0 max-w-none md:max-w-[300px] leading-[1.2] text-center md:text-left">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] items-center gap-6 md:gap-12">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl tracking-tight leading-[1.2] text-center md:text-left">
           Business development teams use Alexandria for
         </h2>
 
-        {/* Right wheel */}
-        <div className="relative w-full min-h-[200px] md:min-h-[260px] md:flex-1">
-          <div className="absolute top-0 left-0 right-0 h-12 md:h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }} />
-          <div className="absolute bottom-0 left-0 right-0 h-12 md:h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }} />
+        <div className="relative w-full overflow-hidden" style={{ height: containerHeight }}>
+          <div className="absolute top-0 left-0 right-0 h-16 md:h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }} />
+          <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }} />
 
-          <div className="absolute inset-0 flex flex-col items-center md:items-start justify-center overflow-hidden">
-            {useCases.map((useCase, i) => {
-              const rawDist = i - activeIndex;
-              const wrappedDist =
-                ((rawDist + useCases.length / 2) % useCases.length) - useCases.length / 2;
-              const absDist = Math.abs(wrappedDist);
+          {items.map((item, idx) => {
+            const distFromCenter = Math.abs(item.yPos - centerY);
+            const normalizedDist = Math.min(distFromCenter / (itemH * 2.5), 1);
+            const opacity = Math.max(1 - normalizedDist * 0.75, 0.15);
+            const isActive = distFromCenter < itemH * 0.4;
 
-              const opacity = absDist === 0 ? 1 : absDist === 1 ? 0.45 : absDist === 2 ? 0.12 : 0.05;
-              const yPos = wrappedDist * (isMobile ? 40 : 56);
-
-              return (
-                <motion.p
-                  key={useCase}
-                  className="absolute font-display tracking-tight select-none"
-                  style={{ fontSize: "clamp(1.5rem, 4vw, 3.2rem)" }}
-                  animate={{
-                    y: yPos,
-                    opacity,
-                    color: absDist === 0 ? "hsl(160, 25%, 12%)" : "hsl(0, 0%, 78%)",
+            return (
+              <div
+                key={`${item.originalIndex}-${idx}`}
+                className="absolute left-0 right-0 flex items-center justify-center"
+                style={{
+                  height: itemH,
+                  top: 0,
+                  transform: `translateY(${item.yPos}px)`,
+                  opacity,
+                  willChange: "transform, opacity",
+                }}
+              >
+                <p
+                  className="font-display tracking-tight select-none text-center"
+                  style={{
+                    fontSize: isMobile ? "clamp(1.3rem, 5vw, 2rem)" : "clamp(1.8rem, 3.5vw, 3rem)",
+                    color: isActive ? "hsl(160, 25%, 12%)" : "hsl(0, 0%, 78%)",
+                    transition: "color 0.3s ease",
                   }}
-                  transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  {useCase}
-                </motion.p>
-              );
-            })}
-          </div>
+                  {item.text}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="flex justify-center md:justify-end">
+          <a
+            href="https://calendly.com/kenneth-alexandrialabs/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-8 py-3 rounded-full text-sm font-medium text-background bg-foreground hover:bg-foreground/90 transition-colors"
+          >
+            Book a Call
+          </a>
         </div>
       </div>
     </section>

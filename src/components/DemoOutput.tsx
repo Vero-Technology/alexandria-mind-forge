@@ -219,56 +219,120 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
   const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
   return (
-    <div ref={containerRef} className="rounded-lg" style={{ background: darkMode ? "hsl(0 0% 7%)" : undefined }}>
-      {/* Header tags */}
+    <div ref={containerRef} className="rounded-lg overflow-hidden" style={{ background: darkMode ? "hsl(0 0% 7%)" : undefined }}>
+      {/* Window chrome */}
       <motion.div
-        className="px-4 sm:px-6 pt-5 sm:pt-6 flex gap-2 flex-wrap"
-        initial={{ opacity: 0, y: 15 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        className="px-4 sm:px-5 py-3 flex items-center justify-between"
+        style={{ background: "hsl(0 0% 9%)", borderBottom: "1px solid hsl(0 0% 13%)" }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.2 }}
       >
-        <span
-          className="text-mono text-[10px] px-2.5 py-1 rounded-full font-medium"
-          style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(0 0% 55%)", border: "1px solid hsl(0 0% 15%)" }}
-        >
-          Regulatory + Trial Strategy
-        </span>
-        <span
-          className="text-mono text-[10px] px-2.5 py-1 rounded-full font-medium"
-          style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(0 0% 55%)", border: "1px solid hsl(0 0% 15%)" }}
-        >
-          Combined Query
-        </span>
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
+            <div className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
+            <div className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
+          </div>
+          <span className="text-mono text-[11px] hidden sm:inline" style={{ color: "hsl(0 0% 40%)" }}>
+            alexandria / workspace / kras-pdac-us
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-mono text-[9px] font-semibold px-2 py-0.5 rounded" style={{ background: "hsl(142 70% 35% / 0.2)", color: "hsl(142 70% 55%)" }}>LIVE</span>
+          <span className="text-mono text-[10px] hidden sm:inline" style={{ color: "hsl(0 0% 35%)" }}>Updated 2h ago</span>
+        </div>
       </motion.div>
 
-      {/* Title */}
+      {/* Search bar */}
       <motion.div
-        className="px-4 sm:px-6 pt-4 pb-2"
-        initial={{ opacity: 0, y: 15 }}
+        className="px-4 sm:px-6 pt-4 pb-3"
+        initial={{ opacity: 0, y: 10 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.4 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
       >
-        <h3 className="text-xl md:text-2xl tracking-tight" style={{ color: "hsl(0 0% 93%)" }}>
-          KRAS G12C — Regulatory &amp; Trial Pathway Analysis
-        </h3>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mt-1 gap-2">
-          <p className="text-[10px] sm:text-xs" style={{ color: "hsl(0 0% 42%)" }}>
-            28 trials · 6 FDA designations · 4 lead compounds · Updated 1d ago
-          </p>
-          <div className="flex gap-2 shrink-0">
+        <div className="flex items-center gap-3 rounded-lg px-4 py-3" style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 14%)" }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 35%)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <span className="text-xs sm:text-sm" style={{ color: "hsl(0 0% 70%)" }}>
+            KRAS G12C inhibitors in pancreatic cancer — US regulatory pathway + competitive landscape
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Filter chips */}
+      <motion.div
+        className="px-4 sm:px-6 pb-3 flex items-center gap-2 flex-wrap"
+        initial={{ opacity: 0, y: 10 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4, delay: 0.35 }}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 40%)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14" /><line x1="4" y1="10" x2="4" y2="3" /><line x1="12" y1="21" x2="12" y2="12" /><line x1="12" y1="8" x2="12" y2="3" /><line x1="20" y1="21" x2="20" y2="16" /><line x1="20" y1="12" x2="20" y2="3" /><line x1="1" y1="14" x2="7" y2="14" /><line x1="9" y1="8" x2="15" y2="8" /><line x1="17" y1="16" x2="23" y2="16" />
+        </svg>
+        {[
+          { label: "Region:", value: "United States" },
+          { label: "Target:", value: "KRAS G12C" },
+          { label: "Indication:", value: "Pancreatic Cancer (PDAC)" },
+          { label: "Phase:", value: "Phase II+" },
+        ].map((chip) => (
+          <span
+            key={chip.value}
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] px-2.5 py-1 rounded-md"
+            style={{ background: "hsl(0 0% 12%)", color: "hsl(0 0% 65%)", border: "1px solid hsl(0 0% 18%)" }}
+          >
+            <span style={{ color: "hsl(0 0% 45%)" }}>{chip.label}</span>
+            {chip.value}
+            <span className="ml-0.5 cursor-pointer" style={{ color: "hsl(0 0% 35%)" }}>&times;</span>
+          </span>
+        ))}
+      </motion.div>
+
+      {/* Metadata + Export row */}
+      <motion.div
+        className="px-4 sm:px-6 pb-2 flex items-center justify-between"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.4 }}
+      >
+        <span className="text-[10px] sm:text-xs" style={{ color: "hsl(0 0% 42%)" }}>
+          6 compounds · 28 trials · 8 FDA designations
+        </span>
+        <button
+          className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1.5"
+          style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(0 0% 65%)", border: "1px solid hsl(0 0% 15%)" }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Export
+        </button>
+      </motion.div>
+
+      {/* Tabs row */}
+      <motion.div
+        className="px-4 sm:px-6 pb-3"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.45 }}
+      >
+        <div className="flex gap-1 p-1 rounded-lg" style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 12%)" }}>
+          {(["pathways", "regulatory", "risk"] as const).map((tab) => (
             <button
-              className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors"
-              style={{ background: "hsl(0 0% 100% / 0.08)", color: "hsl(0 0% 80%)", border: "1px solid hsl(0 0% 18%)" }}
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className="text-xs sm:text-sm py-2 px-2 sm:px-4 rounded-md transition-all duration-300 flex-1"
+              style={{
+                background: activeTab === tab ? "hsl(0 0% 14%)" : "transparent",
+                color: activeTab === tab ? "hsl(0 0% 93%)" : "hsl(0 0% 42%)",
+                fontWeight: activeTab === tab ? 500 : 400,
+                boxShadow: activeTab === tab ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
+              }}
             >
-              Export
+              {tab === "pathways" ? "Competitive Landscape" : tab === "regulatory" ? "Regulatory Pathway" : "Risk Matrix"}
             </button>
-            <button
-              className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors"
-              style={{ background: "hsl(0 0% 100% / 0.04)", color: "hsl(0 0% 55%)", border: "1px solid hsl(0 0% 15%)" }}
-            >
-              Share
-            </button>
-          </div>
+          ))}
         </div>
       </motion.div>
 
@@ -320,32 +384,6 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
           </motion.div>
         ))}
       </div>
-
-      {/* Tabs */}
-      <motion.div
-        className="px-4 sm:px-6"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.8 }}
-      >
-        <div className="flex gap-1 p-1 rounded-lg" style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 12%)" }}>
-          {(["pathways", "regulatory", "risk"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className="text-xs sm:text-sm py-2 px-2 sm:px-4 rounded-md transition-all duration-300 flex-1"
-              style={{
-                background: activeTab === tab ? "hsl(0 0% 14%)" : "transparent",
-                color: activeTab === tab ? "hsl(0 0% 93%)" : "hsl(0 0% 42%)",
-                fontWeight: activeTab === tab ? 500 : 400,
-                boxShadow: activeTab === tab ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
-              }}
-            >
-              {tab === "pathways" ? "Compound Pathways" : tab === "regulatory" ? "Approval Timeline" : "Risk Matrix"}
-            </button>
-          ))}
-        </div>
-      </motion.div>
 
       <AnimatePresence mode="wait">
         {activeTab === "pathways" && (

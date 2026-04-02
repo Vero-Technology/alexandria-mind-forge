@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useState, useEffect } from "react";
+import medicalSummit from "@/assets/medical-summit.jpeg";
 
 const dataDomains = [
   { name: "Pharma Research Papers", count: "100M+" },
@@ -42,72 +43,103 @@ const ArchitectureSection = () => {
     <motion.section
       ref={ref}
       style={{ opacity, y, scale }}
-      className="relative py-16 px-6 sm:px-10 md:px-16 lg:px-20 xl:px-6"
+      className="relative py-16 px-6"
     >
-      <div className="absolute top-0 left-6 sm:left-10 md:left-16 lg:left-20 xl:left-6 right-6 sm:right-10 md:right-16 lg:right-20 xl:right-6 h-px bg-border" />
+      <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
       <div className="max-w-6xl mx-auto">
-        {/* Title + description */}
-        <div className="mb-14">
-          <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
-            Alexandria is AI-Native
-          </h2>
-          <p className="text-foreground/50 text-lg max-w-3xl">
-            An agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Left column — text content */}
+          <div className="flex flex-col justify-center py-4">
+            <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
+              Alexandria is AI-Native
+            </h2>
+            <p className="text-foreground/50 text-lg max-w-md mb-10">
+              An agentic research platform built on an interconnected web of every major pharmaceutical dataset.
+            </p>
 
-        {/* Stats */}
-        <div className="flex flex-col gap-4 mb-10">
-          {/* Static stat */}
-          <div className="flex flex-col items-center justify-center py-6 px-8">
-            <p className="text-5xl md:text-6xl font-display text-foreground tracking-tight">50+</p>
-            <p className="text-mono text-sm text-muted-foreground tracking-wide mt-2">Pharmaceutical Sources</p>
-          </div>
-
-          {/* Rotating stat */}
-          <div className="flex flex-col items-center justify-center py-6 px-8 overflow-hidden">
-            <div className="h-12 relative flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentIndex}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -20, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="text-5xl md:text-6xl font-display text-foreground tracking-tight absolute"
-                >
-                  {dataDomains[currentIndex].count}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-            <div className="h-6 relative flex items-center justify-center mt-2">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={currentIndex}
-                  initial={{ y: 16, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -16, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="text-mono text-sm text-muted-foreground tracking-wide absolute whitespace-nowrap"
-                >
-                  {dataDomains[currentIndex].name}
-                </motion.p>
-              </AnimatePresence>
+            <div className="space-y-0">
+              {[
+                { label: "50+ indexed pharmaceutical sources", bold: true },
+                { label: "AI-powered cross-dataset linkage", bold: false },
+                { label: "Decision-ready answers in minutes, not weeks", bold: false },
+                { label: "Full traceability on every data point", bold: true, description: "Every result shows its source, when it was indexed, and how often it refreshes." },
+                { label: "Structured for instant analysis", bold: false },
+              ].map((item, i) => (
+                <div key={i} className="border-t border-border py-4">
+                  <p className={`text-sm ${item.bold ? 'text-foreground font-medium' : 'text-foreground/40'}`}>
+                    {item.label}
+                  </p>
+                  {item.description && (
+                    <p className="text-sm text-foreground/40 mt-1">{item.description}</p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Knowledge domain pills */}
-        <div className="flex flex-wrap gap-2 justify-center">
-          {domainPills.map((domain) => (
-            <span
-              key={domain}
-              className="px-4 py-2 text-sm text-foreground/50 border border-border rounded-full hover:text-foreground hover:border-foreground/30 transition-colors duration-200 cursor-default"
-            >
-              {domain}
-            </span>
-          ))}
+          {/* Right column — image with overlay card */}
+          <div className="relative rounded-2xl overflow-hidden min-h-[400px] lg:min-h-[520px]">
+            <img
+              src={medicalSummit}
+              alt="Medical summit conference"
+              className="w-full h-full object-cover absolute inset-0"
+            />
+
+            {/* Floating overlay card */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] bg-white/70 backdrop-blur-xl rounded-xl p-6 shadow-lg">
+              <p className="text-xs font-mono uppercase tracking-widest text-foreground/40 mb-1">
+                Indexed Data
+              </p>
+
+              <div className="mb-4">
+                <div className="h-10 relative">
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={`count-${currentIndex}`}
+                      initial={{ y: 16, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -16, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="text-3xl font-display text-foreground tracking-tight absolute"
+                    >
+                      {dataDomains[currentIndex].count}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+                <div className="h-5 relative">
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={`name-${currentIndex}`}
+                      initial={{ y: 12, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -12, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="text-sm text-foreground/50 absolute"
+                    >
+                      {dataDomains[currentIndex].name}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* Domain pills inside card */}
+              <div className="flex flex-wrap gap-1.5">
+                {domainPills.map((domain) => (
+                  <span
+                    key={domain}
+                    className={`px-3 py-1 text-xs rounded-full border transition-colors duration-300 ${
+                      dataDomains[currentIndex]?.name.toLowerCase().includes(domain.toLowerCase().split(" ")[0].toLowerCase())
+                        ? "bg-foreground text-background border-foreground"
+                        : "text-foreground/40 border-border"
+                    }`}
+                  >
+                    {domain}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </motion.section>

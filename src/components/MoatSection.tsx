@@ -5,17 +5,17 @@ const pillars = [
   {
     title: "Architecture, not a feature",
     description:
-      "12+ datasets indexed into one unified reasoning layer. A single query cross-references trials, safety, patents, and regulatory filings simultaneously — no tabs, no exports, no manual synthesis.",
+      "15+ datasets indexed into one unified reasoning layer. A single query cross-references clinical, regulatory, patent, genetic, and other signals simultaneously.",
   },
   {
     title: "Unreplicable by design",
     description:
-      "Legacy platforms cannot replicate this by adding AI on top. It would require unifying databases that were never designed to connect — a rebuild, not an upgrade.",
+      "Legacy platforms can't reproduce this with an AI layer alone — it requires cross-dataset unification at the architecture level.",
   },
   {
     title: "No interface to learn",
     description:
-      "Write your question in plain language. Get a structured, cited answer. The tool disappears into the workflow — the best software is the kind you forget you're using.",
+      "Designed for immediate adoption by BD teams, without the training burden of traditional intelligence platforms.",
   },
 ];
 
@@ -33,10 +33,7 @@ const MoatSection = () => {
             className="text-5xl md:text-7xl tracking-tight"
             style={{ color: "hsl(0 0% 95%)" }}
           >
-            Built to{" "}
-            <span className="italic" style={{ color: "hsl(0 0% 40%)" }}>
-              Disappear.
-            </span>
+            Built to Disappear.
           </h2>
         </div>
 
