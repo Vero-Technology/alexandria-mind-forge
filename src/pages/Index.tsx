@@ -4,6 +4,7 @@ import ArchitectureSection from "@/components/ArchitectureSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
 import LeanTeamsSection from "@/components/LeanTeamsSection";
 import MoatSection from "@/components/MoatSection";
+import TextParallaxContentExample from "@/components/TextParallaxContent";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <GroundTruthSection />
       <LeanTeamsSection />
       <MoatSection />
+      <TextParallaxContentExample />
     </main>
   );
 };
