@@ -19,7 +19,7 @@ const ContactSection = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "8f9a5406-8b8d-434d-8e49-b810aa06cd17",
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
           to: "info@alexandrialabs.uk",
           subject: `New inquiry from ${form.name}`,
           from_name: form.name,
