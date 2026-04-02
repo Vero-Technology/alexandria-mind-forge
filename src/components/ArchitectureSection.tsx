@@ -1,22 +1,31 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useState, useEffect } from "react";
 
 const dataDomains = [
-  "Research Papers & Metadata",
+  "Research Papers",
   "Clinical Trials",
-  "Biomarker & Target Databases",
+  "Biomarker Databases",
   "Drug & Compound Data",
   "Patent Intelligence",
   "Regulatory Intelligence",
   "Protein & Pathway Data",
-  "Failed Trial Knowledge Base",
+  "Failed Trial Records",
   "Conference Abstracts",
-  "FDA Reviewer Profiling",
+  "FDA Reviewer Profiles",
   "Earnings Call Sentiment",
 ];
 
 const ArchitectureSection = () => {
   const { ref, opacity, y, scale } = useScrollAnimation();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % dataDomains.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.section
@@ -37,28 +46,29 @@ const ArchitectureSection = () => {
           </p>
         </div>
 
-        {/* Big stats row */}
-        <div className="grid grid-cols-2 gap-6 mb-14">
+        {/* Stats row */}
+        <div className="grid grid-cols-2 gap-6">
           <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
             <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">50+</p>
             <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Indexed Pharmaceutical Sources</p>
           </div>
-          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
+          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center overflow-hidden">
             <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">540M+</p>
-            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Academic Resources</p>
+            <div className="h-5 mt-3 relative w-full flex justify-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentIndex}
+                  initial={{ y: 16, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -16, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="text-mono text-[11px] text-muted-foreground tracking-wide absolute"
+                >
+                  {dataDomains[currentIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
           </div>
-        </div>
-
-        {/* Knowledge domains — compact inline tags */}
-        <div className="flex flex-wrap gap-2">
-          {dataDomains.map((domain) => (
-            <span
-              key={domain}
-              className="px-4 py-2 text-sm text-foreground/50 border border-border rounded-full hover:text-foreground hover:border-foreground/30 transition-colors duration-200 cursor-default"
-            >
-              {domain}
-            </span>
-          ))}
         </div>
       </div>
     </motion.section>
