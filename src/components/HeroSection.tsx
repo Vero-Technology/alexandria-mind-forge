@@ -38,7 +38,7 @@ const HeroSection = () => {
           href="https://calendly.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="animate-fade-up-delay-1 mt-6 inline-flex items-center px-6 py-3 text-sm font-medium text-white border border-white/30 rounded-full hover:bg-white/10 transition-colors duration-200 w-fit"
+          className="animate-fade-up-delay-1 mt-6 inline-flex items-center px-6 py-3 text-sm font-medium text-black bg-white rounded-full hover:bg-white/90 transition-colors duration-200 w-fit"
         >
           Book a Call
         </a>
