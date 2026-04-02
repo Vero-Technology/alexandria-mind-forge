@@ -42,7 +42,7 @@ const DemoSection = () => {
             Live Example
           </p>
           <h2 className="text-3xl md:text-5xl tracking-tight mb-3" style={{ color: "hsl(0 0% 95%)" }}>
-            What a Query Looks Like
+            Insights that move the needle.
           </h2>
           <p className="text-base max-w-2xl" style={{ color: "hsl(0 0% 50%)" }}>
             One question. Multiple datasets. Decision-ready output.
