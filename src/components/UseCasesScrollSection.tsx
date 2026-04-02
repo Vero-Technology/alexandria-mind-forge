@@ -27,31 +27,31 @@ const UseCasesScrollSection = () => {
     <section className="relative py-28 px-6" ref={containerRef}>
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-24">
-        {/* Left label — matches h2 style */}
-        <h2 className="text-3xl md:text-4xl tracking-tight flex-shrink-0 max-w-[300px] leading-[1.2]">
+      <div className="max-w-6xl mx-auto text-center">
+        {/* Centered heading */}
+        <h2 className="text-3xl md:text-4xl tracking-tight mb-16">
           Business development teams use Alexandria for
         </h2>
 
-        {/* Right wheel */}
-        <div className="relative w-full" style={{ height: "320px" }}>
+        {/* Wheel */}
+        <div className="relative mx-auto" style={{ height: "320px" }}>
           <div className="absolute top-0 left-0 right-0 h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), transparent)" }} />
           <div className="absolute bottom-0 left-0 right-0 h-20 z-10 pointer-events-none" style={{ background: "linear-gradient(to top, hsl(var(--background)), transparent)" }} />
 
-          <div className="absolute inset-0 flex flex-col items-start justify-center overflow-hidden">
+          <div className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden">
             {useCases.map((useCase, i) => {
               const rawDist = i - activeIndex;
               const wrappedDist =
                 ((rawDist + useCases.length / 2) % useCases.length) - useCases.length / 2;
               const absDist = Math.abs(wrappedDist);
 
-              const opacity = absDist === 0 ? 1 : absDist === 1 ? 0.55 : absDist === 2 ? 0.15 : 0.06;
-              const yPos = wrappedDist * 64;
+              const opacity = absDist === 0 ? 1 : absDist === 1 ? 0.45 : absDist === 2 ? 0.12 : 0.05;
+              const yPos = wrappedDist * 68;
 
               return (
                 <motion.p
                   key={useCase}
-                  className="absolute left-0 font-display tracking-tight select-none whitespace-nowrap"
+                  className="absolute font-display tracking-tight select-none whitespace-nowrap"
                   style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
                   animate={{
                     y: yPos,
