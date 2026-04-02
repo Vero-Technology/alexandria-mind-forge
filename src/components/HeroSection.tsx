@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import logo1 from "@/assets/logo_white_4k_fixed.png";
 import logo2 from "@/assets/hcm-big-d.png";
@@ -14,29 +14,38 @@ const logos = [
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoBlocked, setVideoBlocked] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     video.play().catch(() => {
-      // Video blocked (e.g. Low Power Mode) — poster image remains visible
+      setVideoBlocked(true);
     });
   }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-[#0a0a1a]">
       {/* Video background — covers entire section */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        playsInline
-        loop
-        poster="/hero-poster.jpg"
-        className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
-      >
-        <source src="/hero-video-4k.webm" type="video/webm" />
-      </video>
+      {videoBlocked ? (
+        <img
+          src="/hero-poster.jpg"
+          alt=""
+          className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          loop
+          poster="/hero-poster.jpg"
+          className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
+        >
+          <source src="/hero-video-4k.webm" type="video/webm" />
+        </video>
+      )}
 
       {/* Coming Soon */}
       <div className="relative z-20 bg-white text-black text-center py-2 md:py-2.5 text-xs font-medium tracking-wide">
