@@ -1,7 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
 import GroundTruthSection from "@/components/GroundTruthSection";
-import LeanTeamsSection from "@/components/LeanTeamsSection";
 import MoatSection from "@/components/MoatSection";
 
 const Index = () => {
@@ -10,7 +9,6 @@ const Index = () => {
       <HeroSection />
       <ArchitectureSection />
       <GroundTruthSection />
-      <LeanTeamsSection />
       <MoatSection />
     </main>
   );
