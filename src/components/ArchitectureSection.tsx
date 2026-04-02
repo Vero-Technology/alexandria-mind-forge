@@ -22,7 +22,7 @@ const ArchitectureSection = () => {
     <motion.section
       ref={ref}
       style={{ opacity, y, scale }}
-      className="relative py-16 px-6"
+      className="relative py-10 px-6"
     >
       <div className="absolute top-0 left-6 right-6 h-px bg-border" />
 
