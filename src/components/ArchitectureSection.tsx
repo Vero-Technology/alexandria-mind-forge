@@ -63,7 +63,7 @@ const ArchitectureSection = () => {
             Alexandria is AI-Native
           </h2>
           <p className="text-foreground/60 text-lg max-w-3xl mb-3">
-            Most tools add AI to an existing product. Alexandria was built from the ground up as a reasoning engine. There is no legacy system underneath. Here's what that means in practice:
+            Alexandria is an agentic research platform built on an interconnected web of every major pharmaceutical dataset. Ask complex questions, get decision-ready answers — in hours, not weeks.
           </p>
         </div>
 
