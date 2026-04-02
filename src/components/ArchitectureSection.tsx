@@ -3,17 +3,31 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useState, useEffect } from "react";
 
 const dataDomains = [
+  { name: "Research Papers", count: "42M+" },
+  { name: "Clinical Trials", count: "850K+" },
+  { name: "Biomarker Databases", count: "12M+" },
+  { name: "Drug & Compound Data", count: "38M+" },
+  { name: "Patent Intelligence", count: "95M+" },
+  { name: "Regulatory Intelligence", count: "6M+" },
+  { name: "Protein & Pathway Data", count: "28M+" },
+  { name: "Failed Trial Records", count: "320K+" },
+  { name: "Conference Abstracts", count: "18M+" },
+  { name: "FDA Reviewer Profiles", count: "45K+" },
+  { name: "Earnings Call Sentiment", count: "2M+" },
+];
+
+const domainPills = [
   "Research Papers",
   "Clinical Trials",
-  "Biomarker Databases",
-  "Drug & Compound Data",
-  "Patent Intelligence",
-  "Regulatory Intelligence",
-  "Protein & Pathway Data",
-  "Failed Trial Records",
+  "Biomarkers",
+  "Drug Data",
+  "Patents",
+  "Regulatory",
+  "Protein & Pathways",
+  "Failed Trials",
   "Conference Abstracts",
-  "FDA Reviewer Profiles",
-  "Earnings Call Sentiment",
+  "FDA Profiling",
+  "Earnings Sentiment",
 ];
 
 const ArchitectureSection = () => {
@@ -46,29 +60,57 @@ const ArchitectureSection = () => {
           </p>
         </div>
 
-        {/* Stats row */}
-        <div className="grid grid-cols-2 gap-6">
-          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center">
-            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">50+</p>
-            <p className="text-mono text-[11px] text-muted-foreground mt-3 tracking-wide">Indexed Pharmaceutical Sources</p>
+        {/* Stacked stats */}
+        <div className="flex flex-col gap-4 mb-10">
+          {/* Static stat */}
+          <div className="border border-border rounded-lg py-6 px-8 flex items-center justify-between">
+            <p className="text-mono text-sm text-muted-foreground tracking-wide">Indexed Pharmaceutical Sources</p>
+            <p className="text-4xl md:text-5xl font-display text-foreground tracking-tight">50+</p>
           </div>
-          <div className="border border-border rounded-lg p-8 flex flex-col items-center justify-center overflow-hidden">
-            <p className="text-6xl md:text-7xl font-display text-foreground tracking-tight">540M+</p>
-            <div className="h-5 mt-3 relative w-full flex justify-center">
+
+          {/* Rotating stat */}
+          <div className="border border-border rounded-lg py-6 px-8 flex items-center justify-between overflow-hidden">
+            <div className="h-6 relative flex items-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={currentIndex}
-                  initial={{ y: 16, opacity: 0 }}
+                  initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -16, opacity: 0 }}
+                  exit={{ y: -20, opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="text-mono text-[11px] text-muted-foreground tracking-wide absolute"
+                  className="text-mono text-sm text-muted-foreground tracking-wide absolute whitespace-nowrap"
                 >
-                  {dataDomains[currentIndex]}
+                  {dataDomains[currentIndex].name}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+            <div className="h-12 relative flex items-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentIndex}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="text-4xl md:text-5xl font-display text-foreground tracking-tight absolute right-0"
+                >
+                  {dataDomains[currentIndex].count}
                 </motion.p>
               </AnimatePresence>
             </div>
           </div>
+        </div>
+
+        {/* Knowledge domain pills */}
+        <div className="flex flex-wrap gap-2">
+          {domainPills.map((domain) => (
+            <span
+              key={domain}
+              className="px-4 py-2 text-sm text-foreground/50 border border-border rounded-full hover:text-foreground hover:border-foreground/30 transition-colors duration-200 cursor-default"
+            >
+              {domain}
+            </span>
+          ))}
         </div>
       </div>
     </motion.section>
