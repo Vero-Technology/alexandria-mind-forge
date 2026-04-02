@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const stats = [
   { value: "3", label: "Breakthrough Designations" },
@@ -41,216 +43,312 @@ const adagrasibTimeline = [
   { title: "Regulatory Risk", desc: "No Phase III planned for PDAC. Phase II may be insufficient for full approval without randomized comparator.", badge: null },
 ];
 
-const TimelineItem = ({ item, isLast }: { item: typeof sotorasibTimeline[0]; isLast: boolean }) => (
-  <div className="flex gap-3">
+const compounds = [
+  { name: "Sotorasib", company: "Amgen · Covalent KRAS G12C inhibitor", timeline: sotorasibTimeline },
+  { name: "Divarasib", company: "Roche · Next-gen covalent KRAS G12C inhibitor", timeline: divarasibTimeline },
+  { name: "RMC-6236", company: "Revolution Medicines · Pan-RAS(ON) tri-complex inhibitor", timeline: rmc6236Timeline },
+  { name: "Adagrasib", company: "BMS / Mirati · Covalent KRAS G12C inhibitor", timeline: adagrasibTimeline },
+];
+
+const TimelineItem = ({ item, isLast, index }: { item: typeof sotorasibTimeline[0]; isLast: boolean; index: number }) => (
+  <motion.div
+    className="flex gap-3"
+    initial={{ opacity: 0, x: -15 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.35, delay: index * 0.06 }}
+  >
     <div className="flex flex-col items-center">
-      <div className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-      {!isLast && <div className="w-px flex-1 bg-primary/20 mt-1" />}
+      <motion.div
+        className="w-2.5 h-2.5 rounded-full mt-1.5 flex-shrink-0"
+        style={{ background: "hsl(160 55% 40%)" }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3, delay: index * 0.06 + 0.1, type: "spring" }}
+      />
+      {!isLast && <div className="w-px flex-1 mt-1" style={{ background: "hsl(160 30% 25%)" }} />}
     </div>
     <div className="pb-5">
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="font-semibold text-sm text-foreground">{item.title}</span>
+        <span className="font-semibold text-sm" style={{ color: "hsl(0 0% 90%)" }}>{item.title}</span>
         {item.badge && (
           <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
             item.badge === "Warning"
-              ? "bg-destructive/10 text-destructive"
+              ? "bg-red-500/20 text-red-400"
               : item.badge === "Potential"
-              ? "bg-highlight/15 text-highlight"
-              : "bg-primary text-primary-foreground"
-          }`}>
+              ? "bg-amber-500/20 text-amber-400"
+              : "text-emerald-300"
+          }`} style={item.badge !== "Warning" && item.badge !== "Potential" ? { background: "hsl(160 55% 20%)" } : {}}>
             {item.badge}
           </span>
         )}
       </div>
-      <p className="text-xs text-muted-foreground mt-0.5">{item.desc}</p>
+      <p className="text-xs mt-0.5" style={{ color: "hsl(160 10% 50%)" }}>{item.desc}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
-const DemoOutput = () => {
+const regulatoryData = [
+  ["Breakthrough Designation", "Yes (NSCLC)", "Yes (Solid tumors)", "No (Fast Track only)", "Yes (NSCLC)"],
+  ["Fast Track", "Yes", "No", "Yes (PDAC)", "No"],
+  ["Orphan Drug (PDAC)", "Yes", "No", "No", "No"],
+  ["Priority Review likely", "Yes", "Yes", "Possible", "Unlikely"],
+  ["Phase III in PDAC", "Yes (CodeBreaK 201)", "Yes (with cetuximab)", "Planned", "No"],
+  ["Randomized data", "Yes (vs FOLFIRI)", "Yes (vs docetaxel)", "No", "No"],
+  ["OS as primary endpoint", "Yes", "TBD", "TBD", "No (ORR)"],
+  ["Earliest PDAC approval", "Q1 2029", "Q2 2029", "2030", "Unlikely without Ph3"],
+  ["Approval probability", "~44% (from Ph3)", "~38%", "~25%", "~12%"],
+  ["Key regulatory risk", "OS magnitude unclear", "Small PDAC cohort (n=80)", "No randomized data yet", "No Phase III, BMS deprioritizing"],
+];
+
+const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
   const [activeTab, setActiveTab] = useState<"pathways" | "regulatory">("pathways");
+  const [expandedCard, setExpandedCard] = useState<number | null>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+
+  const borderColor = "hsl(160 20% 18%)";
+  const textPrimary = "hsl(0 0% 92%)";
+  const textSecondary = "hsl(160 10% 50%)";
+  const accentColor = "hsl(160 55% 40%)";
+  const cardBg = "hsl(160 15% 8%)";
+  const hoverBg = "hsl(160 15% 12%)";
 
   return (
-    <div className="bg-background rounded-lg">
+    <div ref={containerRef} className="rounded-lg" style={{ background: darkMode ? "hsl(160 20% 10%)" : undefined }}>
       {/* Header tags */}
-      <div className="px-6 pt-6 flex gap-2">
-        <span className="text-mono text-[10px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">
+      <motion.div
+        className="px-6 pt-6 flex gap-2"
+        initial={{ opacity: 0, y: 15 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <span
+          className="text-mono text-[10px] px-2.5 py-1 rounded-full font-medium"
+          style={{ background: "hsl(160 55% 20% / 0.2)", color: accentColor }}
+        >
           Regulatory + Trial Strategy
         </span>
-        <span className="text-mono text-[10px] px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium">
+        <span
+          className="text-mono text-[10px] px-2.5 py-1 rounded-full font-medium"
+          style={{ background: "hsl(160 55% 20% / 0.2)", color: accentColor }}
+        >
           Combined Query
         </span>
-      </div>
+      </motion.div>
 
       {/* Title */}
-      <div className="px-6 pt-4 pb-2">
-        <h3 className="text-xl md:text-2xl tracking-tight">
+      <motion.div
+        className="px-6 pt-4 pb-2"
+        initial={{ opacity: 0, y: 15 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <h3 className="text-xl md:text-2xl tracking-tight" style={{ color: textPrimary }}>
           KRAS G12C — Regulatory &amp; Trial Pathway Analysis
         </h3>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-xs mt-1" style={{ color: textSecondary }}>
           28 trials · 8 FDA designations · 6 compounds tracked · Updated 1d ago
         </p>
-      </div>
+      </motion.div>
 
       {/* Executive Summary */}
-      <div className="px-6 py-4">
-        <div className="border border-border rounded-lg p-5">
-          <p className="font-semibold text-sm mb-2 text-foreground">Executive Summary</p>
-          <p className="text-xs text-muted-foreground leading-relaxed">
+      <motion.div
+        className="px-6 py-4"
+        initial={{ opacity: 0, y: 15 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
+        <div className="rounded-lg p-5" style={{ border: `1px solid ${borderColor}`, background: cardBg }}>
+          <p className="font-semibold text-sm mb-2" style={{ color: textPrimary }}>Executive Summary</p>
+          <p className="text-xs leading-relaxed" style={{ color: textSecondary }}>
             This workspace combines clinical trial intelligence with regulatory pathway data to provide an integrated view of each compound's path to approval. By overlaying FDA designations, phase transition probabilities, and AdCom precedent onto active trial timelines, Alexandria enables real-time assessment of regulatory risk and competitive positioning.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Stats */}
       <div className="px-6 pb-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
         {stats.map((s, i) => (
-          <div key={i} className="border border-border rounded-lg p-4 text-center">
-            <p className="text-2xl md:text-3xl font-bold text-primary">{s.value}</p>
-            <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
-            {s.sub && <p className="text-[10px] text-muted-foreground/60 mt-0.5">{s.sub}</p>}
-          </div>
+          <motion.div
+            key={i}
+            className="rounded-lg p-4 text-center cursor-default group"
+            style={{ border: `1px solid ${borderColor}`, background: cardBg }}
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
+            whileHover={{ scale: 1.03, borderColor: accentColor, transition: { duration: 0.2 } }}
+          >
+            <p className="text-2xl md:text-3xl font-bold" style={{ color: accentColor }}>{s.value}</p>
+            <p className="text-xs mt-1" style={{ color: textSecondary }}>{s.label}</p>
+            {s.sub && <p className="text-[10px] mt-0.5" style={{ color: "hsl(160 10% 38%)" }}>{s.sub}</p>}
+          </motion.div>
         ))}
       </div>
 
       {/* Tabs */}
-      <div className="px-6">
-        <div className="flex gap-6 border-b border-border">
-          <button
-            onClick={() => setActiveTab("pathways")}
-            className={`text-sm pb-2.5 border-b-2 transition-colors ${
-              activeTab === "pathways"
-                ? "border-foreground text-foreground font-medium"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Compound Pathways
-          </button>
-          <button
-            onClick={() => setActiveTab("regulatory")}
-            className={`text-sm pb-2.5 border-b-2 transition-colors ${
-              activeTab === "regulatory"
-                ? "border-foreground text-foreground font-medium"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Regulatory Comparison
-          </button>
+      <motion.div
+        className="px-6"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
+        <div className="flex gap-6" style={{ borderBottom: `1px solid ${borderColor}` }}>
+          {(["pathways", "regulatory"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className="text-sm pb-2.5 border-b-2 transition-all duration-300 relative"
+              style={{
+                borderColor: activeTab === tab ? accentColor : "transparent",
+                color: activeTab === tab ? textPrimary : textSecondary,
+                fontWeight: activeTab === tab ? 500 : 400,
+              }}
+            >
+              {tab === "pathways" ? "Compound Pathways" : "Regulatory Comparison"}
+            </button>
+          ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Compound cards */}
-      {activeTab === "pathways" && (
-        <div className="px-6 py-5 grid md:grid-cols-2 gap-4">
-          {/* Sotorasib */}
-          <div className="border border-border rounded-lg p-5">
-            <p className="font-semibold text-base text-foreground">Sotorasib</p>
-            <p className="text-xs text-muted-foreground mb-4">Amgen · Covalent KRAS G12C inhibitor</p>
-            <div>
-              {sotorasibTimeline.map((item, i) => (
-                <TimelineItem key={i} item={item} isLast={i === sotorasibTimeline.length - 1} />
-              ))}
-            </div>
-          </div>
-
-          {/* Divarasib */}
-          <div className="border border-border rounded-lg p-5">
-            <p className="font-semibold text-base text-foreground">Divarasib</p>
-            <p className="text-xs text-muted-foreground mb-4">Roche · Next-gen covalent KRAS G12C inhibitor</p>
-            <div>
-              {divarasibTimeline.map((item, i) => (
-                <TimelineItem key={i} item={item} isLast={i === divarasibTimeline.length - 1} />
-              ))}
-            </div>
-          </div>
-
-          {/* RMC-6236 */}
-          <div className="border border-border rounded-lg p-5">
-            <p className="font-semibold text-base text-foreground">RMC-6236</p>
-            <p className="text-xs text-muted-foreground mb-4">Revolution Medicines · Pan-RAS(ON) tri-complex inhibitor</p>
-            <div>
-              {rmc6236Timeline.map((item, i) => (
-                <TimelineItem key={i} item={item} isLast={i === rmc6236Timeline.length - 1} />
-              ))}
-            </div>
-          </div>
-
-          {/* Adagrasib */}
-          <div className="border border-border rounded-lg p-5">
-            <p className="font-semibold text-base text-foreground">Adagrasib</p>
-            <p className="text-xs text-muted-foreground mb-4">BMS / Mirati · Covalent KRAS G12C inhibitor</p>
-            <div>
-              {adagrasibTimeline.map((item, i) => (
-                <TimelineItem key={i} item={item} isLast={i === adagrasibTimeline.length - 1} />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {activeTab === "regulatory" && (
-        <div className="px-6 py-5 space-y-6">
-          {/* Comparison table */}
-          <div className="border border-border rounded-lg overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-secondary/40">
-                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Regulatory Dimension</th>
-                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Sotorasib</th>
-                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Divarasib</th>
-                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">RMC-6236</th>
-                  <th className="text-left px-4 py-3 font-semibold text-foreground text-xs">Adagrasib</th>
-                </tr>
-              </thead>
-              <tbody className="text-xs text-muted-foreground">
-                {[
-                  ["Breakthrough Designation", "Yes (NSCLC)", "Yes (Solid tumors)", "No (Fast Track only)", "Yes (NSCLC)"],
-                  ["Fast Track", "Yes", "No", "Yes (PDAC)", "No"],
-                  ["Orphan Drug (PDAC)", "Yes", "No", "No", "No"],
-                  ["Priority Review likely", "Yes", "Yes", "Possible", "Unlikely"],
-                  ["Phase III in PDAC", "Yes (CodeBreaK 201)", "Yes (with cetuximab)", "Planned", "No"],
-                  ["Randomized data", "Yes (vs FOLFIRI)", "Yes (vs docetaxel)", "No", "No"],
-                  ["OS as primary endpoint", "Yes", "TBD", "TBD", "No (ORR)"],
-                  ["Earliest PDAC approval", "Q1 2029", "Q2 2029", "2030", "Unlikely without Ph3"],
-                  ["Approval probability", "~44% (from Ph3)", "~38%", "~25%", "~12%"],
-                  ["Key regulatory risk", "OS magnitude unclear", "Small PDAC cohort (n=80)", "No randomized data yet", "No Phase III, BMS deprioritizing"],
-                ].map((row, i) => (
-                  <tr key={i} className="border-t border-border">
-                    <td className="px-4 py-3 font-medium text-foreground">{row[0]}</td>
-                    {row.slice(1).map((cell, j) => (
-                      <td
-                        key={j}
-                        className={`px-4 py-3 ${
-                          row[0] === "Approval probability" ? "text-primary font-medium" : ""
-                        }`}
-                      >
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Regulatory Analysis */}
-          <div className="border border-border rounded-lg p-5">
-            <p className="font-semibold text-sm mb-2 text-foreground">Regulatory Analysis</p>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Sotorasib has the most de-risked regulatory pathway — the only compound with a randomized Phase III (CodeBreaK 201) using OS as primary endpoint, plus Orphan Drug exclusivity. Divarasib is the strongest clinical performer (44.4% ORR) but its PDAC cohort (n=80) may be too small for standalone approval. RMC-6236 has the most transformative potential (variant-agnostic) but is furthest from registration. Adagrasib is at highest risk of PDAC abandonment given BMS's declining investment signals.
-            </p>
-          </div>
-
-          {/* Source tags */}
-          <div className="flex flex-wrap gap-2">
-            {["AACT", "FDA Drugs@FDA", "FDA Designations", "SEC EDGAR", "AdCom Records"].map((src) => (
-              <span key={src} className="text-mono text-[10px] px-2.5 py-1 rounded bg-secondary text-muted-foreground">
-                {src}
-              </span>
+      {/* Animated Tab Content */}
+      <AnimatePresence mode="wait">
+        {activeTab === "pathways" && (
+          <motion.div
+            key="pathways"
+            className="px-6 py-5 grid md:grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+          >
+            {compounds.map((compound, ci) => (
+              <motion.div
+                key={ci}
+                className="rounded-lg p-5 cursor-pointer transition-all duration-300"
+                style={{
+                  border: `1px solid ${expandedCard === ci ? accentColor : borderColor}`,
+                  background: expandedCard === ci ? hoverBg : cardBg,
+                  boxShadow: expandedCard === ci ? `0 0 30px -10px hsl(160 55% 20% / 0.2)` : "none",
+                }}
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: ci * 0.1 }}
+                onClick={() => setExpandedCard(expandedCard === ci ? null : ci)}
+                whileHover={{ scale: 1.01 }}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-base" style={{ color: textPrimary }}>{compound.name}</p>
+                    <p className="text-xs mb-4" style={{ color: textSecondary }}>{compound.company}</p>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: expandedCard === ci ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xs"
+                    style={{ color: textSecondary }}
+                  >
+                    ▼
+                  </motion.div>
+                </div>
+                <AnimatePresence>
+                  {expandedCard === ci && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      {compound.timeline.map((item, i) => (
+                        <TimelineItem key={i} item={item} isLast={i === compound.timeline.length - 1} index={i} />
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+
+        {activeTab === "regulatory" && (
+          <motion.div
+            key="regulatory"
+            className="px-6 py-5 space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4 }}
+          >
+            {/* Comparison table */}
+            <div className="rounded-lg overflow-x-auto" style={{ border: `1px solid ${borderColor}` }}>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ background: "hsl(160 15% 12%)" }}>
+                    <th className="text-left px-4 py-3 font-semibold text-xs" style={{ color: textPrimary }}>Regulatory Dimension</th>
+                    <th className="text-left px-4 py-3 font-semibold text-xs" style={{ color: textPrimary }}>Sotorasib</th>
+                    <th className="text-left px-4 py-3 font-semibold text-xs" style={{ color: textPrimary }}>Divarasib</th>
+                    <th className="text-left px-4 py-3 font-semibold text-xs" style={{ color: textPrimary }}>RMC-6236</th>
+                    <th className="text-left px-4 py-3 font-semibold text-xs" style={{ color: textPrimary }}>Adagrasib</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs" style={{ color: textSecondary }}>
+                  {regulatoryData.map((row, i) => (
+                    <motion.tr
+                      key={i}
+                      style={{ borderTop: `1px solid ${borderColor}` }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.04 }}
+                      className="hover:brightness-125 transition-all"
+                    >
+                      <td className="px-4 py-3 font-medium" style={{ color: textPrimary }}>{row[0]}</td>
+                      {row.slice(1).map((cell, j) => (
+                        <td
+                          key={j}
+                          className="px-4 py-3"
+                          style={row[0] === "Approval probability" ? { color: accentColor, fontWeight: 500 } : {}}
+                        >
+                          {cell}
+                        </td>
+                      ))}
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Regulatory Analysis */}
+            <motion.div
+              className="rounded-lg p-5"
+              style={{ border: `1px solid ${borderColor}`, background: cardBg }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <p className="font-semibold text-sm mb-2" style={{ color: textPrimary }}>Regulatory Analysis</p>
+              <p className="text-xs leading-relaxed" style={{ color: textSecondary }}>
+                Sotorasib has the most de-risked regulatory pathway — the only compound with a randomized Phase III (CodeBreaK 201) using OS as primary endpoint, plus Orphan Drug exclusivity. Divarasib is the strongest clinical performer (44.4% ORR) but its PDAC cohort (n=80) may be too small for standalone approval. RMC-6236 has the most transformative potential (variant-agnostic) but is furthest from registration. Adagrasib is at highest risk of PDAC abandonment given BMS's declining investment signals.
+              </p>
+            </motion.div>
+
+            {/* Source tags */}
+            <div className="flex flex-wrap gap-2">
+              {["AACT", "FDA Drugs@FDA", "FDA Designations", "SEC EDGAR", "AdCom Records"].map((src, i) => (
+                <motion.span
+                  key={src}
+                  className="text-mono text-[10px] px-2.5 py-1 rounded"
+                  style={{ background: "hsl(160 15% 14%)", color: textSecondary }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.5 + i * 0.05 }}
+                >
+                  {src}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
