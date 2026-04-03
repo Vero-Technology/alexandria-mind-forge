@@ -2,6 +2,40 @@ import { useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef } from "react";
 
+const tableData = [
+  { compound: "Sotorasib", sponsor: "Amgen", phase: "Phase III", trial: "CodeBreaK 201", designation: "Breakthrough", orr: "21.1%", nPatients: 428, status: "Active", approvalProb: "44%", estApproval: "Q1 2029" },
+  { compound: "Divarasib", sponsor: "Roche / Genentech", phase: "Phase III", trial: "GDC-6036-001", designation: "Breakthrough", orr: "44.4%", nPatients: 80, status: "Enrolling", approvalProb: "38%", estApproval: "Q2 2029" },
+  { compound: "RMC-6236", sponsor: "Revolution Medicines", phase: "Phase II", trial: "RMC-6236-001", designation: "Fast Track", orr: "42.0%", nPatients: 210, status: "Enrolling", approvalProb: "25%", estApproval: "2030" },
+  { compound: "Adagrasib", sponsor: "BMS / Mirati", phase: "Phase II", trial: "KRYSTAL-10", designation: "Breakthrough", orr: "33.3%", nPatients: 120, status: "At Risk", approvalProb: "12%", estApproval: "Unlikely" },
+  { compound: "JDQ443", sponsor: "Novartis", phase: "Phase II", trial: "KontRASt-02", designation: "—", orr: "18.2%", nPatients: 55, status: "Active", approvalProb: "15%", estApproval: "2031+" },
+  { compound: "D-1553", sponsor: "InventisBio", phase: "Phase II", trial: "D-1553-002", designation: "—", orr: "25.7%", nPatients: 70, status: "Active", approvalProb: "10%", estApproval: "2031+" },
+];
+
+const tableColumns = [
+  { key: "compound", label: "Compound", width: "140px" },
+  { key: "sponsor", label: "Sponsor", width: "150px" },
+  { key: "phase", label: "Phase", width: "90px" },
+  { key: "trial", label: "Trial ID", width: "130px" },
+  { key: "designation", label: "FDA Designation", width: "120px" },
+  { key: "orr", label: "ORR", width: "70px" },
+  { key: "nPatients", label: "N", width: "60px" },
+  { key: "status", label: "Status", width: "90px" },
+  { key: "approvalProb", label: "P(Approval)", width: "95px" },
+  { key: "estApproval", label: "Est. Approval", width: "110px" },
+];
+
+const statusStyles: Record<string, { bg: string; text: string }> = {
+  Active: { bg: "hsl(0 0% 100% / 0.08)", text: "hsl(0 0% 75%)" },
+  Enrolling: { bg: "hsl(0 0% 100% / 0.08)", text: "hsl(0 0% 85%)" },
+  "At Risk": { bg: "hsl(0 50% 50% / 0.12)", text: "hsl(0 60% 65%)" },
+};
+
+const designationStyles: Record<string, { bg: string; text: string }> = {
+  Breakthrough: { bg: "hsl(0 0% 100% / 0.1)", text: "hsl(0 0% 90%)" },
+  "Fast Track": { bg: "hsl(0 0% 100% / 0.06)", text: "hsl(0 0% 65%)" },
+  "—": { bg: "transparent", text: "hsl(0 0% 30%)" },
+};
+
 const stats = [
   { value: "4", label: "Breakthrough Designations" },
   { value: "44%", label: "Highest Approval Probability", sub: "Sotorasib (from Phase III)" },
@@ -215,8 +249,15 @@ const FieldItem = ({ label, value }: { label: string; value: string }) => (
 const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
   const [activeTab, setActiveTab] = useState<"pathways" | "regulatory" | "risk">("pathways");
   const [expandedCard, setExpandedCard] = useState<number | null>(0);
+  const [selectedRows, setSelectedRows] = useState<number[]>([0, 1]);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.1 });
+
+  const toggleRow = (i: number) => {
+    setSelectedRows((prev) =>
+      prev.includes(i) ? prev.filter((r) => r !== i) : [...prev, i]
+    );
+  };
 
   return (
     <div ref={containerRef} className="rounded-lg overflow-hidden" style={{ background: darkMode ? "hsl(0 0% 7%)" : undefined }}>
@@ -291,59 +332,12 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         </div>
       </motion.div>
 
-      {/* Metadata + Export row */}
-      <motion.div
-        className="px-4 sm:px-6 pb-2 flex items-center justify-between"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.4 }}
-      >
-        <span className="text-[10px] sm:text-xs" style={{ color: "hsl(0 0% 42%)" }}>
-          6 compounds · 28 trials · 8 FDA designations
-        </span>
-        <button
-          className="text-[10px] sm:text-[11px] font-medium px-2.5 sm:px-3 py-1.5 rounded-md transition-colors inline-flex items-center gap-1.5"
-          style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(0 0% 65%)", border: "1px solid hsl(0 0% 15%)" }}
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          Export
-        </button>
-      </motion.div>
-
-      {/* Tabs row */}
-      <motion.div
-        className="px-4 sm:px-6 pb-3"
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.45 }}
-      >
-        <div className="flex gap-1 p-1 rounded-lg" style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 12%)" }}>
-          {(["pathways", "regulatory", "risk"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className="text-xs sm:text-sm py-2 px-2 sm:px-4 rounded-md transition-all duration-300 flex-1"
-              style={{
-                background: activeTab === tab ? "hsl(0 0% 14%)" : "transparent",
-                color: activeTab === tab ? "hsl(0 0% 93%)" : "hsl(0 0% 42%)",
-                fontWeight: activeTab === tab ? 500 : 400,
-                boxShadow: activeTab === tab ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
-              }}
-            >
-              {tab === "pathways" ? "Competitive Landscape" : tab === "regulatory" ? "Regulatory Pathway" : "Risk Matrix"}
-            </button>
-          ))}
-        </div>
-      </motion.div>
-
       {/* Executive Summary */}
       <motion.div
-        className="px-4 sm:px-6 py-4"
+        className="px-4 sm:px-6 py-3"
         initial={{ opacity: 0, y: 15 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.38 }}
       >
         <div
           className="rounded-xl p-5 relative overflow-hidden"
@@ -352,7 +346,6 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
             border: "1px solid hsl(0 0% 14%)",
           }}
         >
-          <div className="absolute top-0 right-0 w-32 h-32 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.02) 0%, transparent 70%)" }} />
           <p className="font-semibold text-sm mb-2 tracking-wide" style={{ color: "hsl(0 0% 90%)" }}>Executive Summary</p>
           <p className="text-xs leading-[1.7]" style={{ color: "hsl(0 0% 45%)" }}>
             Four KRAS G12C inhibitors are actively pursuing PDAC indications with divergent regulatory strategies. Sotorasib (Amgen) holds the strongest position — the only compound with a randomized Phase III (CodeBreaK 201, n=490, OS primary endpoint), Orphan Drug exclusivity, and three FDA designations. Divarasib (Roche) has best-in-class potency but a small PDAC cohort (n=80). RMC-6236 (Revolution Medicines) offers variant-agnostic potential across all KRAS mutations but lacks randomized data. Adagrasib (BMS) is at highest risk of PDAC abandonment — no Phase III planned and declining sponsor commitment. Earliest projected PDAC approval is Q1 2029 (sotorasib), with approval probabilities ranging from 12% (adagrasib) to 44% (sotorasib).
@@ -360,167 +353,139 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
         </div>
       </motion.div>
 
-      {/* Stats */}
-      <div className="px-4 sm:px-6 pb-5 grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
-        {stats.map((s, i) => (
-          <motion.div
-            key={i}
-            className="relative rounded-xl p-[1px] cursor-default group"
-            style={{
-              background: "linear-gradient(135deg, hsl(0 0% 20%) 0%, hsl(0 0% 10%) 50%, hsl(0 0% 20%) 100%)",
-            }}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.55 + i * 0.08 }}
-            whileHover={{ scale: 1.04, transition: { duration: 0.25 } }}
-          >
-            <div
-              className="rounded-[11px] px-4 py-3 h-full relative overflow-hidden"
-              style={{ background: "linear-gradient(180deg, hsl(0 0% 9%) 0%, hsl(0 0% 5%) 100%)" }}
+      {/* Tabs row with metadata + export */}
+      <motion.div
+        className="px-4 sm:px-6 pb-3"
+        style={{ borderBottom: "1px solid hsl(0 0% 10%)" }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.4 }}
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex gap-1 p-1 rounded-lg" style={{ background: "hsl(0 0% 5%)", border: "1px solid hsl(0 0% 12%)" }}>
+            {([
+              { key: "pathways" as const, label: "Competitive Landscape", icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="20" x2="12" y2="10" /><line x1="18" y1="20" x2="18" y2="4" /><line x1="6" y1="20" x2="6" y2="16" /></svg> },
+              { key: "regulatory" as const, label: "Regulatory Pathway", icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg> },
+              { key: "risk" as const, label: "Risk Matrix", icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg> },
+            ]).map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className="flex items-center gap-1.5 text-[11px] sm:text-[12px] py-2 px-3 sm:px-4 rounded-md transition-all duration-300"
+                style={{
+                  background: activeTab === tab.key ? "hsl(0 0% 14%)" : "transparent",
+                  color: activeTab === tab.key ? "hsl(0 0% 93%)" : "hsl(0 0% 42%)",
+                  fontWeight: activeTab === tab.key ? 500 : 400,
+                  boxShadow: activeTab === tab.key ? "0 1px 3px rgba(0,0,0,0.3)" : "none",
+                }}
+              >
+                {tab.icon} {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[13px] font-medium" style={{ color: "hsl(0 0% 60%)" }}>6 compounds</span>
+            <span className="text-[10px]" style={{ color: "hsl(0 0% 30%)" }}>·</span>
+            <span className="text-[11px]" style={{ color: "hsl(0 0% 35%)" }}>28 trials · 8 FDA designations</span>
+            <button
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] transition-colors ml-2"
+              style={{ background: "hsl(0 0% 10%)", color: "hsl(0 0% 55%)", border: "1px solid hsl(0 0% 14%)" }}
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(0 0% 30%), transparent)" }} />
-              <p className="text-xl md:text-2xl font-bold tracking-tight" style={{ color: "hsl(0 0% 100%)" }}>{s.value}</p>
-              <p className="text-[10px] mt-1 leading-snug font-medium tracking-wide" style={{ color: "hsl(0 0% 50%)" }}>{s.label}</p>
-              {s.sub && <p className="text-[9px] mt-0.5" style={{ color: "hsl(0 0% 30%)" }}>{s.sub}</p>}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Export
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+
 
       <AnimatePresence mode="wait">
         {activeTab === "pathways" && (
           <motion.div
             key="pathways"
-            className="px-4 sm:px-6 py-5 space-y-4"
+            className="overflow-auto"
+            style={{ maxHeight: "380px" }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
           >
-            {compounds.map((compound, ci) => (
-              <motion.div
-                key={ci}
-                className="relative rounded-xl p-[1px] cursor-pointer"
-                style={{
-                  background: expandedCard === ci
-                    ? "linear-gradient(135deg, hsl(0 0% 28%) 0%, hsl(0 0% 12%) 50%, hsl(0 0% 28%) 100%)"
-                    : "linear-gradient(135deg, hsl(0 0% 16%) 0%, hsl(0 0% 10%) 50%, hsl(0 0% 16%) 100%)",
-                }}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: ci * 0.1 }}
-                onClick={() => setExpandedCard(expandedCard === ci ? null : ci)}
-                whileHover={{ scale: 1.005 }}
-              >
-                <div
-                  className="rounded-[11px] p-5 relative overflow-hidden"
-                  style={{
-                    background: expandedCard === ci
-                      ? "linear-gradient(180deg, hsl(0 0% 10%) 0%, hsl(0 0% 6%) 100%)"
-                      : "linear-gradient(180deg, hsl(0 0% 8%) 0%, hsl(0 0% 5%) 100%)",
-                    boxShadow: expandedCard === ci ? "inset 0 1px 0 hsl(0 0% 18%)" : "inset 0 1px 0 hsl(0 0% 12%)",
-                  }}
-                >
-                  {expandedCard === ci && (
-                    <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, hsl(0 0% 100% / 0.03) 0%, transparent 70%)" }} />
-                  )}
+            <table className="w-full text-[12px]" style={{ minWidth: "900px" }}>
+              <thead>
+                <tr style={{ background: "hsl(0 0% 7%)", borderBottom: "1px solid hsl(0 0% 12%)" }}>
+                  <th className="px-4 py-3 text-left w-10">
+                    <div className="w-3.5 h-3.5 rounded border flex items-center justify-center" style={{ borderColor: "hsl(0 0% 25%)" }} />
+                  </th>
+                  {tableColumns.map((col) => (
+                    <th key={col.key} className="px-3 py-3 text-left font-medium whitespace-nowrap" style={{ color: "hsl(0 0% 50%)", width: col.width }}>
+                      <span className="flex items-center gap-1 cursor-pointer hover:text-white transition-colors">
+                        {col.label}
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9" /></svg>
+                      </span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {tableData.map((row, i) => {
+                  const isSelected = selectedRows.includes(i);
+                  const sStyle = statusStyles[row.status] || statusStyles.Active;
+                  const dStyle = designationStyles[row.designation] || designationStyles["—"];
 
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-1">
-                    <div>
-                      <div className="flex items-center gap-2.5 mb-0.5">
-                        <p className="font-semibold text-lg tracking-tight" style={{ color: "hsl(0 0% 93%)" }}>{compound.name}</p>
-                        <span className="text-[11px] font-medium" style={{ color: "hsl(0 0% 55%)" }}>({compound.company})</span>
-                      </div>
-                      <p className="text-[11px]" style={{ color: "hsl(0 0% 40%)" }}>{compound.type}</p>
-                    </div>
-                    <div className="flex items-center gap-3 flex-shrink-0">
-                      <div className="text-right">
-                        <p className="text-2xl font-bold tracking-tight" style={{ color: compound.approvalColor }}>{compound.approvalProb}</p>
-                        <p className="text-[9px] tracking-wide" style={{ color: "hsl(0 0% 45%)" }}>Approval Prob.</p>
-                      </div>
-                      <motion.div
-                        animate={{ rotate: expandedCard === ci ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-[10px]"
-                        style={{ color: "hsl(0 0% 30%)" }}
-                      >
-                        ▼
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <AnimatePresence>
-                    {expandedCard === ci && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pt-4 mt-3" style={{ borderTop: "1px solid hsl(0 0% 13%)" }}>
-                          {/* Two column layout */}
-                          <div className="grid md:grid-cols-2 gap-6">
-                            {/* Trial Intelligence */}
-                            <div>
-                              <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: "hsl(210 60% 55%)" }}>Trial Intelligence</p>
-                              <FieldItem label="Registrational Trial" value={compound.trial.registrationalTrial} />
-                              <FieldItem label="Design" value={compound.trial.design} />
-                              <FieldItem label="Phase" value={compound.trial.phase} />
-                              <FieldItem label="Primary Endpoint" value={compound.trial.primaryEndpoint} />
-                              <FieldItem label="Enrollment" value={compound.trial.enrollment} />
-                              <FieldItem label="Sites" value={compound.trial.sites} />
-                              <FieldItem label="Est. Primary Completion" value={compound.trial.estPrimaryCompletion} />
-                              <FieldItem label="Data Readout" value={compound.trial.dataReadout} />
-                              {compound.trial.phaseIIIStatus && (
-                                <FieldItem label="Phase III Status" value={compound.trial.phaseIIIStatus} />
-                              )}
-                            </div>
-
-                            {/* Regulatory Intelligence */}
-                            <div>
-                              <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: "hsl(36 80% 50%)" }}>Regulatory Intelligence</p>
-
-                              <div className="mb-3">
-                                <p className="text-[10px] font-medium tracking-wide mb-2" style={{ color: "hsl(0 0% 45%)" }}>Designations</p>
-                                <div className="flex flex-wrap gap-1.5">
-                                  {compound.regulatory.designations.map((d, di) => (
-                                    <span
-                                      key={di}
-                                      className="text-[10px] px-2.5 py-1 rounded-full font-medium"
-                                      style={{ border: `1px solid ${d.color}50`, color: d.color }}
-                                    >
-                                      {d.label}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-
-                              <FieldItem label="Regulatory Precedent" value={compound.regulatory.regulatoryPrecedent} />
-                              <FieldItem label="AdCom Outlook" value={compound.regulatory.adcomOutlook} />
-                              <FieldItem label="Earliest Approval" value={compound.regulatory.earliestApproval} />
-                              <FieldItem label="Review Pathway" value={compound.regulatory.reviewPathway} />
-                              {compound.regulatory.earningsSentiment && (
-                                <FieldItem label="Earnings Sentiment" value={compound.regulatory.earningsSentiment} />
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Alexandria Insight */}
-                          <div className="mt-5 pt-4" style={{ borderTop: "1px solid hsl(0 0% 11%)" }}>
-                            <p className="text-xs leading-relaxed">
-                              <span className="font-semibold" style={{ color: "hsl(36 80% 50%)" }}>Alexandria Insight: </span>
-                              <span className="italic" style={{ color: "hsl(0 0% 50%)" }}>{compound.insight}</span>
-                            </p>
-                          </div>
+                  return (
+                    <tr
+                      key={i}
+                      className="cursor-pointer transition-colors duration-150"
+                      style={{
+                        borderBottom: "1px solid hsl(0 0% 10%)",
+                        background: isSelected ? "hsl(0 0% 100% / 0.03)" : "transparent",
+                      }}
+                      onClick={() => toggleRow(i)}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = "hsl(0 0% 100% / 0.04)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = isSelected ? "hsl(0 0% 100% / 0.03)" : "transparent")}
+                    >
+                      <td className="px-4 py-3">
+                        <div
+                          className="w-3.5 h-3.5 rounded border flex items-center justify-center transition-all"
+                          style={{
+                            borderColor: isSelected ? "hsl(0 0% 60%)" : "hsl(0 0% 20%)",
+                            background: isSelected ? "hsl(0 0% 100% / 0.15)" : "transparent",
+                          }}
+                        >
+                          {isSelected && <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 90%)" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>}
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-            ))}
+                      </td>
+                      <td className="px-3 py-3">
+                        <span className="font-semibold flex items-center gap-1.5" style={{ color: "hsl(0 0% 93%)" }}>
+                          {row.compound}
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="hsl(0, 0%, 30%)" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                        </span>
+                      </td>
+                      <td className="px-3 py-3" style={{ color: "hsl(0 0% 55%)" }}>{row.sponsor}</td>
+                      <td className="px-3 py-3">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-medium" style={{ background: "hsl(0 0% 100% / 0.06)", color: "hsl(0 0% 75%)" }}>{row.phase}</span>
+                      </td>
+                      <td className="px-3 py-3 font-mono" style={{ color: "hsl(0 0% 45%)" }}>{row.trial}</td>
+                      <td className="px-3 py-3">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-medium" style={{ background: dStyle.bg, color: dStyle.text }}>{row.designation}</span>
+                      </td>
+                      <td className="px-3 py-3 font-mono font-semibold" style={{ color: "hsl(0 0% 90%)" }}>{row.orr}</td>
+                      <td className="px-3 py-3 font-mono" style={{ color: "hsl(0 0% 50%)" }}>{row.nPatients}</td>
+                      <td className="px-3 py-3">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-medium" style={{ background: sStyle.bg, color: sStyle.text }}>{row.status}</span>
+                      </td>
+                      <td className="px-3 py-3 font-mono font-bold" style={{ color: Number(row.approvalProb.replace('%','')) > 30 ? "hsl(0 0% 100%)" : "hsl(0 0% 50%)" }}>
+                        {row.approvalProb}
+                      </td>
+                      <td className="px-3 py-3 font-mono" style={{ color: "hsl(0 0% 55%)" }}>{row.estApproval}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </motion.div>
         )}
 
@@ -823,6 +788,34 @@ const DemoOutput = ({ darkMode }: { darkMode?: boolean }) => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Footer — sources & pagination */}
+      <motion.div
+        className="px-4 sm:px-5 py-3 flex items-center justify-between"
+        style={{ borderTop: "1px solid hsl(0 0% 10%)" }}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.9 }}
+      >
+        <div className="flex items-center gap-2 flex-wrap">
+          {["AACT", "FDA Drugs@FDA", "SEC EDGAR", "ClinicalTrials.gov"].map((src) => (
+            <span
+              key={src}
+              className="text-mono text-[10px] px-2 py-1 rounded"
+              style={{ background: "hsl(0 0% 8%)", color: "hsl(0 0% 35%)", border: "1px solid hsl(0 0% 12%)" }}
+            >
+              {src}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-2 text-[11px]" style={{ color: "hsl(0 0% 35%)" }}>
+          <span>1–6 of 6</span>
+          <div className="flex gap-1">
+            <button className="px-2 py-0.5 rounded" style={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 14%)" }}>&lsaquo;</button>
+            <button className="px-2 py-0.5 rounded" style={{ background: "hsl(0 0% 10%)", border: "1px solid hsl(0 0% 14%)" }}>&rsaquo;</button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 };
